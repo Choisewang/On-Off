@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<a href="home.do">home</a>z
+	<a href="home.do">home</a>
 	
 	
 </body>
