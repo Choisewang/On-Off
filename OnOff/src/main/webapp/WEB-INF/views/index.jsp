@@ -57,7 +57,7 @@
 				<div class="caption">
 					<h2>Build Your Career</h2>
 					<form>
-						<fieldset>
+						<fieldset> 
 							<div class="col-md-4 col-sm-4 no-pad">
 								<input type="text" class="form-control border-right" placeholder="Skills, Designation, Companies" />
 							</div>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8"> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Jober Desk | Responsive Job Portal Template</title>
         <meta name="description" content="">
