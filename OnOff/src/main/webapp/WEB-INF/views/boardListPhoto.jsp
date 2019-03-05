@@ -85,7 +85,7 @@
 						</div>
 						<!-- 내용 -->
 						<div class="col-md-8 col-sm-8">
-							<div class="company-content" onclick="location.href='detailPhoto.do'">
+							<div class="company-content" onclick="location.href='boardDetailPhoto.do'">
 								<h3>게시판 제목</h3>
 								<p>
 									<span class="company-name"><i class="fa fa-briefcase"></i>모임이름</span>
@@ -117,7 +117,7 @@
 			
 			<!-- 글쓰기버튼 -->
 			<div class="row">
-				<input type="button" class="btn brows-btn" value="글쓰기" onclick="location.href='write.do'" />
+				<input type="button" class="btn brows-btn" value="글쓰기" onclick="location.href='boardWrite.do'" />
 			</div>
 		</div>
 	</section>
