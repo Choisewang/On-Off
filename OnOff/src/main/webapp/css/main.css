@@ -713,7 +713,7 @@ background: #ef183c;
 }
 /*-----------------------counter Section start-------------------------*/
 .counter{
-background:#da0833;
+background:#f4f5f7;
 padding:60px 0;
 }
 
@@ -1132,4 +1132,33 @@ width:20%;
 }
 }
 
-
+/*½Âºó*/
+.bestclub{
+	text-align: center;
+	font-size: 23px;
+	font-weight: bold;
+	color: #da0833;
+}
+#bestsort{
+	position:relative;
+	text-align:center;
+	margin-top:-20px;	
+	margin-bottom:10px;
+	font-size: 18px;
+}
+.sampleimg{
+	width:250px;
+	height:200px;
+}
+.bestsort-content {
+	padding: 20px 15px;
+	text-align: center;
+	border-radius: 5px;
+}
+.randomlive{
+	text-align:center;
+}
+.randomlive_{
+	font-weight: bold;
+	font-size: 25px;
+}

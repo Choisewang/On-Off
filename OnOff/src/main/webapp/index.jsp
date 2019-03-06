@@ -24,7 +24,7 @@
 	<a href="moim.do">moim</a>
 	<br/>
 	<a href="moimDetail.do">moimDetail</a>
-	
+	<a href="search.do">소모임검색</a>
 	
 </body>
 </html>
