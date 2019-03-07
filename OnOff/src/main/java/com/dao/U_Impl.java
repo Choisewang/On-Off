@@ -9,9 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.dto.MyDto_U;
 
+
 public class U_Impl implements Dao_U {
+	
+	
 
 	@Override
 	public List<MyDto_U> selectList() {
@@ -30,12 +34,13 @@ public class U_Impl implements Dao_U {
 				dto.setGrade(rs.getString(2));
 				dto.setId(rs.getString(3));
 				dto.setPw(rs.getString(4));
-				dto.setAge(rs.getInt(5));
-				dto.setLo(rs.getString(6));
-				dto.setGen(rs.getString(7));
-				dto.setPhone(rs.getInt(8));
-				dto.setDate(rs.getDate(9));
-				dto.setImg(rs.getString(10));				
+				dto.setName(rs.getString(5));
+				dto.setAge(rs.getInt(6));
+				dto.setLo(rs.getString(7));
+				dto.setGen(rs.getString(8));
+				dto.setPhone(rs.getInt(9));
+				dto.setDate(rs.getDate(10));
+				dto.setImg(rs.getString(11));				
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -67,12 +72,13 @@ public class U_Impl implements Dao_U {
 				dto.setGrade(rs.getString(2));
 				dto.setId(rs.getString(3));
 				dto.setPw(rs.getString(4));
-				dto.setAge(rs.getInt(5));
-				dto.setLo(rs.getString(6));
-				dto.setGen(rs.getString(7));
-				dto.setPhone(rs.getInt(8));
-				dto.setDate(rs.getDate(9));
-				dto.setImg(rs.getString(10));
+				dto.setName(rs.getString(5));
+				dto.setAge(rs.getInt(6));
+				dto.setLo(rs.getString(7));
+				dto.setGen(rs.getString(8));
+				dto.setPhone(rs.getInt(9));
+				dto.setDate(rs.getDate(10));
+				dto.setImg(rs.getString(11));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,11 +102,12 @@ public class U_Impl implements Dao_U {
 			pstm.setString(1, dto.getGrade());
 			pstm.setString(2, dto.getId());
 			pstm.setString(3, dto.getPw());
-			pstm.setInt(4, dto.getAge());
-			pstm.setString(5, dto.getLo());
-			pstm.setString(6, dto.getGen());
-			pstm.setInt(7, dto.getPhone());
-			pstm.setString(8, dto.getImg());
+			pstm.setString(4, dto.getName());
+			pstm.setInt(5, dto.getAge());
+			pstm.setString(6, dto.getLo());
+			pstm.setString(7, dto.getGen());
+			pstm.setInt(8, dto.getPhone());
+			pstm.setString(9, dto.getImg());
 			System.out.println("03.query 준비 "+ insertSql);
 			res = pstm.executeUpdate();
 			System.out.println("04.query 실행 및 리턴");

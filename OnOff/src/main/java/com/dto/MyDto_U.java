@@ -8,6 +8,13 @@ public class MyDto_U {
 	private String grade;
 	private String id;
 	private String pw;
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	private int age;
 	private String lo;
 	private String gen;
@@ -90,27 +97,28 @@ public class MyDto_U {
 		this.img = img;
 	}
 	
-	public MyDto_U(int no, String grade, String id, String pw, int age, String lo, String gen, int phone, Date date) {
-		super();
-		this.no = no;
-		this.grade = grade;
-		this.id = id;
-		this.pw = pw;
-		this.age = age;
-		this.lo = lo;
-		this.gen = gen;
-		this.phone = phone;
-		this.date = date;
-	}
-	
-	
 	public MyDto_U() {
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
-		return "MyDto_U [no=" + no + ", grade=" + grade + ", id=" + id + ", pw=" + pw + ", age=" + age + ", lo=" + lo
-				+ ", gen=" + gen + ", phone=" + phone + ", date=" + date + ", img=" + img + "]";
+		return "MyDto_U [no=" + no + ", grade=" + grade + ", id=" + id + ", pw=" + pw + ", name=" + name + ", age="
+				+ age + ", lo=" + lo + ", gen=" + gen + ", phone=" + phone + ", date=" + date + ", img=" + img + "]";
+	}
+	public MyDto_U(int no, String grade, String id, String pw, String name, int age, String lo, String gen, int phone,
+			Date date, String img) {
+		super();
+		this.no = no;
+		this.grade = grade;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.age = age;
+		this.lo = lo;
+		this.gen = gen;
+		this.phone = phone;
+		this.date = date;
+		this.img = img;
 	}
 	
 	
