@@ -9,18 +9,28 @@ public class MyDto_U {
 	private String id;
 	private String pw;
 	private String name;
+	private int age;
+	private String mail;
+	private String lo;
+	private String gen;
+	private int phone;
+	private Date date;
+	private String img;
+	
+	
+	
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	private int age;
-	private String lo;
-	private String gen;
-	private int phone;
-	private Date date;
-	private String img;
 	
 	public int getNo() {
 		return no;
@@ -100,13 +110,8 @@ public class MyDto_U {
 	public MyDto_U() {
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "MyDto_U [no=" + no + ", grade=" + grade + ", id=" + id + ", pw=" + pw + ", name=" + name + ", age="
-				+ age + ", lo=" + lo + ", gen=" + gen + ", phone=" + phone + ", date=" + date + ", img=" + img + "]";
-	}
-	public MyDto_U(int no, String grade, String id, String pw, String name, int age, String lo, String gen, int phone,
-			Date date, String img) {
+	public MyDto_U(int no, String grade, String id, String pw, String name, int age, String mail, String lo, String gen,
+			int phone, Date date, String img) {
 		super();
 		this.no = no;
 		this.grade = grade;
@@ -114,14 +119,19 @@ public class MyDto_U {
 		this.pw = pw;
 		this.name = name;
 		this.age = age;
+		this.mail = mail;
 		this.lo = lo;
 		this.gen = gen;
 		this.phone = phone;
 		this.date = date;
 		this.img = img;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "MyDto_U [no=" + no + ", grade=" + grade + ", id=" + id + ", pw=" + pw + ", name=" + name + ", age="
+				+ age + ", mail=" + mail + ", lo=" + lo + ", gen=" + gen + ", phone=" + phone + ", date=" + date
+				+ ", img=" + img + "]";
+	}
 	
 	
 }

@@ -36,11 +36,12 @@ public class U_Impl implements Dao_U {
 				dto.setPw(rs.getString(4));
 				dto.setName(rs.getString(5));
 				dto.setAge(rs.getInt(6));
-				dto.setLo(rs.getString(7));
-				dto.setGen(rs.getString(8));
-				dto.setPhone(rs.getInt(9));
-				dto.setDate(rs.getDate(10));
-				dto.setImg(rs.getString(11));				
+				dto.setMail(rs.getString(7));
+				dto.setLo(rs.getString(8));
+				dto.setGen(rs.getString(9));
+				dto.setPhone(rs.getInt(10));
+				dto.setDate(rs.getDate(11));
+				dto.setImg(rs.getString(12));		
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -74,11 +75,12 @@ public class U_Impl implements Dao_U {
 				dto.setPw(rs.getString(4));
 				dto.setName(rs.getString(5));
 				dto.setAge(rs.getInt(6));
-				dto.setLo(rs.getString(7));
-				dto.setGen(rs.getString(8));
-				dto.setPhone(rs.getInt(9));
-				dto.setDate(rs.getDate(10));
-				dto.setImg(rs.getString(11));
+				dto.setMail(rs.getString(7));
+				dto.setLo(rs.getString(8));
+				dto.setGen(rs.getString(9));
+				dto.setPhone(rs.getInt(10));
+				dto.setDate(rs.getDate(11));
+				dto.setImg(rs.getString(12));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,10 +106,11 @@ public class U_Impl implements Dao_U {
 			pstm.setString(3, dto.getPw());
 			pstm.setString(4, dto.getName());
 			pstm.setInt(5, dto.getAge());
-			pstm.setString(6, dto.getLo());
-			pstm.setString(7, dto.getGen());
-			pstm.setInt(8, dto.getPhone());
-			pstm.setString(9, dto.getImg());
+			pstm.setString(6, dto.getMail());
+			pstm.setString(7, dto.getLo());
+			pstm.setString(8, dto.getGen());
+			pstm.setInt(9, dto.getPhone());
+			pstm.setString(10, dto.getImg());
 			System.out.println("03.query 준비 "+ insertSql);
 			res = pstm.executeUpdate();
 			System.out.println("04.query 실행 및 리턴");
