@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class MyDto_P {
 	
-	private int u_no;
+	private String u_id;
 	private int g_no;
 	private String grade;
 	private Date date;
-	public int getU_no() {
-		return u_no;
+	public String getu_id() {
+		return u_id;
 	}
-	public void setU_no(int u_no) {
-		this.u_no = u_no;
+	public void setu_id(String u_id) {
+		this.u_id = u_id;
 	}
 	public int getG_no() {
 		return g_no;
@@ -28,11 +28,11 @@ public class MyDto_P {
 	}
 	@Override
 	public String toString() {
-		return "MyDto_P [u_no=" + u_no + ", g_no=" + g_no + ", grade=" + grade + ", date=" + date + "]";
+		return "MyDto_P [u_id=" + u_id + ", g_no=" + g_no + ", grade=" + grade + ", date=" + date + "]";
 	}
-	public MyDto_P(int u_no, int g_no, String grade, Date date) {
+	public MyDto_P(String u_id, int g_no, String grade, Date date) {
 		super();
-		this.u_no = u_no;
+		this.u_id = u_id;
 		this.g_no = g_no;
 		this.grade = grade;
 		this.date = date;

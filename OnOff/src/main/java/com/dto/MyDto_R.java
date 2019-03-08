@@ -3,7 +3,7 @@ package com.dto;
 public class MyDto_R {
 	
 	private int m_no;
-	private int u_no;
+	private String u_id;
 	private int g_no;
 	private String content;
 	private int star;
@@ -14,11 +14,11 @@ public class MyDto_R {
 	public void setM_no(int m_no) {
 		this.m_no = m_no;
 	}
-	public int getU_no() {
-		return u_no;
+	public String getu_id() {
+		return u_id;
 	}
-	public void setU_no(int u_no) {
-		this.u_no = u_no;
+	public void setu_id(String u_id) {
+		this.u_id = u_id;
 	}
 	public int getG_no() {
 		return g_no;
@@ -41,13 +41,13 @@ public class MyDto_R {
 	
 	@Override
 	public String toString() {
-		return "MyDto_R [m_no=" + m_no + ", u_no=" + u_no + ", g_no=" + g_no + ", content=" + content + ", star=" + star
+		return "MyDto_R [m_no=" + m_no + ", u_id=" + u_id + ", g_no=" + g_no + ", content=" + content + ", star=" + star
 				+ "]";
 	}
-	public MyDto_R(int m_no, int u_no, int g_no, String content, int star) {
+	public MyDto_R(int m_no, String u_id, int g_no, String content, int star) {
 		super();
 		this.m_no = m_no;
-		this.u_no = u_no;
+		this.u_id = u_id;
 		this.g_no = g_no;
 		this.content = content;
 		this.star = star;

@@ -6,7 +6,7 @@ public class MyDto_NC {
 	
 	private int c_no;
 	private int n_no;
-	private int u_no;	
+	private String u_id;	
 	private int g_no;
 	private String write;
 	private Date date;
@@ -23,11 +23,11 @@ public class MyDto_NC {
 	public void setN_no(int n_no) {
 		this.n_no = n_no;
 	}
-	public int getU_no() {
-		return u_no;
+	public String getu_id() {
+		return u_id;
 	}
-	public void setU_no(int u_no) {
-		this.u_no = u_no;
+	public void setu_id(String u_id) {
+		this.u_id = u_id;
 	}
 	public int getG_no() {
 		return g_no;
@@ -47,11 +47,11 @@ public class MyDto_NC {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public MyDto_NC(int c_no, int n_no, int u_no, int g_no, String write, Date date) {
+	public MyDto_NC(int c_no, int n_no, String u_id, int g_no, String write, Date date) {
 		super();
 		this.c_no = c_no;
 		this.n_no = n_no;
-		this.u_no = u_no;
+		this.u_id = u_id;
 		this.g_no = g_no;
 		this.write = write;
 		this.date = date;
