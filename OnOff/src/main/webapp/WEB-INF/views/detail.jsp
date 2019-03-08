@@ -75,7 +75,7 @@
 	<div class="container">		
 		<div id = "midContainer">
 			<div id="topInfo">
-				<img alt="sample" src="img/sampleImg.jpg" style="width: 500px; height: 300px;" id="mainImg">
+				<img alt="sample" src="img/sample_koala.jpg" style="width: 500px; height: 300px;" id="mainImg">
 			</div>			
 			<div id="sInfo" style="margin-left: 80px;">
 				<h3>제목</h3>

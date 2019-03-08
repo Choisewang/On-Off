@@ -74,7 +74,12 @@
 							</div>
 							<!-- /.panel-heading -->
 							<div class="panel-content">
-								<div>
+								<div class="testimonial" style="text-align: left; margin-top: 60px;">
+										<div class="pic">
+											<img src="img/client-1.jpg" alt="">
+										</div>
+									</div>
+								<!-- <div>
 									<ul class="WriterInformation">
 										<li><span>Address:</span>Menlo Park, CA</li>
 										<li><span>Website:</span>Google.com</li>
@@ -82,16 +87,20 @@
 										<li><span>Mail:</span>info@google.com</li>
 										<li><span>From:</span>1998</li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 
 						<div class="container">
+						
+							<!-- for문 시작 -->
+							<!-- 이미지 클릭 시 다운로드를 할지?? 파일 다운로드를 따로 만들지 고민 해봅시다. -->
 							<div class="col-md-4 col-sm-4">
 								<div class="features-content">
 									<img style="width: 100%;" class="sampleimg" src="img/sample_koala.jpg" />
 								</div>
 							</div>
+							<!-- for문 종료 -->
 
 							<div class="col-md-4 col-sm-4">
 								<div class="features-content">
