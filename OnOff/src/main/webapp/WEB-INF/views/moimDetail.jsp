@@ -38,7 +38,8 @@
 		
 		padding-top: 30px;
 		word-wrap:break-word;
-		height: 200px;
+		padding-left: 700px;
+		height: 400px;
 		background-color: white;
 		
 	}
@@ -123,7 +124,36 @@
 		
 		<div class="map-box">
 		
-			<h1>지도넣을껴</h1>
+	<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d1595fcdba49530de07a8fead7b83da"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d1595fcdba49530de07a8fead7b83da&libraries=services,clusterer,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(33.450701, 126.570667),// 지도의 중심좌표
+			level: 3                   // 지도의 확대 레벨
+		};
+
+		var map = new daum.maps.Map(container, options); // 지도를 생성합니다
+		
+		
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
+
+		// 마커를 생성합니다
+		var marker = new daum.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+
+		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+		// marker.setMap(null);    
+		
+		
+	</script>
 		
 		</div>
 	</section>		
