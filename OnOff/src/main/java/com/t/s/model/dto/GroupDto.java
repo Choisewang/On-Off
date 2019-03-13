@@ -5,7 +5,7 @@ import java.util.Date;
 public class GroupDto {
 	
 	//테이블 명 GROUPINFO
-	private int groupseq;
+	private int groupno;
 	private String grouptitle;
 	private String groupcontent;
 	private Date groupregdate;
@@ -19,11 +19,11 @@ public class GroupDto {
 	//파라미터 포함된 생성자는 만들어서 사용하세요 말씀해주시고요
 
 
-	public int getGroupseq() {
-		return groupseq;
+	public int getGroupno() {
+		return groupno;
 	}
-	public void setGroupseq(int groupseq) {
-		this.groupseq = groupseq;
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
 	}
 
 	public String getGrouptitle() {

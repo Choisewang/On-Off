@@ -7,7 +7,7 @@ public class GroupUserDto {
 	//테이블 명 GROUPUSER
 	
 	private String userid;
-	private int groupseq;
+	private int groupno;
 	private String groupusergrade;
 	private Date groupuserregdate;
 	
@@ -25,11 +25,11 @@ public class GroupUserDto {
 		this.userid = userid;
 	}
 
-	public int getGroupseq() {
-		return groupseq;
+	public int getGroupno() {
+		return groupno;
 	}
-	public void setGroupseq(int groupseq) {
-		this.groupseq = groupseq;
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
 	}
 
 	public String getGroupusergrade() {

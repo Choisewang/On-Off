@@ -3,9 +3,9 @@ package com.t.s.model.dto;
 public class MoimUserDto {
 	
 	//테이블 명 MOIMUSER
-	private int moimseq;
+	private int moimno;
 	private String userid;
-	private int groupseq;
+	private int groupno;
 	private String moimq1;
 	private String moimq2;
 	private String moimq3;
@@ -22,11 +22,11 @@ public class MoimUserDto {
 	//파라미터 포함된 생성자는 만들어서 사용하세요 말씀해주시고요
 
 
-	public int getMoimseq() {
-		return moimseq;
+	public int getMoimno() {
+		return moimno;
 	}
-	public void setMoimseq(int moimseq) {
-		this.moimseq = moimseq;
+	public void setMoimno(int moimno) {
+		this.moimno = moimno;
 	}
 
 	public String getUserid() {
@@ -36,11 +36,11 @@ public class MoimUserDto {
 		this.userid = userid;
 	}
 
-	public int getGroupseq() {
-		return groupseq;
+	public int getGroupno() {
+		return groupno;
 	}
-	public void setGroupseq(int groupseq) {
-		this.groupseq = groupseq;
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
 	}
 
 	public String getMoimq1() {

@@ -5,10 +5,10 @@ import java.util.Date;
 public class FreeBoardAnsDto {
 	
 	//테이블 명 FREEBOARDANS
-	private int boardansseq;
-	private int boardseq;
+	private int boardansno;
+	private int boardno;
 	private String userid;
-	private int groupseq;
+	private int groupno;
 	private String boardanscontent;
 	private Date boardansregdate;
 	
@@ -20,18 +20,18 @@ public class FreeBoardAnsDto {
 	//파라미터 포함된 생성자는 만들어서 사용하세요 말씀해주시고요
 
 	
-	public int getBoardansseq() {
-		return boardansseq;
+	public int getBoardansno() {
+		return boardansno;
 	}
-	public void setBoardansseq(int boardansseq) {
-		this.boardansseq = boardansseq;
+	public void setBoardansno(int boardansno) {
+		this.boardansno = boardansno;
 	}
 
-	public int getBoardseq() {
-		return boardseq;
+	public int getBoardno() {
+		return boardno;
 	}
-	public void setBoardseq(int boardseq) {
-		this.boardseq = boardseq;
+	public void setBoardno(int boardno) {
+		this.boardno = boardno;
 	}
 
 	public String getUserid() {
@@ -41,11 +41,11 @@ public class FreeBoardAnsDto {
 		this.userid = userid;
 	}
 
-	public int getGroupseq() {
-		return groupseq;
+	public int getGroupno() {
+		return groupno;
 	}
-	public void setGroupseq(int groupseq) {
-		this.groupseq = groupseq;
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
 	}
 
 	public String getBoardanscontent() {

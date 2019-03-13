@@ -6,9 +6,9 @@ public class FreeBoardDto {
 	
 	//테이블 명 FREEBOARD
 	
-	private int boardseq;
+	private int boardno;
 	private String userid;
-	private int groupseq;
+	private int groupno;
 	private String boardtitle;
 	private String boardcontent;
 	private Date boardregdate;
@@ -21,11 +21,11 @@ public class FreeBoardDto {
 	//파라미터 포함된 생성자는 만들어서 사용하세요 말씀해주시고요
 
 	
-	public int getBoardseq() {
-		return boardseq;
+	public int getBoardno() {
+		return boardno;
 	}
-	public void setBoardseq(int boardseq) {
-		this.boardseq = boardseq;
+	public void setBoardno(int boardno) {
+		this.boardno = boardno;
 	}
 
 	public String getUserid() {
@@ -35,11 +35,11 @@ public class FreeBoardDto {
 		this.userid = userid;
 	}
 
-	public int getGroupseq() {
-		return groupseq;
+	public int getGroupno() {
+		return groupno;
 	}
-	public void setGroupseq(int groupseq) {
-		this.groupseq = groupseq;
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
 	}
 
 	public String getBoardtitle() {

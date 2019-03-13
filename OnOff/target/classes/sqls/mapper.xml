@@ -5,25 +5,25 @@
 
 	<!-- *********************************List를 출력하기 위한 resultMap 작업****************************************** -->
 	<resultMap type="com.t.s.model.dto.FreeBoardAnsDto" id="FreeBoardAnsMap">
-		<result property="boardansseq" column="BOARDANSSEQ" />
-		<result property="boardseq" column="BOARDSEQ" />
+		<result property="boardansno" column="BOARDANSNO" />
+		<result property="boardno" column="BOARDNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="boardanscontent" column="BOARDANSCONTENT" />
 		<result property="boardansregdate" column="BOARDANSREGDATE" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.FreeBoardDto" id="FreeBoardMap">
-		<result property="boardseq" column="BOARDSEQ" />
+		<result property="boardno" column="BOARDNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="boardtitle" column="BOARDTITLE" />
 		<result property="boardcontent" column="BOARDCONTENT" />
 		<result property="boardregdate" column="BOARDREGDATE" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.GroupDto" id="GroupMap">
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="grouptitle" column="GROUPTITLE" />
 		<result property="groupcontent" column="GROUPCONTENT" />
 		<result property="groupregdate" column="GROUPREGDATE" />
@@ -32,44 +32,44 @@
 	
 	<resultMap type="com.t.s.model.dto.GroupUserDto" id="GroupUserMap">
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="groupusergrade" column="GROUPUSERGRADE" />
 		<result property="groupuserregdate" column="GROUPUSERREGDATE" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.ImgBoardAnsDto" id="ImgBoardAnsMap">
-		<result property="imgansseq" column="IMGANSSEQ" />
-		<result property="imgboardseq" column="IMGBOARDSEQ" />
-		<result property="moimseq" column="MOIMSEQ" />
+		<result property="imgansno" column="IMGANSNO" />
+		<result property="imgboardno" column="IMGBOARDNO" />
+		<result property="moimno" column="MOIMNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="imganscontent" column="IMGANSCONTENT" />
 		<result property="imgansregdate" column="IMGANSREGDATE" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.ImgBoardDto" id="ImgBoardMap">
-		<result property="imgboardseq" column="IMGBOARDSEQ" />
-		<result property="moimseq" column="MOIMSEQ" />
+		<result property="imgboardno" column="IMGBOARDNO" />
+		<result property="moimno" column="MOIMNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="imgboardtitle" column="IMGBOARDTITLE" />
 		<result property="imgboardcontent" column="IMGBOARDCONTENT" />
 		<result property="imgboardregdate" column="IMGBOARDREGDATE" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.MoimAnsDto" id="MoimAnsMap">
-		<result property="moimansseq" column="MOIMANSSEQ" />
-		<result property="moimseq" column="MOIMSEQ" />
+		<result property="moimansno" column="MOIMANSNO" />
+		<result property="moimno" column="MOIMNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="moimanscontent" column="MOIMANSCONTENT" />
 		<result property="moimansregdate" column="MOIMANSREGDATE" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.MoimDto" id="MoimMap">
-		<result property="moimseq" column="MOIMSEQ" />
+		<result property="moimno" column="MOIMNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="moimtitle" column="MOIMTITLE" />
 		<result property="moimcontent" column="MOIMCONTENT" />
 		<result property="moimrecruit" column="MOIMRECRUIT" />
@@ -80,9 +80,9 @@
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.MoimUserDto" id="MoimUserMap">
-		<result property="moimseq" column="MOIMSEQ" />
+		<result property="moimno" column="MOIMNO" />
 		<result property="userid" column="USERID" />
-		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupno" column="GROUPNO" />
 		<result property="moimq1" column="MOIMQ1" />
 		<result property="moimq2" column="MOIMQ2" />
 		<result property="moimq3" column="MOIMQ3" />

@@ -6,10 +6,10 @@ public class ImgBoardDto {
 	
 	// 테이블 명 IMGBOARD
 	
-	private int imgboardseq;
-	private int moimseq;
+	private int imgboardno;
+	private int moimno;
 	private String userid;
-	private int groupseq;
+	private int groupno;
 	private String imgboardtitle;
 	private String imgboardcontent;
 	private Date imgboardregdate;
@@ -22,18 +22,18 @@ public class ImgBoardDto {
 	//파라미터 포함된 생성자는 만들어서 사용하세요 말씀해주시고요
 
 	
-	public int getImgboardseq() {
-		return imgboardseq;
+	public int getImgboardno() {
+		return imgboardno;
 	}
-	public void setImgboardseq(int imgboardseq) {
-		this.imgboardseq = imgboardseq;
+	public void setImgboardno(int imgboardno) {
+		this.imgboardno = imgboardno;
 	}
 
-	public int getMoimseq() {
-		return moimseq;
+	public int getMoimno() {
+		return moimno;
 	}
-	public void setMoimseq(int moimseq) {
-		this.moimseq = moimseq;
+	public void setMoimno(int moimno) {
+		this.moimno = moimno;
 	}
 
 	public String getUserid() {
@@ -43,11 +43,11 @@ public class ImgBoardDto {
 		this.userid = userid;
 	}
 
-	public int getGroupseq() {
-		return groupseq;
+	public int getGroupno() {
+		return groupno;
 	}
-	public void setGroupseq(int groupseq) {
-		this.groupseq = groupseq;
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
 	}
 
 	public String getImgboardtitle() {
