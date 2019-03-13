@@ -21,8 +21,6 @@
 	<mappers>
 		<mapper resource="/sqls/mapper.xml"/>
 		<!-- resource -> src/main/java/resources 를 잡아준다. -->
-		<mapper/>
-		<mapper/>
 	</mappers>
 
 </configuration>
