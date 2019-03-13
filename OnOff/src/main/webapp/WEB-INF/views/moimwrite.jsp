@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" >
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -48,6 +48,11 @@
             $("#insertBoardFrm").submit();
         });
     });
+    
+    
+    	
+    
+    
 </script>
 
 
@@ -129,8 +134,19 @@
 	<section class="profile-detail">
 		<p style="font-size:20px; margin-left: 570px;"><모임 만들기></p>
 		<div class="container" style="margin-left: 550px;">
-			<form action="./insertBoard.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
-        		<textarea name="editor" id="editor" style="width: 700px; height: 400px;" ></textarea>
+			<form action="./mapRes.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
+				<label>제목 :</label>
+				<input type="text" name="editTitle" id="edittitle" style="white-space:nowrap; width: 660px; height: 30px; margin-bottom: 1px;" placeholder="제목을 입력해주세요." required="required"/><br/>
+         		<label>모임날짜 :</label>
+        		<input type="text" name="date" id="date" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
+        		<label>모집인원 :</label>
+        		<input type="text" name="person" id="person" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모집 인원" required="required"/>
+        		<label>모임지역 :</label>
+        		<input type="text" name="location" id="location" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모임 지역" required="required"/>
+        		<label>모집기간 :</label>
+        		<input type="text" name="endDate" id="endDate" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
+        		
+        		<textarea name="editor" id="editor" style="width: 700px; height: 400px;"></textarea>
        	<div>
 			<p style="font-size:20px;"><모임 위치></p>
 		
@@ -193,10 +209,16 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
     // 마커 위치를 클릭한 위치로 옮깁니다
     marker.setPosition(latlng);
     
+    //클릭한 좌표를 객체에 넣음
+    alert(latlng.getLat());
+    alert(latlng.getLng());
     
+    var latSet = latlng.getLat();
+    var lngSet = latlng.getLng();
     
-    
-    
+    $('#Lat').val(latSet);
+    $('#Lng').val(lngSet);
+     
     
     
     var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
@@ -430,7 +452,12 @@ function removeAllChildNods(el) {
 				
        			
        			</div>
+ 				
+ 				<input type="text" id="Lat" name="Lat" value="" style="display: none">
+ 				<input type="text" id="Lng" name="Lng" value="" style="display: none">
+       			
        			<input type="button" class="btn brows-btn" id="insertBoard" value="글 올리기" style="margin-left: 300px;" />
+       			
    		 	</form>
 		</div>
 

@@ -135,22 +135,22 @@
 						
 								<tr>
 									<td>d</td>
+									<td><a href="moimDetail.do">d</a></td>
 									<td>d</td>
-									<td><a>d</a></td>
 									<td>d</td>
 								</tr>		
 					
 							
 								 <tr>
 			 						<td colspan="4">
-			 							<input type="button" value="글쓰기" onclick="">
+			 							<input type="button" value="글쓰기" onclick="location.href='moimwrite.do'">
 			 							<input type="submit" value="삭제" /> <!-- onclick= -->
 									</td>
 								</tr>	
 							</table>						
 
 
-
+<!-- 페이징 코드 시작-->
 	<nav aria-label="Page navigation example" style="margin-left: 250px;"> 
   		<ul class="pagination">
     		<li class="page-item">
@@ -168,14 +168,14 @@
    		    </li>
  	    </ul>
 	</nav>
-	 
+<!-- 페이징 코드 끝-->
 				</form>
 		</div>
 			
 		<div class="right-box">
 			
 			
-				<h1>지도넣어~~~~~~~~~~~</h1>
+				<h1>캘린더넣어~~~~~~~~~~~</h1>
 			
 		</div>
 	</section>		

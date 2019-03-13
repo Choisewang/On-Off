@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" >
     <head>
         <meta charset="utf-8"> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -109,7 +110,7 @@
 		
 		<div class="up-box">
 			
-			<p>선택한 일정~</p>
+			<p>${editTitle }</p>
 			
 			
 		</div>
@@ -117,10 +118,13 @@
 		<div class="down-box">
 			
 			
-				<h1>d</h1>
-			
+				<h1>${editor }</h1>
+				
+
 			
 		</div>
+		
+		
 		
 		<div class="map-box">
 		
@@ -130,7 +134,7 @@
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center: new daum.maps.LatLng(33.450701, 126.570667),// 지도의 중심좌표
+			center: new daum.maps.LatLng(${Lat }, ${Lng}),// 지도의 중심좌표
 			level: 3                   // 지도의 확대 레벨
 		};
 
@@ -139,7 +143,7 @@
 		
 		
 		// 마커가 표시될 위치입니다 
-		var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
+		var markerPosition  = new daum.maps.LatLng(${Lat }, ${Lng}); 
 
 		// 마커를 생성합니다
 		var marker = new daum.maps.Marker({
