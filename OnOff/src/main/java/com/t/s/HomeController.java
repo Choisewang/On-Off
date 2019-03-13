@@ -96,7 +96,37 @@ public class HomeController {
       return "search";
    }
    
-   
+	@RequestMapping(value = "/mapRes.do", method = RequestMethod.POST)
+	public String mapRes(Locale locale, Model model, String editTitle, String editor, String Lat, String Lng /*, testDto dto*/) {
+		
+	/*	testDto dtosum = new testDto();
+		dtosum.setTitle(editTitle);
+		dtosum.setContent(editor);
+		
+		
+		int res = biz.insert(dto);
+		*/
+		
+		model.addAttribute("editTitle", editTitle);
+		model.addAttribute("editor",editor);
+		
+		
+		/*model.addAttribute("dtosum",res);*/
+		model.addAttribute("Lat",Lat);
+		model.addAttribute("Lng",Lng);
+		
+		
+		
+		
+		return "moimDetail";
+	}
+  
+	   @RequestMapping(value="/moimwrite.do", method=RequestMethod.GET)
+	   public String moimwrite() {
+	      
+	      return "moimwrite";
+	   }
+  
    
    /*업로드=================================*/
    @RequestMapping(value = "/coding.do")
@@ -121,7 +151,7 @@ public class HomeController {
            // 파일명을 받는다 - 일반 원본파일명
            String oldName = request.getHeader("file-name");
            // 파일 기본경로 _ 상세경로
-           String filePath = "C:/Workspace_FinalProject/OnOff2222222/src/main/webapp/resources/photoUpload/";
+           String filePath = "C:/Users/정성/git/On-Off/OnOff/src/main/webapp/resources/photoUpload/";
            String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
                          .format(System.currentTimeMillis()))
                          .append(UUID.randomUUID().toString())
@@ -139,7 +169,7 @@ public class HomeController {
            sb = new StringBuffer();
            sb.append("&bNewLine=true")
              .append("&sFileName=").append(oldName)
-             .append("&sFileURL=").append("http://localhost:8787/ssss/resources/photoUpload/")
+             .append("&sFileURL=").append("http://localhost:8787/s/resources/photoUpload/")
        .append(saveName);
        } catch (Exception e) {
            e.printStackTrace();
