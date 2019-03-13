@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="onoff">
+
+	<!-- *********************************List를 출력하기 위한 resultMap 작업****************************************** -->
+	<resultMap type="com.t.s.model.dto.FreeBoardAnsDto" id="FreeBoardAnsMap">
+		<result property="boardansseq" column="BOARDANSSEQ" />
+		<result property="boardseq" column="BOARDSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="boardanscontent" column="BOARDANSCONTENT" />
+		<result property="boardansregdate" column="BOARDANSREGDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.FreeBoardDto" id="FreeBoardMap">
+		<result property="boardseq" column="BOARDSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="boardtitle" column="BOARDTITLE" />
+		<result property="boardcontent" column="BOARDCONTENT" />
+		<result property="boardregdate" column="BOARDREGDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.GroupDto" id="GroupMap">
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="grouptitle" column="GROUPTITLE" />
+		<result property="groupcontent" column="GROUPCONTENT" />
+		<result property="groupregdate" column="GROUPREGDATE" />
+		<result property="groupimg" column="GROUPIMG" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.GroupUserDto" id="GroupUserMap">
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="groupusergrade" column="GROUPUSERGRADE" />
+		<result property="groupuserregdate" column="GROUPUSERREGDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.ImgBoardAnsDto" id="ImgBoardAnsMap">
+		<result property="imgansseq" column="IMGANSSEQ" />
+		<result property="imgboardseq" column="IMGBOARDSEQ" />
+		<result property="moimseq" column="MOIMSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="imganscontent" column="IMGANSCONTENT" />
+		<result property="imgansregdate" column="IMGANSREGDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.ImgBoardDto" id="ImgBoardMap">
+		<result property="imgboardseq" column="IMGBOARDSEQ" />
+		<result property="moimseq" column="MOIMSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="imgboardtitle" column="IMGBOARDTITLE" />
+		<result property="imgboardcontent" column="IMGBOARDCONTENT" />
+		<result property="imgboardregdate" column="IMGBOARDREGDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.MoimAnsDto" id="MoimAnsMap">
+		<result property="moimansseq" column="MOIMANSSEQ" />
+		<result property="moimseq" column="MOIMSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="moimanscontent" column="MOIMANSCONTENT" />
+		<result property="moimansregdate" column="MOIMANSREGDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.MoimDto" id="MoimMap">
+		<result property="moimseq" column="MOIMSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="moimtitle" column="MOIMTITLE" />
+		<result property="moimcontent" column="MOIMCONTENT" />
+		<result property="moimrecruit" column="MOIMRECRUIT" />
+		<result property="moimaddr" column="MOIMADDR" />
+		<result property="moimregdate" column="MOIMREGDATE" />
+		<result property="moimenddate" column="MOIMENDDATE" />
+		<result property="moimdate" column="MOIMDATE" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.MoimUserDto" id="MoimUserMap">
+		<result property="moimseq" column="MOIMSEQ" />
+		<result property="userid" column="USERID" />
+		<result property="groupseq" column="GROUPSEQ" />
+		<result property="moimq1" column="MOIMQ1" />
+		<result property="moimq2" column="MOIMQ2" />
+		<result property="moimq3" column="MOIMQ3" />
+		<result property="moimq4" column="MOIMQ4" />
+		<result property="moimq5" column="MOIMQ5" />
+		<result property="moimq6" column="MOIMQ6" />
+	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.UserDto" id="UserMap">
+		<result property="userid" column="USERID" />
+		<result property="userpw" column="USERPW" />
+		<result property="usergrade" column="USERGRADE" />
+		<result property="username" column="USERNAME" />
+		<result property="userbirth" column="USERBIRTH" />
+		<result property="useremail" column="USEREMAIL" />
+		<result property="useraddr" column="USERADDR" />
+		<result property="usergender" column="USERGENDER" />
+		<result property="userphone" column="USERPHONE" />
+		<result property="userregdate" column="USERREGDATE" />
+	</resultMap>
+	<!-- ****************************************************************************************************** -->
+	
+	
+	
+	<!-- *********************************강한승****************************************** -->
+	
+	<!-- ******************************************************************************* -->
+	
+	
+	
+	
+	<!-- *********************************남윤아****************************************** -->
+	
+	<!-- ******************************************************************************* -->
+	
+	
+	
+	
+	<!-- *********************************문지희****************************************** -->
+	
+	<!-- ******************************************************************************* -->
+	
+	
+	
+	
+	<!-- *********************************박정성****************************************** -->
+	
+	<!-- ******************************************************************************* -->
+	
+	
+	
+	
+	<!-- *********************************조승빈****************************************** -->
+	
+	<!-- ******************************************************************************* -->
+	
+	
+	
+	
+	<!-- *********************************최세왕****************************************** -->
+	
+	<!-- ******************************************************************************* -->
+
+
+</mapper>
+
