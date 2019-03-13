@@ -9,11 +9,11 @@ public class UserDto {
 	private String userpw;
 	private String usergrade;
 	private String username;
-	private Date userbirth;
+	private String userbirth;
 	private String useremail;
 	private String useraddr;
 	private String usergender;
-	private int userphone;
+	private String userphone;
 	private Date userregdate;
 	
 	
@@ -52,10 +52,10 @@ public class UserDto {
 		this.username = username;
 	}
 
-	public Date getUserbirth() {
+	public String getUserbirth() {
 		return userbirth;
 	}
-	public void setUserbirth(Date userbirth) {
+	public void setUserbirth(String userbirth) {
 		this.userbirth = userbirth;
 	}
 
@@ -80,10 +80,10 @@ public class UserDto {
 		this.usergender = usergender;
 	}
 
-	public int getUserphone() {
+	public String getUserphone() {
 		return userphone;
 	}
-	public void setUserphone(int userphone) {
+	public void setUserphone(String userphone) {
 		this.userphone = userphone;
 	}
 
