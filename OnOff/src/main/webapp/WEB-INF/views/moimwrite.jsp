@@ -138,14 +138,14 @@
 				<label>제목 :</label>
 				<input type="text" name="moimtitle" id="edittitle" style="white-space:nowrap; width: 660px; height: 30px; margin-bottom: 1px;" placeholder="제목을 입력해주세요." required="required"/><br/>
          		<label>모임날짜 :</label>
-        		<input type="date" name="moimdate" id="date" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
+        		<input type="date" name="moimdate" id="date" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
         		<label>모집인원 :</label>
-        		<input type="text" name="moimrecruit" id="person" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모집 인원" required="required"/>
+        		<input type="text" name="moimrecruit" id="person" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 인원" required="required"/></br>
         		<label>모임지역 :</label>
-        		<input type="text" name="moimaddr" id="location" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모임 지역" required="required"/>
+        		<input type="text" name="moimaddr" id="location" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모임 지역" required="required"/>
         		<label>모집기간 :</label>
-        		<input type="date" name="moimenddate" id="endDate" style="height: 30px; width: 100px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
-        		
+        		<input type="date" name="moimenddate" id="endDate" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
+        		 
         		<textarea name="moimcontent" id="editor" style="width: 700px; height: 400px;"></textarea>
        	<div>
 			<p style="font-size:20px;"><모임 위치></p>

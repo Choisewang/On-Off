@@ -20,30 +20,28 @@
 	<style type="text/css">
 	
 	.up-box{
-		font-size: 40px;
+		/* font-size: 40px; */
 		border-bottom: 1px solid black;
 		padding-bottom: 30px;
 		word-wrap:break-word;
-		height: 100px;
+		height: auto;
+		width: auto;
 		background-color: white;
+		word-wrap:break-word;
+		padding-left: 700px;
 	}
 	
 	.down-box{
 		padding-top: 30px;
-		word-wrap:break-word;
+		padding-bottom: 30px;
 		height: auto;
+		width : 100%;
 		background-color: white;
+		padding-left: 700px;
+		float: left;
+		
 	}
 	
-	.map-box{
-		
-		padding-top: 30px;
-		word-wrap:break-word;
-		padding-left: 700px;
-		height: 400px;
-		background-color: white;
-		
-	}
 	
 	img{
 		max-width: 50%;
@@ -97,80 +95,38 @@
 	<section class="inner-banner" style="backend:#242c36 url(https://via.placeholder.com/1920x600)no-repeat;">
 		<div class="container">
 			<div class="caption">
-				<h2>선택한 일정</h2>
-				<p>현재 진행 예정인 모임<span>ㅇㅇ</span></p>
+				<h2>선택한 그룹</h2>
+				<p>그룹 상세보기<span>ㅇㅇ</span></p>
 			</div>
 		</div>
 	</section>
 	
-<!-- 	<section class="jobs">
-		<div class="container">
-			<div class="row heading">
-				<h2></h2>
-				<p>참여를 원하는 곳에 참가신청을 하세요</p> 
-			</div>
-		</div>
-	</section> -->
-	
+
+
 	<section>
 		
-		<div class="up-box" style="display: block; padding-left: 700px;">
+		<div class="up-box">
 			
-<%-- 			<p>${editTitle }</p>
- --%>			<p>제목 : ${dto.getMoimtitle() }</p>
-		
+				<div style="width: auto; height: auto; float: left;"><a><img alt="" src=""> 이미지</a></div>
+				
+				<a>그룹 소개 적는 곳</a>
+				
+				<button class="btn brows-btn">가입하기</button>
 		</div>
 			
-		<div class="down-box" style="display: block; padding-left: 700px;" >
+		<div class="down-box">
 			
-			
-				<p>모집인원 : ${dto.getMoimrecruit() }</p>
-				<p>모임 위치 : ${dto.getMoimaddr() }</p>
-				<p>모집 기간 : ${dto.getMoimenddate()}</p>
-				<p>모임 날짜 : ${dto.getMoimdate() }</p>
-		
-				<p>내용 : ${dto.getMoimcontent() }</p>
-	
+			<button class="btn brows-btn" style="display: inline-block">자유게시판</button>
+			<button class="btn brows-btn" style="display: inline-block">갤러리</button>
+			<button class="btn brows-btn" style="display: inline-block">모임 일정</button>
+			<button class="btn brows-btn" style="display: inline-block">라이브</button>
+			<button class="btn brows-btn" style="display: inline-block">채팅</button>
 
 			
 		</div>
 		
-		
-		
-		<div class="map-box" >
-		<p style="font-size: 40px;"><모임장소></p>
-	<div id="map" style="width:500px;height:400px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d1595fcdba49530de07a8fead7b83da"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d1595fcdba49530de07a8fead7b83da&libraries=services,clusterer,drawing"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new daum.maps.LatLng(${Lat }, ${Lng}),// 지도의 중심좌표
-			level: 3                   // 지도의 확대 레벨
-		};
 
-		var map = new daum.maps.Map(container, options); // 지도를 생성합니다
-		
-		
-		
-		// 마커가 표시될 위치입니다 
-		var markerPosition  = new daum.maps.LatLng(${Lat }, ${Lng}); 
 
-		// 마커를 생성합니다
-		var marker = new daum.maps.Marker({
-		    position: markerPosition
-		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
-
-		// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-		// marker.setMap(null);    
-		
-		
-	</script>
-		
-		</div>
 	</section>		
 
 <br></br>
