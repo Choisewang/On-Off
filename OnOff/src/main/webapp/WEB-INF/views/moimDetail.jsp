@@ -108,25 +108,29 @@
 	
 	<section>
 		
-		<div class="up-box">
+		<div class="up-box" style="display: block; padding-left: 700px;">
 			
-			<p>${editTitle }</p>
-			
-			
+<%-- 			<p>${editTitle }</p>
+ --%>			<p>제목 : ${dto.getMoimtitle() }</p>
+		
 		</div>
 			
-		<div class="down-box">
+		<div class="down-box" style="display: block; padding-left: 700px;" >
 			
 			
-				<h1>${editor }</h1>
-				
+				<p>모집인원 : ${dto.getMoimrecruit() }</p>
+				<p>모임 위치 : ${dto.getMoimaddr() }</p>
+				<p>모집 기간 : ${dto.getMoimenddate()}</p>
+				<p>모임 날짜 : ${dto.getMoimdate() }</p>
+				<h1>내용 : ${dto.getMoimcontent() }</h1>
+	
 
 			
 		</div>
 		
 		
 		
-		<div class="map-box">
+		<div class="map-box" >
 		
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d1595fcdba49530de07a8fead7b83da"></script>
@@ -164,7 +168,7 @@
 
 
 		<!-- footer start -->
-		<footer>
+		<footer >
 			<div class="container">
 				<div class="col-md-3 col-sm-6">
 					<h4>Featured Job</h4>

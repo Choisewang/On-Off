@@ -5,7 +5,7 @@ import java.util.Date;
 public class MoimDto {
 	
 	//테이블 명 MOIM
-	
+	////////////////////date을 String으로 변경 경도위도 Dto에 추가해야할듯 디비랑
 	private int moimno;
 	private String userid;
 	private int groupno;
@@ -14,8 +14,8 @@ public class MoimDto {
 	private String moimrecruit;
 	private String moimaddr;
 	private Date moimregdate;
-	private Date moimenddate;
-	private Date moimdate;
+	private String moimenddate;
+	private String moimdate;
 	
 	
 	public MoimDto() {
@@ -81,17 +81,17 @@ public class MoimDto {
 		this.moimregdate = moimregdate;
 	}
 
-	public Date getMoimenddate() {
+	public String getMoimenddate() {
 		return moimenddate;
 	}
-	public void setMoimenddate(Date moimenddate) {
+	public void setMoimenddate(String moimenddate) {
 		this.moimenddate = moimenddate;
 	}
 
-	public Date getMoimdate() {
+	public String getMoimdate() {
 		return moimdate;
 	}
-	public void setMoimdate(Date moimdate) {
+	public void setMoimdate(String moimdate) {
 		this.moimdate = moimdate;
 	}
 	
