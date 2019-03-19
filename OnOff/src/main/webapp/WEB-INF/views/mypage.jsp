@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +100,7 @@ ul.sub li:hover {
 					data-target="#navbar-menu">
 					<i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="index.html"> <img
+				<a class="navbar-brand" href="home.do"> <img
 					src="img/Onlogo.png" class="logo" alt="logo">
 				</a>
 			</div>
@@ -109,8 +110,17 @@ ul.sub li:hover {
 			<div class="collapse navbar-collapse" id="navbar-menu">
 				<ul class="nav navbar-nav navbar-right" data-in="fadeInDown"
 					data-out="fadeOutUp">
-					<li><a href="#">Sign up</a></li>
-					<li><a href="#">Login</a></li>
+					<li><a href="home.do">Home</a></li>
+					<c:set var="user" value="${dto.username }"/>
+					<c:choose>
+					<c:when test="${user==null }">
+						<li><a href="login.do">Login</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="logout.do">Logout</a></li>
+						<li><a href="mypage.do">${dto.username }</a></li>
+					</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

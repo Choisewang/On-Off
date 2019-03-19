@@ -25,6 +25,9 @@
 	<br/>
 	<a href="moimDetail.do">moimDetail</a>
 	<a href="search.do">소모임검색</a>
+
+	<a href="groupDetail.do">그룹 상세보기</a>
+	<%-- <jsp:forward page="home.do"></jsp:forward>	 --%>
 	
 </body>
 </html>

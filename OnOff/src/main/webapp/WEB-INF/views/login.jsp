@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -15,6 +17,41 @@
         <link rel="stylesheet" href="css/main.css">
 
     </head>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+	
+	//일반 로그인
+	function login(){
+		
+		var idVal = $("#id").val();
+		var pwVal = $("#pw").val();
+		
+		if(idVal == null || idVal==""){
+			alert("아이디를 확인해 주세요");
+		}else if(pwVal == null || pwVal==""){
+			alert("비밀번호를 확인해 주세요");
+		}else{
+			
+			$.ajax({
+				type:"post",
+				url:"loginajax.do",
+				data:"id="+idVal+"&pw="+pwVal,
+				success:function(msg){
+					if(msg.loginchk == true){
+						location.href="home.do";
+					}else{
+						alert("잘못 입력했습니다.");
+					}
+				},
+				error:function(){
+					alert("로그인 실패");
+				}				
+			});			
+		}	
+	}
+	
+	</script>
 	
     <body>
 	
@@ -27,24 +64,15 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 						<i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand" href="index.html"><img src="img/logo.png" class="logo" alt=""></a>
+					<a class="navbar-brand" href="home.do"><img src="img/Onlogo.png" class="logo" alt=""></a>
 				</div>
 				<!-- End Header Navigation -->
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-							<li><a href="index.html">Home</a></li> 
-							<li><a href="login.html">Login</a></li>
-							<li><a href="companies.html">Companies</a></li> 
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse</a>
-								<ul class="dropdown-menu animated fadeOutUp" style="display: none; opacity: 1;">
-									<li class="active"><a href="browse-job.html">Browse Jobs</a></li>
-									<li><a href="company-detail.html">Job Detail</a></li>
-									<li><a href="resume.html">Resume Detail</a></li>
-								</ul>
-							</li>
+							<li><a href="home.do">Home</a></li> 
+							<li><a href="login.do">Login</a></li>
 						</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>   
@@ -55,14 +83,14 @@
 		<section class="login-wrapper">
 			<div class="container">
 				<div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
-					<form>
-						<img class="img-responsive" alt="logo" src="img/logo.png">
-						<input type="text" class="form-control input-lg" placeholder="User Name">
-						<input type="password" class="form-control input-lg" placeholder="Password">
-						<label><a href="">Forget Password?</a></label>
-						<button type="submit" class="btn btn-primary">Login</button>
-						<p>Have't Any Account <a href="">Create An Account</a></p>
-					</form>
+					<!-- <form> -->
+						<img class="img-responsive" alt="logo" src="img/Onlogo.png">
+						<input type="text" class="form-control input-lg" placeholder="User ID" id="id">
+						<input type="password" class="form-control input-lg" placeholder="Password" id="pw">
+						<label><a href="forgetPassword.do">Forget Password?</a></label>
+						<button type="button" class="btn btn-primary" onclick="login();">Login</button>
+						<p>Have't Any Account <a href="registUser.do">Create An Account</a></p>
+					<!-- </form> -->
 				</div>
 			</div>
 		</section>

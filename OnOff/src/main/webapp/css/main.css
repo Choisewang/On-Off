@@ -529,6 +529,21 @@ margin:20px auto;
 font-weight:400;
 padding:14px 25px;
 }
+
+.brows-btn2{
+background:#da0833 ;
+color:#ffffff;
+text-transform:uppercase;
+font-size:16px;
+text-shadow:none;
+line-height: 1.2;
+margin:20px auto;
+font-weight:400;
+padding:14px 25px;
+}
+#twobtn{
+	text-align:center;
+}
 /*--------------------Style for Job Filter----------------------*/
 .jobs{
 padding:60px 0;
@@ -1132,7 +1147,7 @@ width:20%;
 }
 }
 
-/*½Âºó*/
+/*ï¿½Âºï¿½*/
 .bestclub{
 	text-align: center;
 	font-size: 23px;

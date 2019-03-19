@@ -137,6 +137,50 @@
 	
 	<!-- *********************************조승빈****************************************** -->
 	
+		
+	<select id="login" parameterType="map" resultType="UserDto">
+		SELECT *
+		FROM USERINFO
+		WHERE USERID = #{userid} AND USERPW = #{userpw}
+	</select>
+	
+	<select id="idchk" parameterType="String" resultMap="UserMap">
+		SELECT *
+		FROM USERINFO
+		WHERE USERID = #{userid}
+	</select>
+	
+	<insert id="regist" parameterType="UserDto">
+		INSERT INTO USERINFO
+		VALUES(#{userid},#{userpw},'NORMAL',#{username},#{userbirth},#{useremail},#{useraddr},#{usergender},#{userphone},SYSDATE)
+	</insert>
+	
+	<select id="searchpassword" parameterType="String" resultType="String">
+		SELECT USERPW
+		FROM USERINFO
+		WHERE USERID = #{userid}
+	</select>
+	
+	<select id="myinfo" parameterType="String" resultMap="UserMap">
+		SELECT *
+		FROM USERINFO
+		WHERE USERID = #{userid}
+	</select>
+	
+	<delete id="dropuser" parameterType="String">
+		DELETE 
+		FROM USERINFO
+		WHERE USERID = #{userid}
+	</delete>
+	
+	<update id="updateuser" parameterType="UserDto">
+		UPDATE USERINFO
+		SET USERPW=#{userpw}, USERNAME=#{username}, USERBIRTH=#{userbirth}, USEREMAIL=#{useremail}, USERADDR=#{useraddr}, USERGENDER=#{usergender}, USERPHONE=#{userphone}
+		WHERE USERID=#{userid} 
+	</update>
+	
+	
+	
 	<!-- ******************************************************************************* -->
 	
 	

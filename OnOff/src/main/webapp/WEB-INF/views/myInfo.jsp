@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,34 +67,73 @@ ul.sub li:hover {
 </style>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+	function dropUser(){
+		var confirm = window.confirm("정말 탈퇴하겠습니까?");
+		
+		if(confirm==true){
+			location.href="dropUser.do";
+			
+			/* $.ajax({
+				type:"post",
+				url:"dropUser.do",
+				success:function(msg){
+					if(msg.dropchk == true){
+						alert("성공적으로 탈퇴되었습니다.");
+						location.href="home.do";
+					}else{
+						alert("시스템 오류로 탈퇴에 실패했습니다. 다시 시도하십시오.");
+					}
+				},
+				error:function(){
+					alert("탈퇴 실패");
+				}				
+			}); */		
+		} 
+	}
+	
+	$(function() {
+		
+		$("#btn_update").click(function() {
+			$("#myPage").load("updateMyInfo.do");
+		});
+
+	});
+</script>
 
 </head>
-<body>
-	<div class="basic-information" style="min-width: 80%;">
-		<table border="1" style="width: 100%; text-align: center;">
-			<tr>
-				<td rowspan="3" width="15%;">이미지</td>
-				<td width="15%">이름</td>
-				<td width="15%">생년월일 or 나이</td>
-				<td width="15%">등급</td>
-			</tr>
+<body>	
+	<section class="regist-wrapper">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="row">
+					<form>
+						<div class="basic-information">
+							<div class="col-md-9 col-sm-9">
+								<div class="profile-content">
+									<ul class="information">
+										<li><span>아이디</span><label style="font-weight:normal;">${dto.userid }</label></li>
+										<li><span>이름</span><label style="font-weight:normal;">${dto.username }</label></li>
+										<li><span>성별</span><label style="font-weight:normal;">${dto.usergender }</label></li>
+										<li><span>생년월일</span>${dto.userbirth }<label></label></li>
+										<li><span>이메일</span>${dto.useremail }<label></label></li>
+										<li><span>휴대전화</span>${dto.userphone }<label></label></li>
+										<li><span>주소</span>${dto.useraddr }<label></label></li>
+									</ul>	
+											
+								</div>
+							</div>
+						</div>
 
-			<tr>
-				<td colspan="3">주소</td>
-			</tr>
-
-			<tr>
-				<td>전화번호</td>
-				<td>이메일</td>
-				<td>가입일</td>
-			</tr>
-
-			<tr>
-				<td>변경하기</td>
-				<td colspan="3">비밀번호 변경, 회원정보 수정, 회원 탈퇴</td>
-			</tr>
-		</table>
-
-	</div>
+						<div id="twobtn">
+						<input type="button" class="btn brows-btn2" value="수정하기" id="btn_update" />
+						<input type="button" class="btn brows-btn2" value="탈퇴하기" id="btn_delete" onclick="dropUser();" />
+						</div>
+					</form>	
+				</div>
+			</div>
+		</div>
+		</section>
+		
 </body>
 </html>

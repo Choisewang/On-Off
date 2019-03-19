@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -29,16 +30,25 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 						<i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand" href="index.jsp"><img src="img/logo.png" class="logo" alt=""></a>
+					<a class="navbar-brand" href="home.do"><img src="img/logo.png" class="logo" alt=""></a>
 				</div>
 				<!-- End Header Navigation -->
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-							<li><a href="index.jsp">Home</a></li> 
-							<li><a href="login.jsp">Login</a></li>
-						</ul>
+						<li><a href="home.do">Home</a></li> 
+						<c:set var="user" value="${dto.username }"/>
+						<c:choose>
+						<c:when test="${user==null }">
+							<li><a href="login.do">Login</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="logout.do">Logout</a></li>
+							<li><a href="mypage.do">${dto.username }</a></li>
+						</c:otherwise>
+						</c:choose>
+					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>   
 		</nav>
