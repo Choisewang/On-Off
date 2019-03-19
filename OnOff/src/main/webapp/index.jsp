@@ -28,6 +28,15 @@
 
 	<a href="groupDetail.do">그룹 상세보기</a>
 	<%-- <jsp:forward page="home.do"></jsp:forward>	 --%>
+	<a href="home.do">home</a>
+	<br/>
+	<input type="button" value="채팅창 팝업창 " onclick="showPopup();">
+	
+	<script type="text/javascript">
+		function showPopup(){
+			window.open("home.do","a","width=400,height=500,left=100,top=50");
+		}
+	</script>
 	
 </body>
 </html>
