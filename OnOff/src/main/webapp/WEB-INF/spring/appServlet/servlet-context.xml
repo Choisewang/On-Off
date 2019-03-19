@@ -36,7 +36,15 @@
         <!-- max size of file in memory (in bytes) -->
         <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
     </beans:bean>
-	 
+	
+	 <beans:bean id="echohandler" class="com.chat.config.EchoHandler"/>
+	<websocket:handlers>
+		<websocket:mapping handler="echohandler" path="/echo"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="com.chat.config.HandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+		<websocket:sockjs/>
+	</websocket:handlers>
 	
 </beans:beans>
 
