@@ -34,7 +34,7 @@
 	
 	<script type="text/javascript">
 		function showPopup(){
-			window.open("home.do","a","width=400,height=500,left=100,top=50");
+			window.open("chat.do","a","width=400,height=500,left=100,top=50");
 		}
 	</script>
 	
