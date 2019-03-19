@@ -570,6 +570,11 @@ public class HomeController {
 
 	/////////////////////////////////////////////////////////////////
 
-   
+	 @RequestMapping(value="/chat.do", method=RequestMethod.GET)
+	   public String chat(Model model) {
+	     model.addAttribute("id","dd");
+	     model.addAttribute("groupnum","1");
+	      return "chat";
+	   }
    
 }
