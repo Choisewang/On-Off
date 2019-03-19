@@ -30,7 +30,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 						<i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand" href="home.do"><img src="img/logo.png" class="logo" alt=""></a>
+					<a class="navbar-brand" href="home.do"><img src="img/Onlogo.png" class="logo" alt=""></a>
 				</div>
 				<!-- End Header Navigation -->
 
@@ -61,10 +61,10 @@
 			<div class="container">
 				<div class="caption">
 					<h2>ON&OFF</h2>
-					<form>
+					<form action="search.do" method="post">
 						<fieldset> 
 							<div class="col-md-10 col-sm-4 no-pad">
-								<input type="text" class="form-control border-right" placeholder="소모임을 검색하세요" />
+								<input type="text" class="form-control border-right" name="searchText" placeholder="소모임을 검색하세요" />
 							</div>
 							<div class="col-md-2 col-sm-2 no-pad">
 								<input type="submit" class="btn seub-btn" value="SEARCH" />

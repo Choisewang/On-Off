@@ -100,8 +100,7 @@ ul.sub li:hover {
 					data-target="#navbar-menu">
 					<i class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="home.do"> <img
-					src="img/Onlogo.png" class="logo" alt="logo">
+				<a class="navbar-brand" href="home.do"> <img src="img/Onlogo.png" class="logo" alt="">
 				</a>
 			</div>
 			<!-- End Header Navigation -->

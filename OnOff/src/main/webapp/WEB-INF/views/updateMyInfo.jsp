@@ -10,88 +10,90 @@
         <title>Jober Desk | Responsive Job Portal Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		
+      
         <!-- All Plugin Css -->  
-		<link rel="stylesheet" href="css/plugins.css">
-		
-		<!-- Style & Common Css --> 
-		<link rel="stylesheet" href="css/common.css">
+      <link rel="stylesheet" href="css/plugins.css">
+      
+      <!-- Style & Common Css --> 
+      <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/main.css">
 
     </head>
     <style>
 body {
-	margin: 20px auto;
-	padding: 0;
-	font-family: "맑은 고딕";
-	font-size: 1.5em;
+   margin: 20px auto;
+   padding: 0;
+   font-family: "맑은 고딕";
+   font-size: 1.5em;
 }
 
 ul#navi {
-	width: 200px;
-	text-indent: 10px;
+   width: 200px;
+   text-indent: 10px;
 }
 
 ul#navi, ul#navi ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+   margin: 0;
+   padding: 0;
+   list-style: none;
 }
 
 li.group {
-	margin-bottom: 3px;
+   margin-bottom: 3px;
 }
 
 ul.sub li {
-	margin-bottom: 2px;
-	height: 35px;
-	line-height: 35px;
-	background: #f4f4f4;
-	cursor: pointer;
+   margin-bottom: 2px;
+   height: 35px;
+   line-height: 35px;
+   background: #f4f4f4;
+   cursor: pointer;
 }
 
 ul.sub li a {
-	display: block;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	color: #000;
+   display: block;
+   width: 100%;
+   height: 100%;
+   text-decoration: none;
+   color: #000;
 }
 
 ul.sub li:hover {
-	background: #da0833;
+   background: #da0833;
 }
 
 </style>
     
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<script type="text/javascript">
-	
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+   <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+   <script type="text/javascript">
+   
 
-	// 비밀번호 확인
-	function isSame(){
-		var pw = document.getElementById("pw").value;
-		var pw_chk = document.getElementById("pw_chk").value;
-		if(pw.length<7){
-			alert("비밀번호는 7자리 이상 설정 가능합니다.");
-			document.getElementById("pw").value="";
-			document.getElementById("pw_chk").value="";
-		} else if(document.getElementById("pw").value!="" && document.getElementById("pw_chk").value!=""){
-			if(document.getElementById("pw").value==document.getElementById("pw_chk").value){
-				document.getElementById("same").innerHTML="비밀번호가 일치합니다.";
-				document.getElementById("same").style.color="blue";
-			} else {
-			document.getElementById("same").innerHTML="비밀번호가 일치하지 않습니다.";
-			document.getElementById("same").style.color="red";
-			}
-		}
-	}
+   // 비밀번호 확인
+   function isSame(){
+      var pw = document.getElementById("pw").value;
+      var pw_chk = document.getElementById("pw_chk").value;
+      if(pw.length<7){
+         alert("비밀번호는 7자리 이상 설정 가능합니다.");
+         document.getElementById("pw").value="";
+         document.getElementById("pw_chk").value="";
+      } else if(document.getElementById("pw").value!="" && document.getElementById("pw_chk").value!=""){
+         if(document.getElementById("pw").value==document.getElementById("pw_chk").value){
+            document.getElementById("same").innerHTML="비밀번호가 일치합니다.";
+            document.getElementById("same").style.color="blue";
+         } else {
+         document.getElementById("same").innerHTML="비밀번호가 일치하지 않습니다.";
+         document.getElementById("same").style.color="red";
+         }
+      }
+   }
 
 
-	// 우편번호 찾기
+   // 우편번호 찾기
     function DaumPostCode() {
 
+       daum.postcode.load(function(){
         new daum.Postcode({
             oncomplete: function(data) {
                 // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -140,18 +142,22 @@ ul.sub li:hover {
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
                 document.getElementById('layer').style.display = 'none';
                 
+                document.getElementById("detailAddress").value="";
                 
             },
             width : '100%',
             height : '100%',
             maxSuggestItems : 5
         }).embed(document.getElementById('layer'));
+       });
 
         // iframe을 넣은 element를 보이게 한다.
         document.getElementById('layer').style.display = "block";
 
         // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
         initLayerPosition();
+        
+        
     }
 
     // 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
@@ -175,140 +181,140 @@ ul.sub li:hover {
         // iframe을 넣은 element를 안보이게 한다.
         document.getElementById('layer').style.display = 'none';
     }
-	
+   
     // 폼 다 채워졌나 확인
     function nullChk(){
-    	if(document.getElementById("pw").value==""||document.getElementById("pw_chk").value==""
-    			||document.getElementById("name").value==""||document.getElementById("email").value==""
-    			||document.getElementById("phone").value==""||document.getElementById("address").value==""  || document.getElementById("captchares").innerHTML=="" ){
-    		alert("양식을 모두 작성해주세요");
-    	}  else if(document.getElementById("captchares").innerHTML=="다시 입력하십시오.") {
-    		alert("자동 등록 방지를 확인해주세요");
-    	}  else {
-    		document.getElementById("updateform").submit();
-    	}
+       if(document.getElementById("pw").value==""||document.getElementById("pw_chk").value==""
+             ||document.getElementById("name").value==""||document.getElementById("email").value==""
+             ||document.getElementById("phone").value==""||document.getElementById("address").value==""  || document.getElementById("captchares").innerHTML=="" ){
+          alert("양식을 모두 작성해주세요");
+       }  else if(document.getElementById("captchares").innerHTML=="다시 입력하십시오.") {
+          alert("자동 등록 방지를 확인해주세요");
+       }  else {
+          document.getElementById("updateform").submit();
+       }
     }
     
     // 자동 등록 방지
     $(document).ready(function() {
-		
-		$.ajax({
-			url : "captcha.do",
-			dataType:"json",
-			success : function(data) {
-				console.log(decodeURIComponent(data.key));
-				$("#captchakey").val(decodeURIComponent(data.key));
-				$("#captchaimg").attr("src","captchaImage/"+decodeURIComponent(data.captchaImageName));
-			},
-			error : function(jqXHR, textStatus, errorThrown){
-				console.log('ERRORS: ' + textStatus);
-			}
-		});
-		
-		$("#refresh").on("click",function(){
-			$.ajax({
-				url : "captcha.do",
-				dataType:"json",
-				success : function(data) {
-					console.log(decodeURIComponent(data.key));
-					$("#captchakey").val(decodeURIComponent(data.key));
-					$("#captchaimg").attr("src","captchaImage/"+decodeURIComponent(data.captchaImageName));
-				},
-				error : function(jqXHR, textStatus, errorThrown){
-					console.log('ERRORS: ' + textStatus);
-				}
-			});
-		});
-		$("#btn_captcha").on("click",function(){
-			var key = $("#captchakey").val();
-			var value = $("#captchavalue").val();
-			console.log(key);
-			console.log(value);
-			$.ajax({
-				url : "captcha.do",
-				data : "key="+key+"&value="+value,
-				dataType:"json",
-				success : function(data) {
-					if(decodeURIComponent(data.result)=="true"){
-						document.getElementById("captchares").innerHTML="확인됐습니다.";
-						document.getElementById("captchares").style.color="blue";
-					} else {
-						document.getElementById("captchares").innerHTML="다시 입력하십시오.";
-						document.getElementById("captchares").style.color="red";
-						$("#refresh").trigger("click");
-					}
-					
-				},
-				error : function(jqXHR, textStatus, errorThrown){
-					console.log('ERRORS: ' + textStatus);
-				}
-			});
-		});
-	});
+      
+      $.ajax({
+         url : "captcha.do",
+         dataType:"json",
+         success : function(data) {
+            console.log(decodeURIComponent(data.key));
+            $("#captchakey").val(decodeURIComponent(data.key));
+            $("#captchaimg").attr("src","captchaImage/"+decodeURIComponent(data.captchaImageName));
+         },
+         error : function(jqXHR, textStatus, errorThrown){
+            console.log('ERRORS: ' + textStatus);
+         }
+      });
+      
+      $("#btn_refresh").on("click",function(){
+         $.ajax({
+            url : "captcha.do",
+            dataType:"json",
+            success : function(data) {
+               console.log(decodeURIComponent(data.key));
+               $("#captchakey").val(decodeURIComponent(data.key));
+               $("#captchaimg").attr("src","captchaImage/"+decodeURIComponent(data.captchaImageName));
+            },
+            error : function(jqXHR, textStatus, errorThrown){
+               console.log('ERRORS: ' + textStatus);
+            }
+         });
+      });
+      $("#btn_captcha").on("click",function(){
+         var key = $("#captchakey").val();
+         var value = $("#captchavalue").val();
+         console.log(key);
+         console.log(value);
+         $.ajax({
+            url : "captcha.do",
+            data : "key="+key+"&value="+value,
+            dataType:"json",
+            success : function(data) {
+               if(decodeURIComponent(data.result)=="true"){
+                  document.getElementById("captchares").innerHTML="확인됐습니다.";
+                  document.getElementById("captchares").style.color="blue";
+               } else {
+                  document.getElementById("captchares").innerHTML="다시 입력하십시오.";
+                  document.getElementById("captchares").style.color="red";
+                  $("#btn_refresh")[0].click();
+               }
+               
+            },
+            error : function(jqXHR, textStatus, errorThrown){
+               console.log('ERRORS: ' + textStatus);
+            }
+         });
+      });
+   });
     
-	</script>
+   </script>
 
 <body>
 
-		<!-- update section start -->
-		<section class="update-wrapper">
-		<div class="container">
-			<div class="col-md-12">
-				<div class="row">
-					<form action="updateUser.do" id="updateform" method="post">
-					<div class="basic-information">
-						<div class="col-md-9 col-sm-9">
-							<div class="profile-content">
-								<ul class="information">
-									<li><input type="hidden" name="userid" id="id" value="${dto.userid }"/></li>
-									<li><span>비밀번호</span><input type="password" name="userpw" id="pw" onchange="isSame()" >&nbsp;&nbsp;7자리 이상</li>
-									<li><span>비밀번호 확인</span><input type="password" id="pw_chk" onchange="isSame()">&nbsp;&nbsp;<span id="same" style="width:300px;"></span></li>
-									<li><span>이름</span><input type="text" name="username" id="name" value="${dto.username }"></li>
-									<c:set var="gender" value="${dto.usergender }"/>
-									<c:choose>
-										<c:when test="${gender eq '여성' }">
-											<li><span>성별</span>여성&nbsp;<input type="radio" name="usergender" id="gen_w" value="여성" checked/>&nbsp;남성&nbsp;<input type="radio" name="usergender" id="gen_m" value="남성"></li>
-										</c:when>
-										<c:otherwise>
-											<li><span>성별</span>여성&nbsp;<input type="radio" name="usergender" id="gen_w" value="여성" />&nbsp;남성&nbsp;<input type="radio" name="usergender" id="gen_m" value="남성" checked></li>
-										</c:otherwise>
-									</c:choose>
-									<li><span>생년월일</span><input type="date" name="userbirth" id="birth" value="${dto.userbirth }"></li>
-									<li><span>이메일</span><input type="email" name="useremail" id="email" size="40" value="${dto.useremail }"></li>
-									<li><span>휴대전화</span><input type="tel" name="userphone" id="phone" value="${dto.userphone }">&nbsp;&nbsp;'-' 제외 입력</li>
-									<c:set var="addr" value="${dto.useraddr }"/>
-									<c:set var="splitAddr" value="${fn:split(addr,',')}" />
-									<li><span>주소</span><input type="text" name="useraddr" id="postcode" size="10" placeholder="우편번호" readonly="readonly" value="${splitAddr[0]}"><input type="button" value="우편번호 찾기" onclick="DaumPostCode()"/>
-										<br/><span style="margin-left:150px;font-weight:normal;"><input type="text" name="useraddr" id="address" placeholder="주소" size="50" readonly="readonly" value="${splitAddr[1]}"><br/><input type="text" name="useraddr" id="detailAddress" placeholder="상세주소" size="50" value="${splitAddr[2]}"></span></li>
-									 <li><span>자동 등록 방지</span><img id="captchaimg"/><a href="#" id="refresh" style="font-weight:bold;">
-									&nbsp;&nbsp;[이미지 새로고침]</a><br/><input type="hidden" id="captchakey">
-									<span style="margin-left:150px;font-weight:normal;"><input type="text" id="captchavalue" placeholder="이미지 속 문자 입력" ></span>
-									<button type="button" id="btn_captcha" style="width:50px;">확인</button>&nbsp;&nbsp;<span id="captchares" style="width:300px;"></span></li> 
-								</ul>	
-									<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-									<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-									<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-									</div>	
-							</div>
-						</div>
-					</div>
+      <!-- update section start -->
+      <section class="update-wrapper">
+      <div class="container">
+         <div class="col-md-12">
+            <div class="row">
+               <form action="updateUser.do" id="updateform" method="post">
+               <div class="basic-information">
+                  <div class="col-md-9 col-sm-9">
+                     <div class="profile-content">
+                        <ul class="information">
+                           <li><input type="hidden" name="userid" id="id" value="${dto.userid }"/></li>
+                           <li><span>비밀번호</span><input type="password" name="userpw" id="pw" onchange="isSame()" >&nbsp;&nbsp;7자리 이상</li>
+                           <li><span>비밀번호 확인</span><input type="password" id="pw_chk" onchange="isSame()">&nbsp;&nbsp;<span id="same" style="width:300px;"></span></li>
+                           <li><span>이름</span><input type="text" name="username" id="name" value="${dto.username }"></li>
+                           <c:set var="gender" value="${dto.usergender }"/>
+                           <c:choose>
+                              <c:when test="${gender eq '여성' }">
+                                 <li><span>성별</span>여성&nbsp;<input type="radio" name="usergender" id="gen_w" value="여성" checked/>&nbsp;남성&nbsp;<input type="radio" name="usergender" id="gen_m" value="남성"></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><span>성별</span>여성&nbsp;<input type="radio" name="usergender" id="gen_w" value="여성" />&nbsp;남성&nbsp;<input type="radio" name="usergender" id="gen_m" value="남성" checked></li>
+                              </c:otherwise>
+                           </c:choose>
+                           <li><span>생년월일</span><input type="date" name="userbirth" id="birth" value="${dto.userbirth }"></li>
+                           <li><span>이메일</span><input type="email" name="useremail" id="email" size="40" value="${dto.useremail }"></li>
+                           <li><span>휴대전화</span><input type="tel" name="userphone" id="phone" value="${dto.userphone }">&nbsp;&nbsp;'-' 제외 입력</li>
+                           <c:set var="addr" value="${dto.useraddr }"/>
+                           <c:set var="splitAddr" value="${fn:split(addr,',')}" />
+                           <li><span>주소</span><input type="text" name="useraddr" id="postcode" size="10" placeholder="우편번호" readonly="readonly" value="${splitAddr[0]}"><input type="button" value="우편번호 찾기" onclick="DaumPostCode()"/>
+                              <br/><span style="margin-left:150px;font-weight:normal;"><input type="text" name="useraddr" id="address" placeholder="주소" size="50" readonly="readonly" value="${splitAddr[1]}"><br/><input type="text" name="useraddr" id="detailAddress" placeholder="상세주소" size="50" value="${splitAddr[2]}"></span></li>
+                            <li><span>자동 등록 방지</span><img id="captchaimg"/><a href="#" id="btn_refresh" style="font-weight:bold;">
+                           &nbsp;&nbsp;[이미지 새로고침]</a><br/><input type="hidden" id="captchakey">
+                           <span style="margin-left:150px;font-weight:normal;"><input type="text" id="captchavalue" placeholder="이미지 속 문자 입력" ></span>
+                           <button type="button" id="btn_captcha" style="width:50px;">확인</button>&nbsp;&nbsp;<span id="captchares" style="width:300px;"></span></li> 
+                        </ul>   
+                           <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+                           <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+                           <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+                           </div>   
+                     </div>
+                  </div>
+               </div>
 
-					<div class="row">
-						<input type="button" class="btn brows-btn" value="수정완료" id="btn_update"
-							onclick="nullChk();" />
-					</div>	
-					</form>	
-				</div>
-			</div>
-		</div>
-		</section>
-		<!-- update section End -->	
+               <div class="row">
+                  <input type="button" class="btn brows-btn" value="수정완료" id="btn_update"
+                     onclick="nullChk();" />
+               </div>   
+               </form>   
+            </div>
+         </div>
+      </div>
+      </section>
+      <!-- update section End -->   
 
-		 
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-		<script src="js/bootsnav.js"></script>
-		<script src="js/main.js"></script>
+       
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+      <script src="js/bootsnav.js"></script>
+      <script src="js/main.js"></script>
     </body>
 </html>

@@ -115,9 +115,11 @@ public class HomeController {
       
       return "moimDetail";
    }
-   @RequestMapping(value="/search.do", method=RequestMethod.GET)
-   public String search() {
+   @RequestMapping(value="/search.do", method=RequestMethod.POST)
+   public String search(Locale locale, Model model, String searchText) {
       
+	   /*model.addAttribute("searchText",searchText);*/
+	   
       return "search";
    }
    
@@ -531,7 +533,7 @@ public class HomeController {
 			return "redirect:home.do";
 			
 		}else {
-			return "redirect:myInfo.do";
+			return "redirect:mypage.do";
 		}
 
 	}
@@ -555,7 +557,7 @@ public class HomeController {
 		if(res > 0) {
 			System.out.println("내정보 수정 성공");			
 			session.setAttribute("dto",dto);
-			return "redirect:home.do";
+			return "redirect:mypage.do";
 			
 		}else {
 			System.out.println("내정보 수정 실패");
