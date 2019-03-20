@@ -613,4 +613,16 @@ public class HomeController {
 	      return "chat";
 	   }
    
+	 
+	 @RequestMapping(value="/chat.do", method=RequestMethod.GET)
+     public String chat(Model model,HttpSession session) {
+      
+      model.addAttribute("id",session.getAttribute("id").toString());
+       System.out.println(session.getAttribute("id").toString()+"controller에서 id");
+      //model.addAttribute("id","dd");
+      session.setAttribute("groupnum", "1");
+       model.addAttribute("groupnum","1");
+        return "chat";
+     }
+	 
 }
