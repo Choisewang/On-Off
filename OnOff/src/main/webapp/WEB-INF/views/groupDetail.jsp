@@ -73,8 +73,17 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-							<li><a href="login.html">Join</a></li>
-							<li><a href="login.html">Login</a></li>
+							<li><a href="index.jsp">Home</a></li> 
+							<c:set var="user" value="${dto.username }"/>
+							<c:choose>
+							<c:when test="${user=null }">
+							<li><a href="login.jsp">Login</a></li>							
+							</c:when>
+							<c:otherwise>
+								<li><a href="logout.do">Logout</a></li>
+								<li><a href="mypage.do">${dto.username}</a></li>
+							</c:otherwise>
+							</c:choose>
 
 <!-- 							<li><a href="companies.html">Companies</a></li> 
 							<li class="dropdown">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -38,8 +40,17 @@
 			<div class="collapse navbar-collapse" id="navbar-menu">
 				<ul class="nav navbar-nav navbar-right" data-in="fadeInDown"
 					data-out="fadeOutUp">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="login.html">Login</a></li>
+							<li><a href="index.jsp">Home</a></li> 
+							<c:set var="user" value="${dto.username }"/>
+							<c:choose>
+							<c:when test="${user=null }">
+							<li><a href="login.jsp">Login</a></li>							
+							</c:when>
+							<c:otherwise>
+								<li><a href="logout.do">Logout</a></li>
+								<li><a href="mypage.do">${dto.username}</a></li>
+							</c:otherwise>
+							</c:choose>				
 					<li><a href="companies.html">Companies</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Browse</a>

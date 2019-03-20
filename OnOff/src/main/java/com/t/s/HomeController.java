@@ -73,28 +73,51 @@ public class HomeController {
    } 
    
    @RequestMapping(value="/boardList.do", method=RequestMethod.GET)
-   public String boardList() {
+   public String boardList(HttpSession session, Model model) {
       
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+	   
       return "boardList";
    }
    @RequestMapping(value="/boardListPhoto.do", method=RequestMethod.GET)
-   public String boardListPhoto() {
+   public String boardListPhoto(HttpSession session, Model model) {
       
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+	   
       return "boardListPhoto";
    }
    @RequestMapping(value="/boardDetail.do", method=RequestMethod.GET)
-   public String boardDetail() {
+   public String boardDetail(HttpSession session, Model model) {
       
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+	
+	   
       return "boardDetail";
    }
    @RequestMapping(value="/boardDetailPhoto.do", method=RequestMethod.GET)
-   public String boardDetailPhoto() {
+   public String boardDetailPhoto(HttpSession session, Model model) {
       
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+
+	   
       return "boardDetailPhoto";
    }
    @RequestMapping(value="/boardWrite.do", method=RequestMethod.GET)
-   public String boardWrite() {
+   public String boardWrite(HttpSession session, Model model) {
       
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+	
+	   
       return "boardWrite";
    }
 //
@@ -106,19 +129,32 @@ public class HomeController {
 
    
    @RequestMapping(value="/moim.do", method=RequestMethod.GET)
-   public String moim() {
+   public String moim(HttpSession session, Model model) {
+	   
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+	
+	   
       
       return "moim";
    }
    @RequestMapping(value="/moimDetail.do", method=RequestMethod.GET)
-   public String moimDetail() {
+   public String moimDetail(HttpSession session, Model model) {
       
+	   if(session.getAttribute("dto")!=null) {
+		   model.addAttribute("dto", session.getAttribute("dto"));
+		   }
+	
+	   
       return "moimDetail";
    }
    @RequestMapping(value="/search.do", method=RequestMethod.POST)
-   public String search(Locale locale, Model model, String searchText) {
+   public String search(Model model, String searchText, HttpSession session) {
       
-	   /*model.addAttribute("searchText",searchText);*/
+	   if(session.getAttribute("dto")!=null) {
+	   model.addAttribute("dto", session.getAttribute("dto"));
+	   }
 	   
       return "search";
    }
