@@ -1,13 +1,10 @@
 package com.chat.config;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -16,30 +13,34 @@ import com.t.s.model.dto.GroupUserDto;
 
 public class EchoHandler extends TextWebSocketHandler {
 
-	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
+	//private Map<SessionIds, WebSocketSession> sessionList = new HashMap<>();
 	
 	private Map<Integer, SingleMoim> moims = new HashMap<Integer, SingleMoim>();
 	
 	SingleMoim singleMoim = new SingleMoim();
 	
-	GroupUserDto dto;
-	// 웹소켓 서버에 클라이언트가 접속하면 호출되는 메소드   
+	GroupUserDto dto = new GroupUserDto();
+	// 웹소켓 서버에 클라이언트가 접속하면 호출되는 메소드
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> map = session.getAttributes();
-		dto = (GroupUserDto)map.get("dto"); //아이디랑 그룹아이디 불러옴
+		dto = (GroupUserDto)map.get("groupUserdto"); //아이디랑 그룹넘버 불러옴
 		
-		singleMoim.addSession(session);		
+		
+		SessionIds ids = new SessionIds();
+		ids.setSessionId(session.getId());
+		ids.setUserId(dto.getUserid());
+		
+		singleMoim.addSession(ids, session);
 		
 		moims.put(dto.getGroupno(), singleMoim);
 		
 		//잘들어가 있는지 확인용
-		System.out.println(dto.getGroupno()+"groupnum임");
-		System.out.println(moims.get(dto.getGroupno()).getSessionList()+"들어가는있값이 무엇인지 보자");
-		
-		List<WebSocketSession> abc = singleMoim.getSessionList();
-		System.out.println("abc : " + abc.get(0)+"현재아이디 : "+session.getId());		
-		
+		System.out.println(singleMoim.findSession(ids)+" : 현재 아이디");
+		System.out.println(dto.getGroupno()+" : groupnum임");
+		System.out.println(moims.get(dto.getGroupno()).getSessionMap()+"들어가는있값이 무엇인지 보자");
+				
 		//sessionList.add(session);
 		System.out.println(dto.getUserid()+" 가 입장하였습니다.");
 	}
@@ -47,18 +48,25 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		sessionList = singleMoim.getSessionList();
+		SingleMoim s = null;
 		
-		for(WebSocketSession sess: sessionList) {
-			sess.sendMessage(new TextMessage(dto.getUserid()+" : "+message.getPayload()));
+		for(Map.Entry<Integer, SingleMoim> presentGroup : moims.entrySet()) {
+			if(presentGroup.getKey() == dto.getGroupno()) {
+				s = presentGroup.getValue();
+				break;
+			}
 		}
-		System.out.println(dto.getUserid()+" 가 보낸 매세지[" + message.getPayload()+"]");
+		
+		for(Map.Entry<SessionIds, WebSocketSession> entry : s.getSessionMap().entrySet()) {
+			entry.getValue().sendMessage(new TextMessage(entry.getKey().getUserId()+" : "+message.getPayload()));
+		}
+		System.out.println(session.getId()+" 가 보낸 매세지[" + message.getPayload()+"]");
 
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		singleMoim.getSessionList().remove(session);
+		//singleMoim.getSessionMap().get(session);
 		System.out.println(session.getId()+"가 나가셨습니다.");
 	}
 	

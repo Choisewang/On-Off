@@ -1,34 +1,38 @@
 package com.chat.config;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap; 
+import java.util.Map;
 
-import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 public class SingleMoim {
 
-	private List<WebSocketSession> sessionList; //한개의 모임세션
+	private Map<SessionIds, WebSocketSession> sessionMap; //한개의 모임세션
 
-	
 	public SingleMoim() {
-		this.sessionList = new ArrayList<WebSocketSession>();
+		sessionMap=new HashMap<SessionIds, WebSocketSession>();
 	}
 	
-	public SingleMoim(List<WebSocketSession> sessionList) {
-		this.sessionList = sessionList;
+	public Map<SessionIds, WebSocketSession> getSessionMap() {
+		return sessionMap;
 	}
 
-	public List<WebSocketSession> getSessionList() {
-		return sessionList;
+	public void setSessionMap(Map<SessionIds, WebSocketSession> sessionMap) {
+		this.sessionMap = sessionMap;
 	}
 	
-	public void setSessionList(List<WebSocketSession> sessionList) {
-		this.sessionList = sessionList;
+	public void addSession(SessionIds key, WebSocketSession session) {
+		sessionMap.put(key, session);
 	}
 	
-	public void addSession(WebSocketSession session) {
-		sessionList.add(session);
+	public String findSession(SessionIds ids) {
+		for(Map.Entry<SessionIds, WebSocketSession> entry : sessionMap.entrySet()){
+			if(entry.getKey().getSessionId() == ids.getSessionId()) {
+				return entry.getKey().getSessionId();
+			}
+		}
+		return null;
 	}
+
 	
 }
