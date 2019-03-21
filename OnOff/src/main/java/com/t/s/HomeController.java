@@ -43,8 +43,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.t.s.model.biz.MoimUserBiz;
 import com.t.s.model.biz.UserBiz;
 import com.t.s.model.dto.MoimDto;
+import com.t.s.model.dto.MoimUserDto;
 import com.t.s.model.dto.UserDto;
 
 /**
@@ -603,9 +605,7 @@ public class HomeController {
 
 	}
 	
-
-	/////////////////////////////////////////////////////////////////
-
+	//채팅
 	@RequestMapping(value="/chat.do", method=RequestMethod.GET)
     public String chat(Model model,HttpSession session) {
      
@@ -616,5 +616,50 @@ public class HomeController {
       model.addAttribute("groupnum","1");
        return "chat";
     }
-	 
+	
+	//설문조사
+	@Autowired
+	private MoimUserBiz moimUserBiz;
+
+	@RequestMapping(value = "/survey.do", method = RequestMethod.GET)
+	public String survey(Model model, HttpServletRequest request, HttpSession session,
+			@ModelAttribute MoimUserDto dto) {
+		if (session.getAttribute("dto") != null) {// 로그인 되어있다면
+			model.addAttribute("dto",session.getAttribute("dto"));
+			if (request.getParameter("Q1") != null) {// 설문조사가 완료되면
+				String userid = session.getAttribute("id").toString();
+				System.out.println("userid는 " + userid);
+				String Q1 = request.getParameter("Q1");
+				String Q2 = request.getParameter("Q2");
+				String Q3 = request.getParameter("Q3");
+				String Q4 = request.getParameter("Q4");
+				String Q5 = request.getParameter("Q5");
+				String Q6 = request.getParameter("Q6");
+//					   M_no, u_no는 세션에서 가져옴
+				dto.setMoimno(1);
+				dto.setUserid(userid);
+				dto.setGroupno(0);
+				dto.setMoimq1(Q1);
+				dto.setMoimq2(Q2);
+				dto.setMoimq3(Q3);
+				dto.setMoimq4(Q4);
+				dto.setMoimq5(Q5);
+				dto.setMoimq6(Q6);
+
+				int res = moimUserBiz.survey(dto);
+
+				if (res > 0) {
+					System.out.println("설문지 작성 성공!");
+				} else {
+					System.out.println("설문지 작성 실패");
+				}
+
+			}
+		} else {// 로그인되어있지 않다면
+			model.addAttribute("msg", "<script type='text/javascript'>alert('로그인해주세요.');</script>");
+			return "login";
+		}
+
+		return "survey";
+	} 
 }

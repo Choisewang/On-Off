@@ -115,14 +115,21 @@
 	
 	
 	<!-- *********************************남윤아****************************************** -->
-	
+	<select id="selGroupnoGroupuser" parameterType="GroupUserDto" resultMap="GroupUserMap">
+		SELECT USERID, GROUPUSERGRADE, GROUPUSERREGDATE
+		FROM GROUPUSER
+		WHERE GROUPNO = #{groupno} AND USERID = #{userid}
+	</select>
 	<!-- ******************************************************************************* -->
 	
 	
 	
 	
 	<!-- *********************************문지희****************************************** -->
-	
+	<insert id="survey" parameterType="MoimUserDto">
+		INSERT INTO MOIMUSER
+		VALUES(#{moimno}, #{userid}, #{groupno}, #{moimq1}, #{moimq2}, #{moimq3}, #{moimq4}, #{moimq5}, #{moimq6})
+	</insert>
 	<!-- ******************************************************************************* -->
 	
 	

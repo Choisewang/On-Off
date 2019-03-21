@@ -16,7 +16,7 @@ import com.t.s.model.dto.GroupUserDto;
 
 public class EchoHandler extends TextWebSocketHandler {
 
-	private List<WebSocketSession> sessionList = new ArrayList<>();
+	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	
 	private Map<Integer, SingleMoim> moims = new HashMap<Integer, SingleMoim>();
 	

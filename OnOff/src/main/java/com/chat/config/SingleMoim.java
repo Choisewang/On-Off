@@ -12,7 +12,7 @@ public class SingleMoim {
 
 	
 	public SingleMoim() {
-		this.sessionList = new ArrayList<>();
+		this.sessionList = new ArrayList<WebSocketSession>();
 	}
 	
 	public SingleMoim(List<WebSocketSession> sessionList) {

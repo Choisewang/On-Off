@@ -1,5 +1,9 @@
 package com.t.s.model.biz;
 
-public interface GroupUserBiz {
+import com.t.s.model.dto.GroupUserDto;
 
+public interface GroupUserBiz {
+	
+	public GroupUserDto selGroupnoGroupuser(GroupUserDto dto);
+	
 }
