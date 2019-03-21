@@ -297,7 +297,7 @@ public class HomeController {
 		int res = biz.regist(dto);
 
 		if (res > 0) {
-			return "redirect:login.do";
+			return "registOk";
 		} else {
 			return "redirect:registUser.do";
 		}
@@ -606,23 +606,15 @@ public class HomeController {
 
 	/////////////////////////////////////////////////////////////////
 
-	 @RequestMapping(value="/chat.do", method=RequestMethod.GET)
-	   public String chat(Model model) {
-	     model.addAttribute("id","dd");
-	     model.addAttribute("groupnum","1");
-	      return "chat";
-	   }
-   
-	 
-	 @RequestMapping(value="/chat.do", method=RequestMethod.GET)
-     public String chat(Model model,HttpSession session) {
-      
-      model.addAttribute("id",session.getAttribute("id").toString());
-       System.out.println(session.getAttribute("id").toString()+"controller에서 id");
-      //model.addAttribute("id","dd");
-      session.setAttribute("groupnum", "1");
-       model.addAttribute("groupnum","1");
-        return "chat";
-     }
+	@RequestMapping(value="/chat.do", method=RequestMethod.GET)
+    public String chat(Model model,HttpSession session) {
+     
+     model.addAttribute("id",session.getAttribute("id").toString());
+      System.out.println(session.getAttribute("id").toString()+"controller에서 id");
+     //model.addAttribute("id","dd");
+     session.setAttribute("groupnum", "1");
+      model.addAttribute("groupnum","1");
+       return "chat";
+    }
 	 
 }

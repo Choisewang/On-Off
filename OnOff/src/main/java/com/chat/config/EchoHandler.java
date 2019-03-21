@@ -23,7 +23,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	SingleMoim singleMoim = new SingleMoim();
 	
 	GroupUserDto dto;
-	// 웹소켓 서버에 클라이언트가 접속하면 호출되는 메소드
+	// 웹소켓 서버에 클라이언트가 접속하면 호출되는 메소드   
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> map = session.getAttributes();

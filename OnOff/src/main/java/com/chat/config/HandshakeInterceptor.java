@@ -20,10 +20,10 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor{
     
         // 위의 파라미터 중, attributes 에 값을 저장하면 웹소켓 핸들러 클래스의 WebSocketSession에 전달된다
         System.out.println("Before Handshake");
-          
+           
         ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
         System.out.println("URI:"+request.getURI());
-  
+   
         HttpServletRequest req =  ssreq.getServletRequest();
         
         GroupUserDto dto = new GroupUserDto();
@@ -44,7 +44,7 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor{
          
         dto.setGroupno(groupnum);
         attributes.put("dto", dto);
-        //attributes.put("groupnum", groupnum);
+        //attributes.put("groupnum", groupnum); 
         System.out.println("HttpSession에 저장된 id:"+dto.getUserid());
         System.out.println("HttpSession에 저장된 groupnum :" +dto.getGroupno());
          

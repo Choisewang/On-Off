@@ -51,13 +51,7 @@
 	String groupnum = (String)request.getAttribute("groupnum");
 	System.out.println(id + " : " + groupnum);
 	
-	HttpSession session = request.getSession(false);
-	if(session !=null){
-		session.invalidate();
-	}
-	session = request.getSession(true);
-	session.setAttribute("id",id);
-	session.setAttribute("groupnum",groupnum);	
+	//session.setAttribute("groupnum",groupnum);	
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
@@ -74,7 +68,7 @@ $(document).ready(function() {
 	});
 });
 var sock;
-//웸소켓을 지정한 url로 연결한다.
+//웸소켓을 지정한 url로 연결한다.   
 sock = new SockJS("<c:url value="/echo"/>");
 /*
 (1) onopen : 웹 소켓이 열리면 호출
