@@ -38,5 +38,8 @@
 		}
 	</script>
 	
+	<a href="test.do">test</a>
+	
+	
 </body>
 </html>
