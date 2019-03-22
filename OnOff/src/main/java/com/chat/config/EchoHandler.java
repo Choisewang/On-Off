@@ -3,12 +3,15 @@ package com.chat.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.t.s.model.biz.SessionIdsBiz;
 import com.t.s.model.dto.GroupUserDto;
+import com.t.s.model.dto.SessionIds;
 
 
 public class EchoHandler extends TextWebSocketHandler {
@@ -22,6 +25,10 @@ public class EchoHandler extends TextWebSocketHandler {
 	GroupUserDto dto = new GroupUserDto();
 	// 웹소켓 서버에 클라이언트가 접속하면 호출되는 메소드
 	
+	@Autowired
+	SessionIdsBiz biz;
+	//아이디 저장하고 불러오고 해야할 biz
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Map<String, Object> map = session.getAttributes();
@@ -29,20 +36,30 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		
 		SessionIds ids = new SessionIds();
-		ids.setSessionId(session.getId());
-		ids.setUserId(dto.getUserid());
+		ids.setSessionid(session.getId());
+		System.out.println(session.getId()+" : 들어가는 sessionid");
+		ids.setUserid(dto.getUserid());
+		System.out.println(dto.getUserid()+" : 들어가는 userid");
 		
 		singleMoim.addSession(ids, session);
 		
 		moims.put(dto.getGroupno(), singleMoim);
 		
 		//잘들어가 있는지 확인용
-		System.out.println(singleMoim.findSession(ids)+" : 현재 아이디");
+		/*System.out.println(singleMoim.findSession(ids)+" : 현재 아이디");
 		System.out.println(dto.getGroupno()+" : groupnum임");
-		System.out.println(moims.get(dto.getGroupno()).getSessionMap()+"들어가는있값이 무엇인지 보자");
+		System.out.println(moims.get(dto.getGroupno()).getSessionMap()+"들어가는있값이 무엇인지 보자");*/
 				
 		//sessionList.add(session);
 		System.out.println(dto.getUserid()+" 가 입장하였습니다.");
+
+		int res = 0;
+        res = biz.insertIds(ids);
+        
+        if(res != 0) {
+        	System.out.println("sessionids 잘 들어갔음");
+        }
+
 	}
 
 	@Override
@@ -58,7 +75,8 @@ public class EchoHandler extends TextWebSocketHandler {
 		}
 		
 		for(Map.Entry<SessionIds, WebSocketSession> entry : s.getSessionMap().entrySet()) {
-			entry.getValue().sendMessage(new TextMessage(entry.getKey().getUserId()+" : "+message.getPayload()));
+			
+			entry.getValue().sendMessage(new TextMessage(biz.selectOne(session.getId()).getUserid()+" : "+message.getPayload()));
 		}
 		System.out.println(session.getId()+" 가 보낸 매세지[" + message.getPayload()+"]");
 
@@ -89,7 +107,7 @@ public class EchoHandler extends TextWebSocketHandler {
             Throwable exception) throws Exception {
         super.handleTransportError(session, exception);
         System.out.println("전송오류 발생");
-    }
+    } 
 
 
 

@@ -32,25 +32,26 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor{
         attributes.put("userId", userId);*/
   
         // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
+        
         groupUserdto.setUserid((String)req.getSession().getAttribute("id"));
         System.out.println("handshakerinterceptor에서 받아지는 값 : "+groupUserdto.getUserid());
         int groupnum =0;
-        
         try {
         	groupnum = Integer.parseInt((String)req.getSession().getAttribute("groupnum"));
         }catch (Exception e) {
         	System.out.println("숫자 예외처리함");
         }
-         
+        
+        
         groupUserdto.setGroupno(groupnum);
         attributes.put("groupUserdto", groupUserdto);
         //attributes.put("groupnum", groupnum);
         System.out.println("HttpSession에 저장된 id:"+groupUserdto.getUserid());
         System.out.println("HttpSession에 저장된 groupnum :" +groupUserdto.getGroupno());
-         
+        
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
-  
+   
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception ex) {
         System.out.println("After Handshake");  

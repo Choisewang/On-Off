@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.web.socket.WebSocketSession;
 
+import com.t.s.model.dto.SessionIds;
+
 public class SingleMoim {
 
 	private Map<SessionIds, WebSocketSession> sessionMap; //한개의 모임세션
@@ -27,12 +29,12 @@ public class SingleMoim {
 	
 	public String findSession(SessionIds ids) {
 		for(Map.Entry<SessionIds, WebSocketSession> entry : sessionMap.entrySet()){
-			if(entry.getKey().getSessionId() == ids.getSessionId()) {
-				return entry.getKey().getSessionId();
+			if(entry.getKey().getSessionid() == ids.getSessionid()) {
+				return entry.getKey().getSessionid();
 			}
 		}
 		return null;
-	}
+	} 
 
 	
 }
