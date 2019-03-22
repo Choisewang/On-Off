@@ -9,8 +9,6 @@ import com.t.s.model.dto.MoimUserDto;
 @Repository
 public class MoimUserDaoImpl implements MoimUserDao {
 	
-	
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -24,6 +22,61 @@ public class MoimUserDaoImpl implements MoimUserDao {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public double avgQ1(MoimUserDto dto) {
+		double avg = 0;
+		try {
+			avg = sqlSession.selectOne(NAMESPACE+"avgQ1",dto);
+		}catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return avg;
+	}
+
+	@Override
+	public double avgQ2(MoimUserDto dto) {
+		double avg = 0;
+		try {
+			avg = sqlSession.selectOne(NAMESPACE+"avgQ2",dto);
+		}catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return avg;
+	}
+
+	@Override
+	public double avgQ3(MoimUserDto dto) {
+		double avg = 0;
+		try {
+			avg = sqlSession.selectOne(NAMESPACE+"avgQ3",dto);
+		}catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return avg;
+	}
+
+	@Override
+	public double avgQ4(MoimUserDto dto) {
+		double avg = 0;
+		try {
+			avg = sqlSession.selectOne(NAMESPACE+"avgQ4",dto);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return avg;
+	}
+
+	@Override
+	public double avgQ5(MoimUserDto dto) {
+		double avg = 0;
+		try {
+			avg = sqlSession.selectOne(NAMESPACE+"avgQ5",dto);
+		}catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return avg;
 	}
 
 }

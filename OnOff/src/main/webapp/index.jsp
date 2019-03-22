@@ -38,7 +38,7 @@
 		}
 	</script>
 	
-	<a href="test.do">test</a>
+	<a href="D3.do">D3</a>
 	
 	
 </body>

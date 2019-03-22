@@ -156,6 +156,32 @@
 		INSERT INTO MOIMUSER
 		VALUES(#{moimno}, #{userid}, #{groupno}, #{moimq1}, #{moimq2}, #{moimq3}, #{moimq4}, #{moimq5}, #{moimq6})
 	</insert>
+	<!-- D3 -->
+	<select id="avgQ1" parameterType="MoimuserDto" resultType="double">
+		SELECT AVG(MOIMQ1)
+		FROM MOIMUSER
+		WHERE MOIMNO = #{moimno}
+	</select>
+	<select id="avgQ2" parameterType="MoimuserDto" resultType="double">
+		SELECT AVG(MOIMQ2)
+		FROM MOIMUSER
+		WHERE MOIMNO = #{moimno}	
+	</select>
+	<select id="avgQ3" parameterType="MoimuserDto" resultType="double">
+		SELECT AVG(MOIMQ3)
+		FROM MOIMUSER
+		WHERE MOIMNO = #{moimno}	
+	</select>
+	<select id="avgQ4" parameterType="MoimuserDto" resultType="double">
+		SELECT AVG(MOIMQ4)
+		FROM MOIMUSER
+		WHERE MOIMNO = #{moimno}	
+	</select>
+	<select id="avgQ5" parameterType="MoimuserDto" resultType="double">
+		SELECT AVG(MOIMQ5)
+		FROM MOIMUSER
+		WHERE MOIMNO = #{moimno}	
+	</select>
 	<!-- ******************************************************************************* -->
 	
 	

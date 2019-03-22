@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -646,11 +647,11 @@ public class HomeController {
 			if (request.getParameter("Q1") != null) {// 설문조사가 완료되면
 				String userid = session.getAttribute("id").toString();
 				System.out.println("userid는 " + userid);
-				String Q1 = request.getParameter("Q1");
-				String Q2 = request.getParameter("Q2");
-				String Q3 = request.getParameter("Q3");
-				String Q4 = request.getParameter("Q4");
-				String Q5 = request.getParameter("Q5");
+				int Q1 = Integer.parseInt(request.getParameter("Q1"));
+				int Q2 = Integer.parseInt(request.getParameter("Q2"));
+				int Q3 = Integer.parseInt(request.getParameter("Q3"));
+				int Q4 = Integer.parseInt(request.getParameter("Q4"));
+				int Q5 = Integer.parseInt(request.getParameter("Q5"));
 				String Q6 = request.getParameter("Q6");
 //					   M_no, u_no는 세션에서 가져옴
 				dto.setMoimno(1);
@@ -680,7 +681,32 @@ public class HomeController {
 		return "survey";
 	} 
 	
-	
+	@RequestMapping(value = "/D3.do", method = RequestMethod.GET)
+	public String D3(Model model, @ModelAttribute MoimUserDto dto) {
+		dto.setMoimno(1);//평균내고싶은 모임번호 넣음. 이전 페이지에서 에서 값 받아욤
+		int avgQ1 = (int)moimUserBiz.avgQ1(dto);
+		int avgQ2 = (int)moimUserBiz.avgQ2(dto);
+		int avgQ3 = (int)moimUserBiz.avgQ3(dto);
+		int avgQ4 = (int)moimUserBiz.avgQ4(dto);
+		int avgQ5 = (int)moimUserBiz.avgQ5(dto);
+		int avgAll = (int)moimUserBiz.avgAll(avgQ1, avgQ2, avgQ3, avgQ4, avgQ5);
+//		System.out.println("1번모임1번질문"+avgQ1);
+//		System.out.println("1번모임2번질문"+avgQ2);
+//		System.out.println("1번모임3번질문"+avgQ3);
+//		System.out.println("1번모임4번질문"+avgQ4);
+//		System.out.println("1번모임5번질문"+avgQ5);
+//		System.out.println("1번모임의 평균"+avgall);
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		array.add(avgQ1);
+		array.add(avgQ2);
+		array.add(avgQ3);
+		array.add(avgQ4);
+		array.add(avgQ5);
+		array.add(avgAll);
+		model.addAttribute("array",array);
+		
+		return "D3";
+	}
 	
 	
 	

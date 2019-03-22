@@ -17,4 +17,36 @@ public class MoimUserBizImpl implements MoimUserBiz {
 		return dao.survey(dto);
 	}
 
+	@Override
+	public double avgQ1(MoimUserDto dto) {
+		return dao.avgQ1(dto);
+	}
+
+	@Override
+	public double avgQ2(MoimUserDto dto) {
+		return dao.avgQ2(dto);
+	}
+
+	@Override
+	public double avgQ3(MoimUserDto dto) {
+		return dao.avgQ3(dto);
+	}
+
+	@Override
+	public double avgQ4(MoimUserDto dto) {
+		return dao.avgQ4(dto);
+	}
+
+	@Override
+	public double avgQ5(MoimUserDto dto) {
+		return dao.avgQ5(dto);
+	}
+
+	@Override
+	public double avgAll(double avgQ1, double avgQ2, double avgQ3, double avgQ4, double avgQ5) {
+		double sum = avgQ1+avgQ2+avgQ3+avgQ4+avgQ5;
+		double res = Double.parseDouble(String.format("%.2f",sum/5));
+		return res;
+	}
+
 }

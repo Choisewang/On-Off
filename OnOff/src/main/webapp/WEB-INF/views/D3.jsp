@@ -8,7 +8,7 @@
 
 <style>
 .bar {
-    fill: #FFA2A2;
+    fill: #fffc16;
     fill-opacity: 0.3;
     stroke: #da0833;
     
@@ -19,7 +19,7 @@
 }
 
 .text {
-    fill: white;
+    fill: #b57e7e;
     font-weight:bold;
 }
 
@@ -28,25 +28,26 @@
 <svg width="500" height="300"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-var dataset = [9, 19, 29, 39, 29, 19, 9];
+var dataset = ${array};
 var svg = d3.select("svg");
+
 svg.selectAll("rect")
     .data(dataset)
     .enter().append("rect")
         .attr("class", "bar")
-        .attr("height", function(d, i) {return (d*5)})
+        .attr("height", function(d, i) {return (d*20)})//도형(rect)의 크기(height)가 바뀌고
         .attr("width", 40)
-        .attr("x", function(d, i) {return (50 * i)})
-        .attr("y", function(d, i) {return (250-d*5)});
-
+        .attr("x", function(d, i) {return (50 * i)})//도형의 위치(x)가 지정
+        .attr("y", function(d, i) {return (200-d*20)});
+//차이를 벌리고싶으면 d에다 배수를 곱해준다.
 
 svg.selectAll("text")
 .data(dataset)
 .enter().append("text")
 .text(function(d) {return d})
     .attr("class", "text")
-    .attr("x", function(d, i) {return 50 * i + 10})
-    .attr("y", function(d, i) {return 250-d*5 + 15});
+    .attr("x", function(d, i) {return 50 * i + 15})
+    .attr("y", function(d, i) {return 200-d*20 + 15});
 
 
 
