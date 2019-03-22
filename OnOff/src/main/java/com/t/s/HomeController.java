@@ -57,26 +57,17 @@ import com.t.s.model.dto.UserDto;
  */
 @Controller
 public class HomeController {
-   
-   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-   
-   /**
-    * Simply selects the home view to render by returning its name.
-    */
-   @RequestMapping(value = "/home.do", method = RequestMethod.GET)
-   public String home(Locale locale, Model model) {
-      logger.info("Welcome home! The client locale is {}.", locale);
-      
-      Date date = new Date();
-      DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-      
-      String formattedDate = dateFormat.format(date);
-      
-      model.addAttribute("serverTime", formattedDate );
-      
-      return "index";
-   } 
-   
+
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	public String home(HttpSession session, Model model) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+
+		return "index";
+	}
+
    @RequestMapping(value="/boardList.do", method=RequestMethod.GET)
    public String boardList(HttpSession session, Model model) {
       
@@ -300,7 +291,7 @@ public class HomeController {
 			session.invalidate();
 		}
 		
-		return "redirect:home.do";
+		return "redirect:index.jsp";
 	}
 
 	// 회원가입폼
@@ -578,6 +569,39 @@ public class HomeController {
 		return "myInfo";
 	}
 	
+	// 내 모임
+	@RequestMapping(value = "/myGroup.do", method = RequestMethod.GET)
+	public String myGroup(Model model, HttpSession session) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+
+		return "myGroup";
+	}
+
+	// 내 달력
+	@RequestMapping(value = "/myCal.do", method = RequestMethod.GET)
+	public String myCal(Model model, HttpSession session) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+
+		return "myCal";
+	}
+	
+	// 내 달력
+	@RequestMapping(value = "/myGroupManager.do", method = RequestMethod.GET)
+	public String myGroupManager(Model model, HttpSession session) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+
+		return "myGroupManager";
+	}
+	
 	// 탈퇴하기
 	@RequestMapping(value = "/dropUser.do", method = RequestMethod.GET)
 	public String dropUser(Model model, HttpSession session) {
@@ -586,7 +610,7 @@ public class HomeController {
 		
 		if(res > 0) {
 			session.invalidate();
-			return "redirect:home.do";
+			return "redirect:index.jsp";
 			
 		}else {
 			return "redirect:mypage.do";

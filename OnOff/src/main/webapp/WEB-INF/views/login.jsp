@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Jober Desk | Responsive Job Portal Template</title>
+        <title>On & Off</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		
@@ -70,7 +70,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                     <li><a href="index.do">Home</a></li> 
+                     <li><a href="index.jsp">Home</a></li> 
                      <c:set var="user" value="${dto.username }"/>
                      <c:choose>
                      <c:when test="${user==null }">
@@ -97,7 +97,7 @@
 			<div class="container">
 				<div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
 					<!-- <form> -->
-						<img class="img-responsive" alt="logo" src="img/Onlogo.png">
+						<img class="img-responsive" alt="logo" src="img/logo.png">
 						<input type="text" class="form-control input-lg" placeholder="User ID" id="id">
 						<input type="password" class="form-control input-lg" placeholder="Password" id="pw">
 						<label><a href="forgetPassword.do">Forget Password?</a></label>

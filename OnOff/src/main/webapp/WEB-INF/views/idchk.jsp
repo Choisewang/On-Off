@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>On & Off</title>
 <script type="text/javascript">
 
 	// 화면이 실행되자마자 실행

@@ -60,7 +60,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-							<li><a href="index.do">Home</a></li> 
+							<li><a href="index.jsp">Home</a></li> 
 							<c:set var="user" value="${dto.username }"/>
 							<c:choose>
 							<c:when test="${user==null }">
