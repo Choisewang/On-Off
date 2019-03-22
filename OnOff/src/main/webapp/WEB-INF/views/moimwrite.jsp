@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html class="no-js" >
@@ -115,7 +116,7 @@
                      <li><a href="index.do">Home</a></li> 
                      <c:set var="user" value="${dto.username }"/>
                      <c:choose>
-                     <c:when test="${user==null }">
+                     <c:when test="${user==null }"> 
                         <li class="login"><a href="login.do">Login</a></li>
                      </c:when>
                      <c:otherwise>
@@ -139,7 +140,7 @@
 	<section class="profile-detail">
 		<p style="font-size:20px; margin-left: 570px;"><모임 만들기></p>
 		<div class="container" style="margin-left: 550px;">
-			<form action="./mapRes.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
+			<form action="mapRes.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
 				<label>제목 :</label>
 				<input type="text" name="moimtitle" id="edittitle" style="white-space:nowrap; width: 660px; height: 30px; margin-bottom: 1px;" placeholder="제목을 입력해주세요." required="required"/><br/>
          		<label>모임날짜 :</label>
@@ -150,7 +151,7 @@
         		<input type="text" name="moimaddr" id="location" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모임 지역" required="required"/>
         		<label>모집기간 :</label>
         		<input type="date" name="moimenddate" id="endDate" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
-        		 
+        		 <input type="hidden"name="userid" value="${dto.userid }">
         		<textarea name="moimcontent" id="editor" style="width: 700px; height: 400px;"></textarea>
        	<div>
 			<p style="font-size:20px;"><모임 위치></p>
@@ -458,8 +459,8 @@ function removeAllChildNods(el) {
        			
        			</div>
  				
- 				<input type="text" id="Lat" name="Lat" value="" style="display: none">
- 				<input type="text" id="Lng" name="Lng" value="" style="display: none">
+ 				<input type="text" id="Lat" name="lat" value="" style="display: none">
+ 				<input type="text" id="Lng" name="lng" value="" style="display: none">
        			
        			<input type="button" class="btn brows-btn" id="insertBoard" value="글 올리기" style="margin-left: 300px;" />
        			

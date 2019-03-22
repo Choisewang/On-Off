@@ -77,6 +77,8 @@
 		<result property="moimregdate" column="MOIMREGDATE" />
 		<result property="moimenddate" column="MOIMENDDATE" />
 		<result property="moimdate" column="MOIMDATE" />
+		<result property="lat" column="LAT" />
+		<result property="lng" column="LNG" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.MoimUserDto" id="MoimUserMap">
@@ -103,6 +105,11 @@
 		<result property="userphone" column="USERPHONE" />
 		<result property="userregdate" column="USERREGDATE" />
 	</resultMap>
+	
+	<resultMap type="com.t.s.model.dto.SessionIds" id="SessionIds">
+      <result property="sessionid" column="SESSIONID"/>
+      <result property="userid" column="USERID"/>
+   </resultMap>
 	<!-- ****************************************************************************************************** -->
 	
 	
@@ -120,6 +127,25 @@
 		FROM GROUPUSER
 		WHERE GROUPNO = #{groupno} AND USERID = #{userid}
 	</select>
+	
+	<insert id="insertSessionIds" parameterType="SessionIds">
+      INSERT INTO SESSIONIDS
+      VALUES(#{sessionid}, #{userid})
+   </insert>
+   
+   <delete id="deleteSessionIds" parameterType="String">
+      DELETE 
+      FROM SESSIONIDS
+      WHERE SESSIONID = #{value}
+   </delete>
+   
+   <select id="selectSession" parameterType="String" resultType="SessionIds">
+      SELECT * 
+      FROM SESSIONIDS
+      WHERE SESSIONID = #{sessionid}   
+   </select>
+	
+	
 	<!-- ******************************************************************************* -->
 	
 	
@@ -136,6 +162,29 @@
 	
 	
 	<!-- *********************************박정성****************************************** -->
+	
+	<select id="selectAllMoim" parameterType="MoimDto" resultMap="MoimMap">
+	
+	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE FROM MOIM
+		
+	
+	</select>
+	
+	
+	<select id="selectOneMoim" parameterType="int" resultType="MoimDto">
+	
+	SELECT USERID,MOIMTITLE,MOIMCONTENT,MOIMRECRUIT,MOIMADDR,MOIMREGDATE,MOIMENDDATE,MOIMDATE,LAT,LNG FROM MOIM WHERE MOIMNO=#{moimno}
+	
+	</select>
+	
+	
+	
+	<insert id="insertMoim" parameterType="MoimDto">
+		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},1,#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
+	</insert>
+	
+	
+	
 	
 	<!-- ******************************************************************************* -->
 	

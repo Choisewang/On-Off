@@ -127,25 +127,29 @@
 									<th>작성일자</th>
 								</tr>
 								
-<%-- <%
-			if(list.size() == 0){
-%>			
-
-		<tr><td colspan="5">--글이 존재하지 않습니다--</td></tr>
-
-<%
-			}else{
-				for(MVCBoardDto dto:list){
-			
-%> --%>	
-						
+								<c:choose>
+								<c:when test="${empty list }">
+									<tr>
+										<td>*******모임 정보가 없습니다*******</td>
+									</tr>
+								</c:when>
+									<c:otherwise>
+										<c:forEach items="${list }" var="dto">
+									
 								<tr>
-									<td>d</td>
-									<td><a href="moimDetail.do">d</a></td>
-									<td>d</td>
-									<td>d</td>
+									<td>${dto.moimno }</td>
+									<td><a href="moimDetail.do?moimno=${dto.moimno }">${dto.moimtitle }</a></td>
+									<td>${dto.userid }</td>
+									<td>${dto.moimregdate }</td>
 								</tr>		
-					
+									
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+						
+						
+
+
 							
 								 <tr>
 			 						<td colspan="4">
@@ -164,10 +168,12 @@
        	 <span aria-hidden="true">&laquo;</span>
       	</a>
     		</li>
+    		
    			 <li class="page-item"><a class="page-link" href="#">1</a></li>
    			 <li class="page-item"><a class="page-link" href="#">2</a></li>
    			 <li class="page-item"><a class="page-link" href="#">3</a></li>
-    			<li class="page-item">
+			 
+			 <li class="page-item">
         <a class="page-link" href="#" aria-label="Next">
          <span aria-hidden="true">&raquo;</span>
         </a>
@@ -178,10 +184,13 @@
 				</form>
 		</div>
 			
+
+			
+			
 		<div class="right-box">
 			
-			
-				<h1>캘린더넣어~~~~~~~~~~~</h1>
+			<%-- <jsp:include page="myCal.jsp"></jsp:include> --%>
+			<%-- 	<%@ include file="myCal.jsp" %> --%>
 			
 		</div>
 	</section>		

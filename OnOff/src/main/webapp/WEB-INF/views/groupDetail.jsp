@@ -52,6 +52,9 @@
 	
 	</style>
 
+	
+
+
 
     </head>
 	
@@ -122,7 +125,7 @@
 			
 			<button class="btn brows-btn" style="display: inline-block">자유게시판</button>
 			<button class="btn brows-btn" style="display: inline-block">갤러리</button>
-			<button class="btn brows-btn" style="display: inline-block">모임 일정</button>
+			<button class="btn brows-btn" style="display: inline-block" onclick="location.href='moim.do'">모임 일정</button>
 			<button class="btn brows-btn" style="display: inline-block">라이브</button>
 			<button class="btn brows-btn" style="display: inline-block">채팅</button>
 

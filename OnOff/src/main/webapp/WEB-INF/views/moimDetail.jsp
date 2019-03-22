@@ -67,7 +67,7 @@
                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                   <i class="fa fa-bars"></i>
                </button>
-               <a class="navbar-brand" href="index.do"><img src="img/logo.png" class="logo" alt=""></a>
+               <a class="navbar-brand" href="home.do"><img src="img/logo.png" class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -121,20 +121,20 @@
 		<div class="up-box" style="display: block; padding-left: 700px;">
 			
 <%-- 			<p>${editTitle }</p>
- --%>			<p>제목 : ${dto.getMoimtitle() }</p>
+ --%>			<p>제목 : ${res.moimtitle }</p>
 		
 		</div>
 			
 		<div class="down-box" style="display: block; padding-left: 700px;" >
 			
 			
-				<p>모집인원 : ${dto.getMoimrecruit() }</p>
-				<p>모임 위치 : ${dto.getMoimaddr() }</p>
-				<p>모집 기간 : ${dto.getMoimenddate()}</p>
-				<p>모임 날짜 : ${dto.getMoimdate() }</p>
+				<p>모집인원 : ${res.moimrecruit }</p>
+				<p>모임 위치 : ${res.moimaddr }</p>
+				<p>모집 기간 : ${res.moimenddate}</p>
+				<p>모임 날짜 : ${res.moimdate }</p>
 		
-				<p>내용 : ${dto.getMoimcontent() }</p>
-	
+				<p>내용 : ${res.moimcontent }</p>
+					
 
 			
 		</div>
@@ -149,7 +149,7 @@
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center: new daum.maps.LatLng(${Lat }, ${Lng}),// 지도의 중심좌표
+			center: new daum.maps.LatLng(${res.lat }, ${res.lng }),// 지도의 중심좌표
 			level: 3                   // 지도의 확대 레벨
 		};
 
@@ -158,7 +158,7 @@
 		
 		
 		// 마커가 표시될 위치입니다 
-		var markerPosition  = new daum.maps.LatLng(${Lat }, ${Lng}); 
+		var markerPosition  = new daum.maps.LatLng(${res.lat }, ${res.lng }); 
 
 		// 마커를 생성합니다
 		var marker = new daum.maps.Marker({

@@ -43,6 +43,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.t.s.model.biz.MoimBiz;
+import com.t.s.model.biz.MoimBizImpl;
 import com.t.s.model.biz.MoimUserBiz;
 import com.t.s.model.biz.UserBiz;
 import com.t.s.model.dto.MoimDto;
@@ -137,17 +139,25 @@ public class HomeController {
 		   model.addAttribute("dto", session.getAttribute("dto"));
 		   }
 	
+	   //리스트 가져오기
+	   
+	   model.addAttribute("list", moimbiz.selectMoimList());
 	   
       
       return "moim";
    }
    @RequestMapping(value="/moimDetail.do", method=RequestMethod.GET)
-   public String moimDetail(HttpSession session, Model model) {
+   public String moimDetail(HttpSession session, Model model, int moimno) {
       
 	   if(session.getAttribute("dto")!=null) {
 		   model.addAttribute("dto", session.getAttribute("dto"));
 		   }
 	
+	   model.addAttribute("res", moimbiz.selectMoim(moimno));
+		
+	/*	MoimDto res = moimbiz.selectMoim(moimno);
+		
+		model.addAttribute("res", res);*/
 	   
       return "moimDetail";
    }
@@ -161,24 +171,31 @@ public class HomeController {
       return "search";
    }
    
+   @Autowired
+   private MoimBiz moimbiz;
+   
 	@RequestMapping(value = "/mapRes.do", method = RequestMethod.POST)
-	public String mapRes(Locale locale, Model model, MoimDto dto, String Lat, String Lng ) {
-		
+	public String mapRes(HttpSession session, Locale locale, Model model, MoimDto moimdto ) {
 
-/*		model.addAttribute("editTitle", editTitle);
-		model.addAttribute("editor",editor);
 		
 		
-		model.addAttribute("Lat",Lat);
-		model.addAttribute("Lng",Lng);
-		*/
-		//경도위도 Dto에 추가해야할듯 디비랑
-		model.addAttribute("dto", dto);
-		model.addAttribute("Lat",Lat);
-		model.addAttribute("Lng",Lng);
+		Date date = new Date();
 		
+		moimdto.setMoimregdate(date);
 		
-		return "moimDetail";
+		System.out.println(moimdto);
+		
+		int res = moimbiz.insertMoim(moimdto);
+		
+		   if(session.getAttribute("dto")!=null) {
+				
+				if(res > 0 ) {
+					 model.addAttribute("dto", session.getAttribute("dto"));
+				}
+			   
+			   }
+		
+		return "redirect:moim.do";
 	}
   
 	   @RequestMapping(value="/moimwrite.do", method=RequestMethod.GET)
@@ -662,4 +679,19 @@ public class HomeController {
 
 		return "survey";
 	} 
+	
+	
+	
+	
+	
+	
+	//테스트 메소드
+	@RequestMapping(value = "/test.do", method = RequestMethod.GET)
+	public String test(Model model, HttpSession session) {
+				
+		
+
+		return "myCal";
+	}
+	
 }
