@@ -61,6 +61,13 @@ ul.sub li:hover {
 	background: #da0833;
 }
 
+footer {
+position:fixed;
+left: 0;
+right: 0;   
+bottom:0px;
+width:100%;
+}	
 </style>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>

@@ -53,7 +53,18 @@
 	}
 	
 	</script>
-	
+	<style>
+	body {
+    min-height: 100%;
+}
+footer {
+position:fixed;
+left: 0;
+right: 0;   
+bottom:0px;
+width:100%;
+}	
+	</style>
     <body>
 	
 <!-- Navigation Start  -->
