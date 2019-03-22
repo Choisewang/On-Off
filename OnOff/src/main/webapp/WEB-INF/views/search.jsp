@@ -29,7 +29,7 @@
                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                   <i class="fa fa-bars"></i>
                </button>
-               <a class="navbar-brand" href="index.do"><img src="img/logo.png" class="logo" alt=""></a>
+               <a class="navbar-brand" href="index.jsp"><img src="img/logo.png" class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
             <!-- Collect the nav links, forms, and other content for toggling -->
