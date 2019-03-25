@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -44,6 +45,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.t.s.domain.Criteria;
+import com.t.s.domain.PageMaker;
 import com.t.s.model.biz.MoimBiz;
 import com.t.s.model.biz.MoimBizImpl;
 import com.t.s.model.biz.MoimUserBiz;
@@ -125,15 +128,24 @@ public class HomeController {
 
    
    @RequestMapping(value="/moim.do", method=RequestMethod.GET)
-   public String moim(HttpSession session, Model model) {
+   public String moim(HttpSession session, Model model, Criteria cri) {
 	   
 	   if(session.getAttribute("dto")!=null) {
 		   model.addAttribute("dto", session.getAttribute("dto"));
 		   }
 	
-	   //리스트 가져오기
 	   
-	   model.addAttribute("list", moimbiz.selectMoimList());
+	   
+	   //리스트, 페이징
+	   
+	      List<MoimDto> list = moimbiz.listPage(cri);   
+	      model.addAttribute("list",list);
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCri(cri);
+	      pageMaker.setTotalCount(moimbiz.listCount());
+	      model.addAttribute("pageMaker", pageMaker);
+	
 	   
       
       return "moim";
@@ -734,6 +746,23 @@ public class HomeController {
 	
 	
 	
+	//페이징 테스트 메소드
+	   @RequestMapping(value = "/paging.do", method = RequestMethod.GET)
+	   public String search(Model model,@ModelAttribute("cri") Criteria cri) {
+	      
+	      List<MoimDto> list = moimbiz.listPage(cri);   
+	      model.addAttribute("list",list);
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCri(cri);
+	      pageMaker.setTotalCount(moimbiz.listCount());
+	      model.addAttribute("pageMaker", pageMaker);
+	      
+	      return "moim";
+	   }
+	
+	
+	
 	
 	//테스트 메소드
 	@RequestMapping(value = "/test.do", method = RequestMethod.GET)
@@ -743,5 +772,8 @@ public class HomeController {
 
 		return "myCal";
 	}
+	
+	
+	
 	
 }

@@ -2,6 +2,7 @@ package com.t.s.model.dao;
 
 import java.util.List;
 
+import com.t.s.domain.Criteria;
 import com.t.s.model.dto.MoimDto;
 
 public interface MoimDao {
@@ -17,4 +18,7 @@ public interface MoimDao {
 	
 	public List<MoimDto> selectMoimList();
 	
+	public List<MoimDto> listPage(Criteria cri);
+	
+	public int listCount();
 }

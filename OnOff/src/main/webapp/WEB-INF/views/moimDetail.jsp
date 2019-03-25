@@ -55,10 +55,38 @@
 	</style>
 
 
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
+	<script type="text/javascript">
+	
+	
+	$(function () {
+		
+		/* alert($("#ri").val()); */
+		
+		var insertid = $("#ri").val();
+		var sessionid = $("#di").val();
+		
+		
+		if(insertid == sessionid){
+			
+			$("#moimjoin").hide();
+		}else{
+			$("#moimedit").hide();
+		};
+	});
+	
+	</script>
+	
+	
+
+
+
     </head>
 	
     <body>
-	
+	<input type="text" value="${res.userid }" id="ri" style="display: none;">
+	<input type="text" value="${dto.userid }" id="di" style="display: none;">
 <!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      
@@ -127,7 +155,7 @@
 			
 		<div class="down-box" style="display: block; padding-left: 700px;" >
 			
-			
+				<p>주최자 : ${res.userid }</p>
 				<p>모집인원 : ${res.moimrecruit }</p>
 				<p>모임 위치 : ${res.moimaddr }</p>
 				<p>모집 기간 : ${res.moimenddate}</p>
@@ -135,7 +163,7 @@
 		
 				<p>내용 : ${res.moimcontent }</p>
 					
-
+				
 			
 		</div>
 		
@@ -175,6 +203,14 @@
 	</script>
 		
 		</div>
+		
+		</br>
+		</br>
+		</br>
+		</br>
+		<button class="btn brows-btn" id="moimjoin" style="display: inline-block; margin-left: 900px;">참가신청</button>
+		<button class="btn brows-btn" id="moimedit" style="display: inline-block; margin-left: 900px;">수정하기</button>
+		
 	</section>		
 
 <br></br>

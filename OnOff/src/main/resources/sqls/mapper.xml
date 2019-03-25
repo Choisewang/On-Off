@@ -209,7 +209,28 @@
 		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},1,#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
 	</insert>
 	
+
 	
+	<select id="selectPaging" parameterType="com.t.s.domain.Criteria" resultMap="MoimMap">
+	
+	select MOIMNO,MOIMTITLE,USERID,MOIMREGDATE
+    from (
+        select MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,
+            row_number() over(order by MOIMNO desc) as rNum
+        from MOIM
+        ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by MOIMNO desc
+	
+	</select>
+	
+	<select id="listCount" resultType="int">
+	
+	select count(MOIMNO)
+		from MOIM
+			where MOIMNO>0
+	
+	</select>
 	
 	
 	<!-- ******************************************************************************* -->

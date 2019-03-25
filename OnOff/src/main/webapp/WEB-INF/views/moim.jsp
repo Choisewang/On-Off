@@ -26,9 +26,10 @@
 		border-right: 1px solid black;
 		padding-right: 30px;
 		word-wrap:break-word;
-		height: 500px;
+		height: 600px;
 		background-color: white;
 		padding-left: 350px;
+		
 		
 	} 
 	
@@ -37,7 +38,7 @@
 		width: 30%;
 		padding-left: 20px;
 		word-wrap:break-word;
-		height: 500px;
+		height: 600px;
 		background-color: white;
 	}
 	
@@ -159,28 +160,40 @@
 								</tr>	
 							</table>						
 
+<%-- <div>
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="paging.do?page=${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="paging.do?page=${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="paging.do?page=${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
+ --%>
 
-<!-- 페이징 코드 시작-->
-	<nav aria-label="Page navigation example" style="margin-left: 250px;"> 
-  		<ul class="pagination">
-    		<li class="page-item">
-      	<a class="page-link" href="#" aria-label="Previous">
-       	 <span aria-hidden="true">&laquo;</span>
-      	</a>
-    		</li>
-    		
-   			 <li class="page-item"><a class="page-link" href="#">1</a></li>
-   			 <li class="page-item"><a class="page-link" href="#">2</a></li>
-   			 <li class="page-item"><a class="page-link" href="#">3</a></li>
-			 
-			 <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-         <span aria-hidden="true">&raquo;</span>
-        </a>
-   		    </li>
- 	    </ul>
-	</nav>
-<!-- 페이징 코드 끝-->
+      <div id="paging" style="padding-left:350px;font-weight:bold;">
+       
+        <c:if test="${pageMaker.prev}">
+         <a href="paging.do?page=${startPage - 1}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </c:if> 
+         
+        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+         <a href="paging.do?page=${idx}">${idx}&nbsp;&nbsp;</a>
+        </c:forEach>
+          
+        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+         <a href="paging.do?page=${pageMaker.endPage + 1}">&nbsp;&nbsp;다음</a>
+        </c:if> 
+      
+      </div>
+
+
 				</form>
 		</div>
 			

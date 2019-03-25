@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.t.s.domain.Criteria;
 import com.t.s.model.dao.MoimDao;
 import com.t.s.model.dto.MoimDto;
 
@@ -32,4 +33,14 @@ public class MoimBizImpl implements MoimBiz {
 		return dao.selectMoimList();
 	}
 
+	@Override
+	public List<MoimDto> listPage(Criteria cri) {
+
+		return dao.listPage(cri);
+	}
+
+	@Override
+	public int listCount() {
+		return dao.listCount();
+	}
 }

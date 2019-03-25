@@ -2,6 +2,7 @@ package com.t.s.model.biz;
 
 import java.util.List;
 
+import com.t.s.domain.Criteria;
 import com.t.s.model.dto.MoimDto;
 
 public interface MoimBiz {
@@ -12,5 +13,7 @@ public interface MoimBiz {
 	
 	public List<MoimDto> selectMoimList();
 	
+	public List<MoimDto> listPage(Criteria cri);
 	
+	public int listCount();
 }

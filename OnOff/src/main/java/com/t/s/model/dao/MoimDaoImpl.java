@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.t.s.domain.Criteria;
 import com.t.s.model.dto.MoimDto;
 
 @Repository
@@ -57,8 +58,27 @@ public class MoimDaoImpl implements MoimDao {
 		return list;
 	}
 
-	
-	
+	@Override
+	public List<MoimDto> listPage(Criteria cri) {
+		
+
+		
+		List<MoimDto> listPage = new ArrayList<MoimDto>();
+		
+		listPage = sqlSession.selectList(NAMESPACE+"selectPaging",cri);
+		
+		return listPage;
+	}
+
+	@Override
+	public int listCount() {
+		
+
+		
+		int res = sqlSession.selectOne(NAMESPACE+"listCount");
+		
+		return res;
+	}
 	
 	
 	
