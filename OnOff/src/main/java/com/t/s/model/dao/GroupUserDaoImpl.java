@@ -14,9 +14,15 @@ public class GroupUserDaoImpl implements GroupUserDao {
 
 	@Override
 	public GroupUserDto selGroupnoGroupuser(GroupUserDto dto) {
-		GroupUserDto dtoResult = new GroupUserDto();
-		dto = sqlSession.selectOne(NAMESPACE+"selGroupnoGroupuser", dto);
-		return dto;
+GroupUserDto dtoResult = new GroupUserDto();
+		
+		dtoResult = sqlSession.selectOne(NAMESPACE+"selGroupnoGroupuser", dto);
+		
+		if(dtoResult == null) {
+			System.out.println("아무것도 없음");
+		}
+		
+		return dtoResult;
 	}
 
 }
