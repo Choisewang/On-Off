@@ -47,10 +47,12 @@ import org.springframework.web.util.WebUtils;
 
 import com.t.s.domain.Criteria;
 import com.t.s.domain.PageMaker;
+import com.t.s.model.biz.GroupUserBiz;
 import com.t.s.model.biz.MoimBiz;
 import com.t.s.model.biz.MoimBizImpl;
 import com.t.s.model.biz.MoimUserBiz;
 import com.t.s.model.biz.UserBiz;
+import com.t.s.model.dto.GroupUserDto;
 import com.t.s.model.dto.MoimDto;
 import com.t.s.model.dto.MoimUserDto;
 import com.t.s.model.dto.UserDto;
@@ -659,17 +661,41 @@ public class HomeController {
 
 	}
 	
-	//채팅
-	@RequestMapping(value="/chat.do", method=RequestMethod.GET)
-    public String chat(Model model,HttpSession session) {
-     
-     model.addAttribute("id",session.getAttribute("id").toString());
-      System.out.println(session.getAttribute("id").toString()+"controller에서 id");
-     //model.addAttribute("id","dd");
-     session.setAttribute("groupnum", "1");
-      model.addAttribute("groupnum","1");
-       return "chat";
-    }
+	   @Autowired
+	   private GroupUserBiz gubiz;
+
+	   //채팅
+	   @RequestMapping(value="/chat.do", method=RequestMethod.GET)
+	    public String chat(Model model,HttpSession session,HttpServletRequest request) {
+	      //밖에서 번호 받아오기    
+	      int groupnumber = Integer.parseInt((String)request.getParameter("groupnum"));
+
+	      //로그인이 안되어있는지 확인
+	      if(session.getAttribute("id").toString() == null) {
+	         return "index";
+	      }
+	      model.addAttribute("id",session.getAttribute("id").toString());
+	      
+	      GroupUserDto guDto = new GroupUserDto();
+	      
+	      guDto.setUserid(session.getAttribute("id").toString());
+	      guDto.setGroupno(groupnumber);
+	      System.out.println("guDto 잘들어갔나 확인용 groupno():"+guDto.getGroupno()+", userid : " + guDto.getUserid());
+	      
+	      GroupUserDto sendguDto = new GroupUserDto();
+	      sendguDto = gubiz.selGroupnoGroupuser(guDto);
+	      System.out.println(sendguDto.getUserid()+": sendguDto");
+	      
+	      //groupnum 외에 과정을 성공적으로 마치면 보내줄건 보내고 chat으로 return 한다
+	      if(guDto != null) {
+	         //model.addAttribute("id","dd");
+	         session.setAttribute("groupnum", "1");
+	         model.addAttribute("groupnum",Integer.toString(guDto.getGroupno()));
+	         return "chat";
+	      }else{
+	         return "error";
+	      }   
+	    }
 	
 	//설문조사
 	@Autowired
