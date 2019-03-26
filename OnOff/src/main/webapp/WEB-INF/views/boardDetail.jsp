@@ -84,7 +84,9 @@
 							</div>
 						</div>
 
-						<c:if test="user eq ${freeboarddetail.userid }">
+						<c:set var="loginid" value="${loginid }" />
+						<c:set var="writerid" value="${freeboarddetail.userid }" />
+						<c:if test="${loginid eq writerid }">
 							<!-- 본인만 보이게 할겁니다 ㅇㅇㅇ -->
 							<div align="right">
 								<input type="button" class="btn brows-btn" value="수정" style="display: inline-block; margin-right: 5px;" /> 

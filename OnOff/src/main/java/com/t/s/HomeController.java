@@ -981,7 +981,13 @@ public class HomeController {
 		}
 
 		@RequestMapping(value = "/boardDetail.do", method = RequestMethod.GET)
-		public String boardDetail(Model model, int boardno) {
+		public String boardDetail(HttpSession session, Model model, int boardno) {
+			
+			if (session.getAttribute("dto") != null) {
+				model.addAttribute("dto", session.getAttribute("dto"));
+			}
+			
+			UserDto tmpdto = (UserDto) session.getAttribute("dto");
 
 			FreeBoardDto freeboarddto = new FreeBoardDto();
 			
@@ -990,6 +996,7 @@ public class HomeController {
 			
 			model.addAttribute("freeboarddetail", freeboarddto);
 			model.addAttribute("boardregdate",sys.format(freeboarddto.getBoardregdate()));
+			model.addAttribute("loginid",tmpdto.getUserid());
 			
 			//여기에 댓글을 추가해여함
 
