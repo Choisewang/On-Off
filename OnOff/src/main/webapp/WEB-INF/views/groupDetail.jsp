@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -51,7 +50,7 @@
 <body>
 
 
-	<!-- Navigation Start  -->
+<!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      
             <!-- Start Header Navigation -->
@@ -59,13 +58,13 @@
                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                   <i class="fa fa-bars"></i>
                </button>
-               <a class="navbar-brand" href="index.do"><img src="img/logo.png" class="logo" alt=""></a>
+               <a class="navbar-brand" href="index.jsp"><img src="img/logo.png" class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                     <li><a href="index.do">Home</a></li> 
+                     <li><a href="index.jsp">Home</a></li> 
                      <c:set var="user" value="${dto.username }"/>
                      <c:choose>
                      <c:when test="${user==null }">
@@ -102,8 +101,25 @@
 					</textarea>
 				</div>
 				<br/>
-				<!-- 여기 잘 처리해야한당 -->
-				<button class="btn brows-btn" style="display: inline-block; margin: 0;">가입하기</button>
+				<c:set var="resUser" value="${resUser.userid }" />
+				<c:if test="${empty resUser }">
+					<!-- 여기 잘 처리해야한당 -->
+					<form action="groupUserIn.do" method="get">
+						<input type="hidden" value="${dto.userid }" name="userid" />
+						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
+						<input type="submit" value="가입하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />
+					</form>
+				</c:if>
+				
+				<c:if test="${!empty resUser }">
+					<!-- 여기 잘 처리해야한당 -->
+					<form action="#" method="get">
+						<input type="hidden" value="${dto.userid }" name="userid" />
+						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
+						<input type="submit" value="탈퇴하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />
+					</form>
+				</c:if>
+				<!-- <button class="btn brows-btn" style="display: inline-block; margin: 0;">가입하기</button> -->
 			</div>
 		</div>
 		
@@ -119,22 +135,11 @@
 				<li><button class="btn brows-btn" onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}'" >사진게시판</button></li>
 				<li><button class="btn brows-btn" >모임게시판</button></li>
 				<li><button class="btn brows-btn" >라이브</button></li>
-				<li><button class="btn brows-btn" id="chatting" >채팅</button></li>
+				<li><button class="btn brows-btn" >채팅</button></li>
 			</ul>
 		</div>
 	</div>
-	
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript">
-		
-		$(document).ready(function(){
-			$("#chatting").click(function(){
-				window.open("chat.do?groupnum=${groupdto.groupno}","a","width=400,height=550,left=100,top=50");
-			});
-		});
-			 
-		
-	</script>
+
 	
 		
 <footer>

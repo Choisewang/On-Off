@@ -192,7 +192,7 @@
 	
 	<select id="selectAllMoim" parameterType="MoimDto" resultMap="MoimMap">
 	
-	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE FROM MOIM
+	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,MOIMADDR,MOIMDATE FROM MOIM
 		
 	
 	</select>
@@ -283,6 +283,42 @@
 		WHERE USERID=#{userid} 
 	</update>
 	
+	<select id="groupSearch_search" resultMap="GroupMap" parameterType="com.t.s.domain.SearchCriteria">
+		SELECT GROUPNO, GROUPTITLE, GROUPCONTENT, GROUPREGDATE, GROUPIMG
+        FROM 
+        (SELECT GROUPNO, GROUPTITLE, GROUPCONTENT, GROUPREGDATE, GROUPIMG,
+		ROW_NUMBER() OVER(ORDER BY GROUPNO DESC) AS RNUM
+		FROM GROUPINFO
+        <include refid="search"></include>
+        ) g
+        WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+        ORDER BY GROUPNO DESC
+	</select>
+	
+	<sql id="search">
+	 <!-- <if test="searchType == 'n'.toString()">WHERE</if> -->
+	  <if test="searchType == 't'.toString()">WHERE GROUPTITLE LIKE '%' || #{keyword} || '%'</if>
+	  <if test="searchType == 'c'.toString()">WHERE GROUPCONTENT LIKE '%' || #{keyword} || '%'</if>
+	  <if test="searchType == 'tc'.toString()">WHERE (GROUPTITLE LIKE '%' || #{keyword} || '%') OR (GROUPCONTENT LIKE '%' || #{keyword} || '%')</if>
+
+	</sql>
+	
+	<sql id="searchcount">
+	 <!-- <if test="searchType == 'n'.toString()">WHERE</if> -->
+	  <if test="searchType == 't'.toString()">GROUPTITLE LIKE '%' || #{keyword} || '%' AND</if>
+	  <if test="searchType == 'c'.toString()">GROUPCONTENT LIKE '%' || #{keyword} || '%' AND</if>
+	  <if test="searchType == 'tc'.toString()">(GROUPTITLE LIKE '%' || #{keyword} || '%') OR (GROUPCONTENT LIKE '%' || #{keyword} || '%') AND</if>
+
+	</sql>
+	
+	<select id="groupSearch_searchCount" resultType="int" parameterType="com.t.s.domain.SearchCriteria">
+		SELECT COUNT(GROUPNO)
+		FROM GROUPINFO WHERE
+		<include refid="searchcount"></include>
+		<![CDATA[
+		   GROUPNO > 0
+		]]>
+	</select>
 	
 	
 	<!-- ******************************************************************************* -->
@@ -303,6 +339,11 @@
 	<select id="findGroupNo" parameterType="String" resultType="int">
 		SELECT GROUPNO FROM GROUPINFO WHERE GROUPIMG=#{fineImg}
 	</select>
+	
+	<!-- 그룹 유저 -->
+	<insert id="groupInUser" parameterType="GroupUserDto">
+		INSERT INTO GROUPUSER VALUES(#{userid}, #{groupno}, #{groupusergrade}, SYSDATE)
+	</insert>
 	
 	<!-- 자유게시판 -->
 	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="int">

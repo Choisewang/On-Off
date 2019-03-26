@@ -817,19 +817,31 @@ public class HomeController {
 		/*@Autowired
 		private GroupBiz groupbiz;*/
 		
-		@RequestMapping(value = "/groupDetail.do", method = RequestMethod.GET)
-		public String groupDetail(Model model, int groupno) {
-			
-			GroupDto groupdto = new GroupDto();
-			SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
-			
-			groupdto = groupbiz.selectGroupDetail(groupno);
-			
-			model.addAttribute("groupdto",groupdto);
-			model.addAttribute("groupregdate", sys.format(groupdto.getGroupregdate()));
-
-			return "groupDetail";
+	@RequestMapping(value = "/groupDetail.do", method = RequestMethod.GET)
+	public String groupDetail(HttpSession session, Model model, int groupno) {
+		
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
 		}
+		
+		GroupDto groupdto = new GroupDto();
+		UserDto userdto = (UserDto) session.getAttribute("dto");
+		GroupUserDto groupuserdto = new GroupUserDto();
+		groupuserdto.setUserid(userdto.getUserid());
+		groupuserdto.setGroupno(groupno);
+		
+		GroupUserDto resUser = groupuserbiz.selGroupnoGroupuser(groupuserdto);
+		
+		SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
+		
+		groupdto = groupbiz.selectGroupDetail(groupno);
+		
+		model.addAttribute("groupdto",groupdto);
+		model.addAttribute("groupregdate", sys.format(groupdto.getGroupregdate()));
+		model.addAttribute("resUser",resUser);
+
+		return "groupDetail";
+	}
 		
 		
 		@RequestMapping(value = "/groupInsert.do", method = RequestMethod.GET)
@@ -931,6 +943,30 @@ public class HomeController {
 			
 			return "preViewUpload";
 		}
+		
+		//-----------------------------------------------------그룹 유저 가입
+		
+				@Autowired
+				private GroupUserBiz groupuserbiz;
+				
+				@RequestMapping(value = "/groupUserIn.do", method = RequestMethod.GET)
+				public String groupUserIn(Model model, GroupUserDto groupuserdto) {
+					
+					int res = 0;
+					
+					groupuserdto.setGroupusergrade("USER");
+					res = groupuserbiz.groupInUser(groupuserdto);
+					
+					if(res > 0) {
+						model.addAttribute("groupno",groupuserdto.getGroupno());
+						return "redirect:/groupDetail.do";
+					}
+					else {
+						return "error";
+					}
+
+					
+				}
 		
 		// -----------------------------------------------------------자유게시판 관련
 		@Autowired

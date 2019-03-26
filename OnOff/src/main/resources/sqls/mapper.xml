@@ -340,6 +340,11 @@
 		SELECT GROUPNO FROM GROUPINFO WHERE GROUPIMG=#{fineImg}
 	</select>
 	
+	<!-- 그룹 유저 -->
+	<insert id="groupInUser" parameterType="GroupUserDto">
+		INSERT INTO GROUPUSER VALUES(#{userid}, #{groupno}, #{groupusergrade}, SYSDATE)
+	</insert>
+	
 	<!-- 자유게시판 -->
 	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="int">
 		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno}

@@ -78,20 +78,20 @@
 
 	<body>
 		<!-- Navigation Start  -->
-		<nav class="navbar navbar-default navbar-sticky bootsnav">
-			<div class="container">      
-				<!-- Start Header Navigation -->
+      <nav class="navbar navbar-default navbar-sticky bootsnav">
+         <div class="container">      
+            <!-- Start Header Navigation -->
             <div class="navbar-header">
                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                   <i class="fa fa-bars"></i>
                </button>
-               <a class="navbar-brand" href="index.do"><img src="img/logo.png" class="logo" alt=""></a>
+               <a class="navbar-brand" href="index.jsp"><img src="img/logo.png" class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                     <li><a href="index.do">Home</a></li> 
+                     <li><a href="index.jsp">Home</a></li> 
                      <c:set var="user" value="${dto.username }"/>
                      <c:choose>
                      <c:when test="${user==null }">

@@ -17,4 +17,9 @@ public class GroupUserBizImpl implements GroupUserBiz {
 		return dao.selGroupnoGroupuser(dto);
 	}
 
+	@Override
+	public int groupInUser(GroupUserDto groupuserdto) {
+		return dao.groupInUser(groupuserdto);
+	}
+
 }
