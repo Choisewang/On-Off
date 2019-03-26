@@ -73,6 +73,7 @@ ul.sub li:hover {
 	
 	<a href="groupInsert.do">그룹 생성하기</a>
 	<a href="groupDetail.do?groupno=2">2번 그룹</a>
+	<a href="survey.do?moimNo=2">2번그룹 설문조사</a>
 
 	<div class="companies">
 

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+  request.setCharacterEncoding("UTF-8"); //받아올 데이터의 인코딩
+  String moimNo = request.getParameter("moimNo"); //넘겨오는 데이터중에 irum속성을 가져옴
+  %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -186,20 +190,30 @@ var surveyJSON =
 			} ]
 		} ]
 	};
+	
 	function sendDataToServer(survey) {
 		//send Ajax request to your web server.
-		//alert("The results are:" + JSON.stringify(survey.data));
-		var allData = survey.data;//object
+		var allData = survey.data; //object
+		allData["moimno"]="<%=moimNo%>";
+		//alert("The results are:" + JSON.stringify(allData)); //{"Q1":"10","Q2":"10","Q3":"10","Q4":"5","Q5":"10","Q6":"ㅎㅎ"}
 		$.ajax({
-			url : "survey.do",
+			url : "surveyResult.do",
 			type : "GET",
 			data : allData,
 			success : function(data) {
-				alert("설문지를 작성해주셔서 감사합니다.");
-				window.location.href = "mypage.do";
+				if(data=='o'){
+					alert("설문조사에 응해주셔서 감사합니다.");
+					location.href = "mypage.do";			
+					self.close;
+				}else {
+					alert("이미 이 그룹에 대한 설문조사를 마치셨습니다.");
+					location.href = "mypage.do";			
+					self.close;
+				}	
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				alert("ajax전송중에 문제가 생겼습니다.\n" + textStatus + " : " + errorThrown);
+				self.close;
 			}
 		});
 	}
