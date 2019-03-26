@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -16,6 +17,52 @@
 		<!-- Style & Common Css --> 
 		<link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/main.css">
+        <style>
+        #paging li a:focus {
+			color:#fff;
+			border:1px solid #f40;
+			background-color:#f40;
+		}
+		
+		#selectType{position:relative; width:220px; height:40px; line-height:40px; border:0;  text-transform:uppercase; background:#fff;}
+		#selectType label{position:absolute; width:100%; font-size:.90em; color:#6b797c; font-weight:normal; top:0; left:0; padding:0 5%; margin-right:5%;}
+		#selectType label:after{content:'▼'; width:40px; height:40px; position:absolute; top:0; right:0; font-size:.90em; color:#fff; text-align:center; background:#da0833; }
+		#selectType select{width:100%; height:40px; opacity:0; filter:alpha(opacity=0); -ms-filter:alpha(opacity=0)/* IE 8 */;}
+		
+		
+		
+
+        </style> 
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		function selSearch(val){
+			
+
+			if(val=="t"){
+				$("#selLabel").text("제목");
+			} else if(val=="c"){
+				$("#selLabel").text("내용");
+			} else if(val=="tc"){
+				$("#selLabel").text("제목+내용");
+			}
+	        
+		} 
+		
+	    function enterKey(){
+	    	if (window.event.keyCode == 13) {
+	             search();
+	        }
+	    }
+		 
+		
+		function search(){
+			
+	    	 location.href="search.do?searchType="+$("select option:selected").val()+"&keyword="+encodeURIComponent($('#search_input').val());
+	    }
+		
+
+</script>
 
     </head>
 	
@@ -66,16 +113,25 @@
 			<div class="container">
 				<div class="caption">
 					<h2><img src="img/logo.png" class="logo" alt=""></h2>
-					<form action="search.do" method="post">
+					<!-- <form action="" method="post"> -->
 						<fieldset> 
+							<div class="col-md-10 col-sm-4 no-pad" id="selectType">
+								<label id="selLabel">조건을 선택하세요</label>
+								<select name="searchType" style="color:black;" id="sel" onchange="selSearch(this.value)">
+								  <%-- <option value="n"<c:out value="${sc.searchType == null ? 'selected' : ''}"/>>전체 목록</option> --%>
+								  <option value="t"<c:out value="${sc.searchType eq 't' ? 'selected' : ''}"/> selected>제목</option>
+								  <option value="c"<c:out value="${sc.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+								  <option value="tc"<c:out value="${sc.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+								 </select>
+							</div>
 							<div class="col-md-10 col-sm-4 no-pad">
-								<input type="text" class="form-control border-right" name="searchText" placeholder="소모임을 검색하세요" />
+								<input type="text" class="form-control border-right" name="searchText" id="search_input" placeholder="소모임을 검색하세요" onkeyup="enterKey();"/>
 							</div>
 							<div class="col-md-2 col-sm-2 no-pad">
-								<input type="submit" class="btn seub-btn" value="SEARCH" />
+								<input type="button" class="btn seub-btn" id="search" value="SEARCH" onclick="search();" />
 							</div>
 						</fieldset>
-					</form>
+					<!-- </form> -->
 				</div>
 			</div>
 		</section>
@@ -155,6 +211,9 @@
 				</div>
 			</div>
 		</section>
+		
+		
+		
 			
       <!-- footer start -->
       <footer>

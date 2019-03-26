@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>On & Off</title>
+        <title>Jober Desk | Responsive Job Portal Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		
@@ -16,12 +17,78 @@
 		<!-- Style & Common Css --> 
 		<link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/search.css">
+        <style>
+        #paging li a:focus {
+			color:#fff;
+			border:1px solid #f40;
+			background-color:#f40;
+		}
+		
+		#selectType{position:relative; width:220px; height:40px; line-height:40px; border:0;  text-transform:uppercase; background:#fff;}
+		#selectType label{position:absolute; width:100%; font-size:.90em; color:#6b797c; font-weight:normal; top:0; left:0; padding:0 5%; margin-right:5%;}
+		#selectType label:after{content:'▼'; width:40px; height:40px; position:absolute; top:0; right:0; font-size:.90em; color:#fff; text-align:center; background:#da0833; }
+		#selectType select{width:100%; height:40px; opacity:0; filter:alpha(opacity=0); -ms-filter:alpha(opacity=0)/* IE 8 */;}
+		
+        </style> 
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		function selSearch(val){
+			//$("#search_input").attr("readonly",false);
+			/* if(val=="n"){
+				$("#search_input").attr("readonly",true);
+			} else if(val=="t"){
+				$("#search_input").attr("readonly",false);
+			} else if(val=="c"){
+				$("#search_input").attr("readonly",false);
+			} else if(val=="tc"){
+				$("#search_input").attr("readonly",false);
+			} */
+			
+	       // var select_name = $(this).children("option:selected").text();
+			
+			
+			if(val=="t"){
+				$("#selLabel").text("제목");
+			} else if(val=="c"){
+				$("#selLabel").text("내용");
+			} else if(val=="tc"){
+				$("#selLabel").text("제목+내용");
+			}
+	        
+		} 
+		
+	    //var select = $('#selectType select');
+		/* $("#sel").change(function(){
+	        var select_name = $(this).children("option:selected").text();
+	        $(this).siblings("label").text(select_name);
+	    }); */
+
+	    function enterKey(){
+	    	if (window.event.keyCode == 13) {
+	             search();
+	        }
+	    }
+
+		
+		function search(){
+	    	 self.location="search.do"+"${pageMaker.makeQuery(1)}"+"&searchType="+$("select option:selected").val()+"&keyword="+encodeURIComponent($('#search_input').val());
+	    }
+		
+		$(function() {
+			
+			//$("#search_input").attr("readonly",true);
+	    
+		    
+		});
+
+</script>
 
     </head>
 	
     <body>
 	
-<!-- Navigation Start  -->
+		<!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      
             <!-- Start Header Navigation -->
@@ -56,8 +123,6 @@
          </div>   
       </nav>
 <!-- Navigation End  -->
-
-
 		
 		
 		
@@ -66,119 +131,182 @@
 			<div class="container">
 				<div class="caption">
 					<h2><img src="img/logo.png" class="logo" alt=""></h2>
-					<form action="search.do" method="post">
+					<!-- <form action="" method="post"> -->
 						<fieldset> 
+							<div class="col-md-10 col-sm-4 no-pad" id="selectType">
+								<label id="selLabel">조건을 선택하세요</label>
+								<select name="searchType" style="color:black;" id="sel" onclick="selSearch(this.value)">
+								  <%-- <option value="n"<c:out value="${sc.searchType == null ? 'selected' : ''}"/>>전체 목록</option> --%>
+								  <option value="t"<c:out value="${sc.searchType eq 't' ? 'selected' : ''}"/> selected>제목</option>
+								  <option value="c"<c:out value="${sc.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+								  <option value="tc"<c:out value="${sc.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+								 </select>
+							</div>
 							<div class="col-md-10 col-sm-4 no-pad">
-								<input type="text" class="form-control border-right" name="searchText" placeholder="소모임을 검색하세요" />
+								<input type="text" class="form-control border-right" name="searchText" id="search_input" placeholder="소모임을 검색하세요" onkeyup="enterKey();"/>
 							</div>
 							<div class="col-md-2 col-sm-2 no-pad">
-								<input type="submit" class="btn seub-btn" value="SEARCH" />
+								<input type="button" class="btn seub-btn" id="search" value="SEARCH" onclick="search();"/>
 							</div>
 						</fieldset>
-					</form>
+					<!-- </form> -->
 				</div>
 			</div>
 		</section>
-		
-				
-
-		
+	
 		<section class="jobs">
 			<div class="container">
 				<div class="row heading">
-					<h2>검색 결과</h2>
+					<h3 style="font-weight:bold;">검색 결과</h3>
 				</div>
 				<div class="companies">
-					<div class="company-list">
-						<div class="row">
-							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
-									<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
-								</div>
-							</div>
-							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
-									<h3>웹 개발 프로젝트<span class="full-time">모집중</span></h3>
-									<p><span class="company-name">같이 프로젝트 해요</span></p>
-								</div>
-							</div>
-						</div>
-					</div>
 					
-					<div class="company-list">
-						<div class="row">
-							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
-									<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
+					<%-- <c:forEach items="${list}" var="dto">
+						<div class="company-list">
+							<div class="row">
+								<div class="col-md-2 col-sm-2">
+									<div class="company-logo">
+										<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
+									</div>
 								</div>
-							</div>
-							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
-									<h3>배드민턴^^<span class="part-time">모집 완료</span></h3>
-									<p><span class="company-name">배드민턴 및 친목 소모임</span></p>
+								<div class="col-md-10 col-sm-10">
+									<div class="company-content">
+										<h3><span class="full-time"></span></h3>
+										<p><span class="company-name"><c:out value="${dto.moimcontent }"/></span></p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</c:forEach> --%>
 					
-					<div class="company-list">
-						<div class="row">
-							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
-									<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
+					<c:choose>
+						<c:when test="${empty list }">
+							<div style="text-align:center;font-size:20px;">그룹 정보가 없습니다:(</div>
+							
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto">
+								<div class="company-list">
+									<div class="row">
+										<div class="col-md-2 col-sm-2">
+											<div class="company-logo">
+												<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
+											</div>
+										</div>
+										<div class="col-md-10 col-sm-10">
+											<div class="company-content">
+												<h3>${dto.grouptitle }<span class="full-time"><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/>~</span></h3>
+												<p><span class="company-name"><c:out value="${dto.groupcontent }"/></span></p>
+											</div>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
-									<h3>UI/UX Designer<span class="freelance">Freelance</span></h3>
-									<p><span class="company-name"><i class="fa fa-briefcase"></i>Apple</span><span class="company-location"><i class="fa fa-map-marker"></i> 7th Avenue, New York, NY, United States</span><span class="package"><i class="fa fa-money"></i>$22,000-$50,000</span></p>
-								</div>
-							</div>
-						</div>
-					</div>
+							</c:forEach>			
+						</c:otherwise>		
+					</c:choose>
 					
-					<div class="company-list">
-						<div class="row">
-							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
-									<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
-								</div>
-							</div>
-							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
-									<h3>IOS developer<span class="internship">Intership</span></h3>
-									<p><span class="company-name"><i class="fa fa-briefcase"></i>Wipro</span><span class="company-location"><i class="fa fa-map-marker"></i> 8th Avenue, New York, NY, United States</span><span class="package"><i class="fa fa-money"></i>$24,000-$52,000</span></p>
-								</div>
-							</div>
-						</div>
-					</div>
 					
-					<div class="company-list">
-						<div class="row">
-							<div class="col-md-2 col-sm-2">
-								<div class="company-logo">
-									<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
-								</div>
-							</div>
-							<div class="col-md-10 col-sm-10">
-								<div class="company-content">
-									<h3>Marketing Holder<span class="full-time">Full Time</span></h3>
-									<p><span class="company-name"><i class="fa fa-briefcase"></i>Twitter</span><span class="company-location"><i class="fa fa-map-marker"></i> 4th Avenue, New York, NY, United States</span><span class="package"><i class="fa fa-money"></i>$24,000-$48,000</span></p>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</section>
 
+		<%-- <div id="paging" style="text-align:center;font-weight:bold;">
+		 
+		  <c:if test="${pageMaker.prev}">
+		   <a href="search.do${pageMaker.makeSearch(startPage - 1)}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
+		  </c:if> 
+		  
+		  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+		   <a href="search.do${pageMaker.makeSearch(idx)}">${idx}&nbsp;&nbsp;</a>
+		  </c:forEach>
+		    
+		  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		   <a href="search.do${pageMaker.makeSearch(endPage + 1)}">&nbsp;&nbsp;다음</a>
+		  </c:if> 
+		
+		</div> --%>
+		
+		<nav aria-label="Page navigation example" style="text-align:center;">
+		  <ul class="pagination justify-content-center" id="paging">
+		  	<c:if test="${pageMaker.prev}">
+			    <li class="page-item disabled">
+			      <a class="page-link" href="search.do${pageMaker.makeSearch(startPage - 1)}" tabindex="-1" aria-disabled="true">이전</a>
+			    </li>
+		    </c:if> 
+		    
+		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+		    	<li class="page-item"><a class="page-link" href="search.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+		    </c:forEach>
+		    
+		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+			    <li class="page-item">
+			      <a class="page-link" href="search.do${pageMaker.makeSearch(endPage + 1)}">다음</a>
+			    </li>
+		    </c:if> 
+		  </ul>
+		</nav>
+		
+
 			
-      <!-- footer start -->
-      <footer>
-         <div class="copy-right">
-          <p>&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조 </a></p>
-         </div>
-      </footer>
+		<!-- footer start -->
+		<footer>
+			<div class="container">
+				<div class="col-md-3 col-sm-6">
+					<h4>Featured Job</h4>
+					<ul>
+						<li><a href="#">Browse Jobs</a></li>
+						<li><a href="#">Premium MBA Jobs</a></li>
+						<li><a href="#">Access Database</a></li>
+						<li><a href="#">Manage Responses</a></li>
+						<li><a href="#">Report a Problem</a></li>
+						<li><a href="#">Mobile Site</a></li>
+						<li><a href="#">Jobs by Skill</a></li>
+					</ul>
+				</div>
+				
+				<div class="col-md-3 col-sm-6">
+					<h4>Latest Job</h4>
+					<ul>
+						<li><a href="#">Browse Jobs</a></li>
+						<li><a href="#">Premium MBA Jobs</a></li>
+						<li><a href="#">Access Database</a></li>
+						<li><a href="#">Manage Responses</a></li>
+						<li><a href="#">Report a Problem</a></li>
+						<li><a href="#">Mobile Site</a></li>
+						<li><a href="#">Jobs by Skill</a></li>
+					</ul>
+				</div>
+				
+				<div class="col-md-3 col-sm-6">
+					<h4>Reach Us</h4>
+					<address>
+					<ul>
+					<li>1201, Murakeu Market, QUCH07<br>
+					United Kingdon</li>
+					<li>Email: Support@job.com</li>
+					<li>Call: 044 123 458 65879</li>
+					<li>Skype: job@skype</li>
+					<li>FAX: 123 456 85</li>
+					</ul>
+					</address>
+				</div>
+				
+				<div class="col-md-3 col-sm-6">
+					<h4>Drop A Mail</h4>
+					<form>
+						<input type="text" class="form-control input-lg" placeholder="Your Name">
+						<input type="text" class="form-control input-lg" placeholder="Email...">
+						<textarea class="form-control" placeholder="Message"></textarea>
+						<button type="submit" class="btn btn-primary">Login</button>
+					</form>
+				</div>
+				
+				
+			</div>
+			<div class="copy-right">
+			 <p>&copy;Copyright 2018 Jober Desk | Design By <a href="https://themezhub.com/">ThemezHub</a></p>
+			</div>
+		</footer>
 		 
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>

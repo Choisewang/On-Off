@@ -159,13 +159,6 @@ width:100%;
 			</td>
 		</tr>
 	</table>
- 
- 
-       <!-- footer start -->
-      <footer>
-         <div class="copy-right">
-          <p>&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조 </a></p>
-         </div>
-      </footer>
+
 </body>
 </html>

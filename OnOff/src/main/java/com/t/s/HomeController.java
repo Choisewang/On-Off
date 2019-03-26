@@ -49,6 +49,8 @@ import org.springframework.web.util.WebUtils;
 
 import com.t.s.domain.Criteria;
 import com.t.s.domain.PageMaker;
+import com.t.s.domain.PageMaker2;
+import com.t.s.domain.SearchCriteria;
 import com.t.s.model.biz.FreeBoardBiz;
 import com.t.s.model.biz.GroupBiz;
 import com.t.s.model.biz.GroupUserBiz;
@@ -72,11 +74,16 @@ import com.t.s.model.dto.UserDto;
 public class HomeController {
 
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String home(HttpSession session, Model model) {
+	public String home(HttpSession session, Model model, @ModelAttribute("sc") SearchCriteria sc) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
+		//SearchCriteria sc = new SearchCriteria();
+		PageMaker2 pageMaker = new PageMaker2();
+		   pageMaker.setCri(sc);
+		   pageMaker.setTotalCount(groupbiz.groupSearch_searchCount(sc));
+		   model.addAttribute("pageMaker", pageMaker);
 
 		return "index";
 	}
@@ -167,12 +174,23 @@ public class HomeController {
 	   
       return "moimDetail";
    }
-   @RequestMapping(value="/search.do", method=RequestMethod.POST)
-   public String search(Model model, String searchText, HttpSession session) {
+   @Autowired
+   private GroupBiz groupbiz;
+   
+   @RequestMapping(value="/search.do", method=RequestMethod.GET)
+   public String search(Model model, HttpSession session, @ModelAttribute("sc") SearchCriteria sc) {
       
 	   if(session.getAttribute("dto")!=null) {
 	   model.addAttribute("dto", session.getAttribute("dto"));
 	   }
+	   
+	   List<GroupDto> list = groupbiz.groupSearch_search(sc);
+	   model.addAttribute("list", list);
+		 
+	   PageMaker2 pageMaker = new PageMaker2();
+	   pageMaker.setCri(sc);
+	   pageMaker.setTotalCount(groupbiz.groupSearch_searchCount(sc));
+	   model.addAttribute("pageMaker", pageMaker);
 	   
       return "search";
    }
@@ -618,7 +636,7 @@ public class HomeController {
 		
 		if(res > 0) {
 			session.invalidate();
-			return "redirect:index.jsp";
+			return "dropOk";
 			
 		}else {
 			return "redirect:mypage.do";
@@ -796,8 +814,8 @@ public class HomeController {
 	// 그룹 관련 컨트롤러
 	//----------------------------그룹 관련된 내용
 	
-		@Autowired
-		private GroupBiz groupbiz;
+		/*@Autowired
+		private GroupBiz groupbiz;*/
 		
 		@RequestMapping(value = "/groupDetail.do", method = RequestMethod.GET)
 		public String groupDetail(Model model, int groupno) {

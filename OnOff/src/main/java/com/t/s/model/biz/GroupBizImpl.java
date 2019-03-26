@@ -1,8 +1,11 @@
 package com.t.s.model.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.t.s.domain.SearchCriteria;
 import com.t.s.model.dao.GroupDao;
 import com.t.s.model.dto.GroupDto;
 
@@ -25,6 +28,21 @@ public class GroupBizImpl implements GroupBiz {
 	@Override
 	public int findGroupNo(String fineImg) {
 		return dao.findGroupNo(fineImg);
+	}
+	
+	@Override
+	public List<GroupDto> groupSearch_search(SearchCriteria sc) {
+		return dao.groupSearch_search(sc);
+	}
+
+	@Override
+	public int groupSearch_searchCount(SearchCriteria sc) {
+		return dao.groupSearch_searchCount(sc);
+	}
+
+	@Override
+	public int groupSearch_listCount() {
+		return dao.groupSearch_listCount();
 	}
 
 }

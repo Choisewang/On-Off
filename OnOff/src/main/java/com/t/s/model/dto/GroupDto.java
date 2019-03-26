@@ -17,11 +17,21 @@ public class GroupDto {
 	}
 	
 	//파라미터 포함된 생성자는 만들어서 사용하세요 말씀해주시고요
+	public GroupDto(int groupno, String grouptitle, String groupcontent, Date groupregdate, String groupimg) {
+		super();
+		this.groupno = groupno;
+		this.grouptitle = grouptitle;
+		this.groupcontent = groupcontent;
+		this.groupregdate = groupregdate;
+		this.groupimg = groupimg;
+	}
 
+	
 
 	public int getGroupno() {
 		return groupno;
 	}
+	
 	public void setGroupno(int groupno) {
 		this.groupno = groupno;
 	}
@@ -40,11 +50,10 @@ public class GroupDto {
 		this.groupcontent = groupcontent;
 	}
 
-
 	public Date getGroupregdate() {
 		return groupregdate;
 	}
-	public void setGroupregdate(Date groupregdate) {
+	public void setGroupredate(Date groupregdate) {
 		this.groupregdate = groupregdate;
 	}
 

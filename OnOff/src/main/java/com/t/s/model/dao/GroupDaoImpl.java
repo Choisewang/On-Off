@@ -1,9 +1,13 @@
 package com.t.s.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.t.s.domain.SearchCriteria;
 import com.t.s.model.dto.GroupDto;
 
 @Repository
@@ -41,4 +45,24 @@ public class GroupDaoImpl implements GroupDao {
 		return res;
 	}
 
+	@Override
+	public List<GroupDto> groupSearch_search(SearchCriteria sc) {
+		List<GroupDto> res = new ArrayList<GroupDto>();
+		
+		res = sqlSession.selectList(NAMESPACE+"groupSearch_search",sc);
+		
+		return res;
+	}
+
+	@Override
+	public int groupSearch_searchCount(SearchCriteria sc) {
+		int res = sqlSession.selectOne(NAMESPACE+"groupSearch_searchCount",sc);
+		return res;
+	}
+
+	@Override
+	public int groupSearch_listCount() {
+		int res = sqlSession.selectOne(NAMESPACE+"groupSearch_listCount");
+		return res;
+	}
 }
