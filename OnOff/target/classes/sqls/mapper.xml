@@ -55,6 +55,7 @@
 		<result property="imgboardtitle" column="IMGBOARDTITLE" />
 		<result property="imgboardcontent" column="IMGBOARDCONTENT" />
 		<result property="imgboardregdate" column="IMGBOARDREGDATE" />
+		<result property="imgboardimg" column="IMGBOARDIMG" />
 	</resultMap>
 	
 	<resultMap type="com.t.s.model.dto.MoimAnsDto" id="MoimAnsMap">
@@ -209,7 +210,28 @@
 		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},1,#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
 	</insert>
 	
+
 	
+	<select id="selectPaging" parameterType="com.t.s.domain.Criteria" resultMap="MoimMap">
+	
+	select MOIMNO,MOIMTITLE,USERID,MOIMREGDATE
+    from (
+        select MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,
+            row_number() over(order by MOIMNO desc) as rNum
+        from MOIM
+        ) mb
+    where rNum between #{rowStart} and #{rowEnd}
+        order by MOIMNO desc
+	
+	</select>
+	
+	<select id="listCount" resultType="int">
+	
+	select count(MOIMNO)
+		from MOIM
+			where MOIMNO>0
+	
+	</select>
 	
 	
 	<!-- ******************************************************************************* -->
@@ -269,6 +291,44 @@
 	
 	
 	<!-- *********************************최세왕****************************************** -->
+	<!-- 그룹 정보 불러오기  -->
+	<select id="groupInfo" resultType="GroupDto" parameterType="int">
+		SELECT GROUPNO, GROUPTITLE, GROUPCONTENT, GROUPREGDATE, GROUPIMG FROM GROUPINFO WHERE GROUPNO=#{groupmo}
+	</select>
+	
+	<!-- 그룹 인서트 -->
+	<insert id="groupInsert" parameterType="GroupDto" >
+		INSERT INTO GROUPINFO VALUES(GROUPSEQ.NEXTVAL, #{grouptitle}, #{groupcontent}, SYSDATE, #{groupimg})
+	</insert>
+	<select id="findGroupNo" parameterType="String" resultType="int">
+		SELECT GROUPNO FROM GROUPINFO WHERE GROUPIMG=#{fineImg}
+	</select>
+	
+	<!-- 자유게시판 -->
+	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="int">
+		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno}
+	</select>
+	
+	<select id="freeboarddetail" parameterType="int" resultType="FreeBoardDto">
+		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE BOARDNO=#{boardno}
+	</select>
+	
+	<insert id="freeBoardInsert" parameterType="FreeBoardDto">
+		INSERT INTO FREEBOARD VALUES(BOARDSEQ.NEXTVAL, #{userid}, #{groupno}, #{boardtitle}, #{boardcontent}, SYSDATE)
+	</insert>
+	
+	<!-- 이미지게시판 -->
+	<select id="imgboardlist" resultMap="ImgBoardMap" parameterType="int">
+		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE GROUPNO=#{groupno}
+	</select>
+	
+	<select id="imgboarddetail" parameterType="int" resultType="ImgBoardDto">
+		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE IMGBOARDNO=#{imgboardno}
+	</select>
+	
+	<insert id="imgBoardInsert" parameterType="ImgBoardDto">
+		INSERT INTO IMGBOARD VALUES(IMGBOARDSEQ.NEXTVAL, #{moimno}, #{userid}, #{groupno}, #{imgboardtitle}, #{imgboardcontent}, SYSDATE, #{imgboardimg})
+	</insert>
 	
 	<!-- ******************************************************************************* -->
 

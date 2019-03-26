@@ -13,6 +13,7 @@ public class ImgBoardDto {
 	private String imgboardtitle;
 	private String imgboardcontent;
 	private Date imgboardregdate;
+	private String imgboardimg;
 	
 	
 	public ImgBoardDto() {
@@ -69,6 +70,13 @@ public class ImgBoardDto {
 	}
 	public void setImgboardregdate(Date imgboardregdate) {
 		this.imgboardregdate = imgboardregdate;
+	}
+
+	public String getImgboardimg() {
+		return imgboardimg;
+	}
+	public void setImgboardimg(String imgboardimg) {
+		this.imgboardimg = imgboardimg;
 	}
 	
 	

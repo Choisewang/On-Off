@@ -1,66 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html class="no-js" >
-    <head>
-        <meta charset="utf-8"> 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>On & Off</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		
-        <!-- All Plugin Css --> 
-		<link rel="stylesheet" href="css/plugins.css">
-		
-		<!-- Style & Common Css --> 
-		<link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/main.css">
+    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-	<style type="text/css">
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>On&Off</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+			
+	<!-- All Plugin Css -->  
+	<link rel="stylesheet" href="css/plugins.css">
+			
+	<!-- Style & Common Css --> 
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/main.css">
 	
-	.up-box{
-		/* font-size: 40px; */
-		border-bottom: 1px solid black;
-		padding-bottom: 30px;
-		word-wrap:break-word;
-		height: auto;
-		width: auto;
-		background-color: white;
-		word-wrap:break-word;
-		padding-left: 700px;
-	}
-	
-	.down-box{
-		padding-top: 30px;
-		padding-bottom: 30px;
-		height: auto;
-		width : 100%;
-		background-color: white;
-		padding-left: 700px;
-		float: left;
+	<style>
+		.container div {
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: 15px;
+		}
+		#menu2 > li{
+			display: inline-block;
+			font: bold 12px Dotum;
+			padding: 0 10px;
+		}
 		
-	}
-	
-	
-	img{
-		max-width: 50%;
-	}
-	
-	
-	
-	
+		#menu2 > li > button{
+			margin: 0;
+			font: bold 10pt Dotum;
+		}
+		
+		#midContainer{
+			margin-top: 10px;
+		}
+		.navbar-header{
+			vertical-align: middle;
+		}
 	</style>
-
 	
+</head>
+
+<body>
 
 
-
-    </head>
-	
-    <body>
-	
-<!-- Navigation Start  -->
+	<!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      
             <!-- Start Header Navigation -->
@@ -68,13 +58,13 @@
                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                   <i class="fa fa-bars"></i>
                </button>
-               <a class="navbar-brand" href="index.jsp"><img src="img/logo.png" class="logo" alt=""></a>
+               <a class="navbar-brand" href="index.do"><img src="img/logo.png" class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                     <li><a href="index.jsp">Home</a></li> 
+                     <li><a href="index.do">Home</a></li> 
                      <c:set var="user" value="${dto.username }"/>
                      <c:choose>
                      <c:when test="${user==null }">
@@ -95,59 +85,53 @@
          </div>   
       </nav>
 <!-- Navigation End  -->
-
-
+ 
 	
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-	<section class="inner-banner" style="backend:#242c36 url(https://via.placeholder.com/1920x600)no-repeat;">
-		<div class="container">
-			<div class="caption">
-				<h2>선택한 그룹</h2>
-				<p>그룹 상세보기<span>ㅇㅇ</span></p>
+	<div class="container">		
+		<div id = "midContainer" style="width: 100%;">
+			<div id="topInfo" class="features-content" style="margin: 0;">
+				<img alt="sample"  src="${groupdto.groupimg }" style="width: 500px; height: 300px;" id="mainImg">
+			</div>			
+			<div id="sInfo"  style="margin-left: 80px;">
+				<h3>${groupdto.grouptitle }</h3>
+				<h5>${groupregdate }</h5>
+				<div style="margin-bottom: 10px;">
+					<textarea  rows="7" cols="60" readonly="readonly"  style="border: 0; resize: none; outline: none;">
+						${groupdto.groupcontent }
+					</textarea>
+				</div>
+				<br/>
+				<!-- 여기 잘 처리해야한당 -->
+				<button class="btn brows-btn" style="display: inline-block; margin: 0;">가입하기</button>
 			</div>
 		</div>
-	</section>
+		
+		<!-- 수평선 경계 -->
+
+	</div>
+	<hr size="8" noshade="noshade">
+		
+	<div class="container" style="margin-bottom: 100px;">
+		<div class="collapse navbar-collapse" id="navbar-menu" >
+			<ul id="menu2" data-in="fadeInDown" data-out="fadeOutUp">
+				<li><button class="btn brows-btn" onclick="location.href='boardList.do?groupno=${groupdto.groupno}'" >자유게시판</button></li>			
+				<li><button class="btn brows-btn" onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}'" >사진게시판</button></li>
+				<li><button class="btn brows-btn" >모임게시판</button></li>
+				<li><button class="btn brows-btn" >라이브</button></li>
+				<li><button class="btn brows-btn" >채팅</button></li>
+			</ul>
+		</div>
+	</div>
+
+	
+		
+<footer>
+		<div class="copy-right">
+			<p>&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조 </a></p>
+		</div>
+	</footer>
+	
 	
 
-
-	<section>
-		
-		<div class="up-box">
-			
-				<div style="width: auto; height: auto; float: left;"><a><img alt="" src=""> 이미지</a></div>
-				
-				<a>그룹 소개 적는 곳</a>
-				
-				<button class="btn brows-btn">가입하기</button>
-		</div>
-			
-		<div class="down-box">
-			
-			<button class="btn brows-btn" style="display: inline-block">자유게시판</button>
-			<button class="btn brows-btn" style="display: inline-block">갤러리</button>
-			<button class="btn brows-btn" style="display: inline-block" onclick="location.href='moim.do'">모임 일정</button>
-			<button class="btn brows-btn" style="display: inline-block">라이브</button>
-			<button class="btn brows-btn" style="display: inline-block">채팅</button>
-
-			
-		</div>
-		
-
-
-	</section>		
-
-<br></br>
-      <!-- footer start -->
-      <footer>
-         <div class="copy-right">
-          <p>&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조 </a></p>
-         </div>
-      </footer>
-		 
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-		<script src="js/bootsnav.js"></script>
-		<script src="js/main.js"></script>
-    </body>
+</body>
 </html>

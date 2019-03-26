@@ -1,9 +1,19 @@
 package com.t.s.model.dao;
 
+import java.util.List;
+
+import com.t.s.model.dto.FreeBoardDto;
+
 public interface FreeBoardDao {
 
 	String NAMESPACE = "onoff.";
 
-	// 아래에는 기능만
-	// public List<CustomerDto> selectList(); 이런식으로만
+	// 자유게시판 리스트 출력
+	public List<FreeBoardDto> selectFreeBoardList(int groupno);
+		
+	// 자유게시판 글 디테일
+	public FreeBoardDto selectFreeBoardDetail(int boardno);
+
+	// 자유게시판 글 생성
+	public int insertFreeBoard(FreeBoardDto freeboarddto);
 }

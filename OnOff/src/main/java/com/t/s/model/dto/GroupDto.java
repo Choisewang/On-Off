@@ -40,10 +40,11 @@ public class GroupDto {
 		this.groupcontent = groupcontent;
 	}
 
-	public Date getGroupdate() {
+
+	public Date getGroupregdate() {
 		return groupregdate;
 	}
-	public void setGroupdate(Date groupregdate) {
+	public void setGroupregdate(Date groupregdate) {
 		this.groupregdate = groupregdate;
 	}
 

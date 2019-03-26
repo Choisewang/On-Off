@@ -43,16 +43,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.t.s.domain.Criteria;
 import com.t.s.domain.PageMaker;
+import com.t.s.model.biz.FreeBoardBiz;
+import com.t.s.model.biz.GroupBiz;
 import com.t.s.model.biz.GroupUserBiz;
+import com.t.s.model.biz.ImgBoardBiz;
 import com.t.s.model.biz.MoimBiz;
 import com.t.s.model.biz.MoimBizImpl;
 import com.t.s.model.biz.MoimUserBiz;
 import com.t.s.model.biz.UserBiz;
+import com.t.s.model.dto.FreeBoardDto;
+import com.t.s.model.dto.GroupDto;
 import com.t.s.model.dto.GroupUserDto;
+import com.t.s.model.dto.ImgBoardDto;
 import com.t.s.model.dto.MoimDto;
 import com.t.s.model.dto.MoimUserDto;
 import com.t.s.model.dto.UserDto;
@@ -72,61 +79,7 @@ public class HomeController {
 
 		return "index";
 	}
-
-   @RequestMapping(value="/boardList.do", method=RequestMethod.GET)
-   public String boardList(HttpSession session, Model model) {
-      
-	   if(session.getAttribute("dto")!=null) {
-		   model.addAttribute("dto", session.getAttribute("dto"));
-		   }
-	   
-      return "boardList";
-   }
-   @RequestMapping(value="/boardListPhoto.do", method=RequestMethod.GET)
-   public String boardListPhoto(HttpSession session, Model model) {
-      
-	   if(session.getAttribute("dto")!=null) {
-		   model.addAttribute("dto", session.getAttribute("dto"));
-		   }
-	   
-      return "boardListPhoto";
-   }
-   @RequestMapping(value="/boardDetail.do", method=RequestMethod.GET)
-   public String boardDetail(HttpSession session, Model model) {
-      
-	   if(session.getAttribute("dto")!=null) {
-		   model.addAttribute("dto", session.getAttribute("dto"));
-		   }
-	
-	   
-      return "boardDetail";
-   }
-   @RequestMapping(value="/boardDetailPhoto.do", method=RequestMethod.GET)
-   public String boardDetailPhoto(HttpSession session, Model model) {
-      
-	   if(session.getAttribute("dto")!=null) {
-		   model.addAttribute("dto", session.getAttribute("dto"));
-		   }
-
-	   
-      return "boardDetailPhoto";
-   }
-   @RequestMapping(value="/boardWrite.do", method=RequestMethod.GET)
-   public String boardWrite(HttpSession session, Model model) {
-      
-	   if(session.getAttribute("dto")!=null) {
-		   model.addAttribute("dto", session.getAttribute("dto"));
-		   }
-	
-	   
-      return "boardWrite";
-   }
 //
-   @RequestMapping(value="/detail.do", method=RequestMethod.GET)
-   public String detail() {
-      
-      return "detail";
-   }
 
    
    @RequestMapping(value="/moim.do", method=RequestMethod.GET)
@@ -208,12 +161,6 @@ public class HomeController {
 	   public String moimwrite() {
 	      
 	      return "moimwrite";
-	   }
-  
-	   @RequestMapping(value="/groupDetail.do", method=RequestMethod.GET)
-	   public String groupDetail() {
-	      
-	      return "groupDetail";
 	   }
 	   
    
@@ -799,6 +746,231 @@ public class HomeController {
 		return "myCal";
 	}
 	
+	// 그룹 관련 컨트롤러
+	//----------------------------그룹 관련된 내용
+	
+		@Autowired
+		private GroupBiz groupbiz;
+		
+		@RequestMapping(value = "/groupDetail.do", method = RequestMethod.GET)
+		public String groupDetail(Model model, int groupno) {
+			
+			GroupDto groupdto = new GroupDto();
+			SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
+			
+			groupdto = groupbiz.selectGroupDetail(groupno);
+			
+			model.addAttribute("groupdto",groupdto);
+			model.addAttribute("groupregdate", sys.format(groupdto.getGroupregdate()));
+
+			return "groupDetail";
+		}
+		
+		
+		@RequestMapping(value = "/groupInsert.do", method = RequestMethod.GET)
+		public String groupInsert() {
+
+			return "groupInsert";
+		}
+		
+		@RequestMapping(value = "/groupInsertRes.do", method = RequestMethod.GET)
+		public String groupInsertRes(Model model, GroupDto groupdto) {
+			
+			int res = groupbiz.insertGroup(groupdto);
+			
+			if(res > 0) {
+				
+				String findImg = groupdto.getGroupimg();
+				
+				int resNo = groupbiz.findGroupNo(findImg);
+				
+				model.addAttribute("groupno",resNo);
+				return "redirect:/groupDetail.do";
+			}
+			else {
+				return "groupInsert";
+			}
+
+			
+		}
+		
+		@RequestMapping(value = "/preView.do", method = RequestMethod.GET)
+		public String qqqq() {
+
+			//model.addAttribute("dto", dto);
+
+			return "preView";
+		}
+		
+		@RequestMapping(value = "/preViewUpload.do", method = RequestMethod.POST)
+		public String uploadfff(HttpServletRequest request, Model model, MultipartFile uploadfile) {
+
+			MultipartFile file = uploadfile;
+			String filename = file.getOriginalFilename();
+			
+			StringBuffer sb = new StringBuffer();
+			String test = null;
+			
+			InputStream inputStream = null;
+			OutputStream outputStream = null;
+			
+			try {
+				inputStream = file.getInputStream();
+				String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/photoUpload");
+				System.out.println("업로드될 실제 경로 : " + path);
+				
+				File folder = new File(WebUtils.getRealPath(request.getSession().getServletContext(), "/photoUpload"));
+				
+				if(!folder.exists()) {
+					folder.mkdirs();
+				}
+				
+				String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
+						.append(UUID.randomUUID().toString()).append(filename.substring(filename.lastIndexOf(".")))
+						.toString();
+				
+				File newfile = new File(path + "/" + saveName);
+				if(!newfile.exists()) {
+					newfile.createNewFile();
+				}
+				
+				outputStream = new FileOutputStream(newfile);
+				
+				int read = 0;
+				byte[] b = new byte[(int)file.getSize()];
+				
+				while((read=inputStream.read(b))!=-1) {
+					outputStream.write(b, 0, read);
+				}
+				
+				// 정보 출력
+				sb = new StringBuffer();
+				sb.append("&bNewLine=true").append("&sFileName=").append(filename).append("&sFileURL=")
+									.append("/s/photoUpload/").append(saveName);
+				
+				test = "/s/photoUpload/" + saveName;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					inputStream.close();
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
+			
+			model.addAttribute("test", test);
+			
+			return "preViewUpload";
+		}
+		
+		// -----------------------------------------------------------자유게시판 관련
+		@Autowired
+		private FreeBoardBiz freeboardbiz;
+
+		@RequestMapping(value = "/boardList.do", method = RequestMethod.GET)
+		public String boardList(Model model, int groupno) {
+
+			model.addAttribute("freeboardlist", freeboardbiz.selectFreeBoardList(groupno));
+			model.addAttribute("groupno",groupno);
+			return "boardList";
+		}
+
+		@RequestMapping(value = "/boardDetail.do", method = RequestMethod.GET)
+		public String boardDetail(Model model, int boardno) {
+
+			FreeBoardDto freeboarddto = new FreeBoardDto();
+			
+			freeboarddto = freeboardbiz.selectFreeBoardDetail(boardno);
+			SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
+			
+			model.addAttribute("freeboarddetail", freeboarddto);
+			model.addAttribute("boardregdate",sys.format(freeboarddto.getBoardregdate()));
+			
+			//여기에 댓글을 추가해여함
+
+			return "boardDetail";
+		}
+
+		@RequestMapping(value = "/boardWrite.do", method = RequestMethod.GET)
+		public String boardWrite(Model model, int groupno) {
+			
+			model.addAttribute("groupno",groupno);
+			
+			return "boardWrite";
+		}
+		
+		@RequestMapping(value = "/boardWriteRes.do", method = RequestMethod.GET)
+		public String boardWriteRes(Model model, FreeBoardDto freeboarddto) {
+
+			int res = freeboardbiz.insertFreeBoard(freeboarddto);
+			
+			if(res > 0) {
+				model.addAttribute("groupno",freeboarddto.getGroupno());
+				return "redirect:/boardList.do";
+			}
+			else {
+				model.addAttribute("groupno",freeboarddto.getGroupno());
+				return "redirect:/boardWrite.do";
+			}
+		}
+
+		// ---------------------------------------------------------------------------
+		// -----------------------------------------------------------이미지 게시판 관련
+
+		@Autowired
+		private ImgBoardBiz imgboardbiz;
+
+		@RequestMapping(value = "/imgBoardList.do", method = RequestMethod.GET)
+		public String imgBoardList(Model model, int groupno) {
+
+			model.addAttribute("imgboardlist", imgboardbiz.selectImgBoardList(groupno));
+			model.addAttribute("groupno",groupno);
+
+			return "imgBoardList";
+		}
+		
+		@RequestMapping(value = "/imgBoardWrite.do", method = RequestMethod.GET)
+		public String imgBoardWrite(Model model, int groupno) {
+									//Model model, int moimno, int groupno 파라미터 바꿔야함 글쓰기 버튼이 여기에 있으면 안되거든
+			model.addAttribute("groupno",groupno);
+			
+			return "imgBoardWrite";
+		}
+		
+		@RequestMapping(value = "/imgBoardWriteRes.do", method = RequestMethod.GET)
+		public String imgBoardWriteRes(Model model, ImgBoardDto imgboarddto) {
+			
+			int res = imgboardbiz.insertImgBoard(imgboarddto);
+			
+			if(res > 0) {
+				model.addAttribute("groupno", imgboarddto.getGroupno());
+				return "redirect:/imgBoardList.do";
+			}
+			else {
+				model.addAttribute("groupno", imgboarddto.getGroupno());
+				return "redirect:/imgBoardWrite.do";
+			}
+		}
+		
+		
+
+		@RequestMapping(value = "/imgBoardDetail.do", method = RequestMethod.GET)
+		public String boardDetailPhoto(Model model, int imgboardno) {
+
+			ImgBoardDto imgboarddto = new ImgBoardDto();
+			
+			imgboarddto = imgboardbiz.selectImgBoardDetail(imgboardno);
+			SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
+			
+			model.addAttribute("imgboarddto", imgboarddto);
+			model.addAttribute("imgboardregdate", sys.format(imgboarddto.getImgboardregdate()));
+
+			return "imgBoardDetail";
+		}
 	
 	
 	

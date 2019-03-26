@@ -70,6 +70,9 @@ ul.sub li:hover {
 </head>
 <body>
 	<!-- 검색 결과 창이랑 비슷하게 하면 될거 같아요 -->
+	
+	<a href="groupInsert.do">그룹 생성하기</a>
+	<a href="groupDetail.do?groupno=2">2번 그룹</a>
 
 	<div class="companies">
 
