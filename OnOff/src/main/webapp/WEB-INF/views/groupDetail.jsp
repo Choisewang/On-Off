@@ -133,14 +133,21 @@
 			<ul id="menu2" data-in="fadeInDown" data-out="fadeOutUp">
 				<li><button class="btn brows-btn" onclick="location.href='boardList.do?groupno=${groupdto.groupno}'" >자유게시판</button></li>			
 				<li><button class="btn brows-btn" onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}'" >사진게시판</button></li>
-				<li><button class="btn brows-btn" >모임게시판</button></li>
+				<li><button class="btn brows-btn" onclick="location.href='moim.do?groupno=${groupdto.groupno}'">모임게시판</button></li>
 				<li><button class="btn brows-btn" >라이브</button></li>
-				<li><button class="btn brows-btn" >채팅</button></li>
+				<li><button class="btn brows-btn" id="chatting" >채팅</button></li>
 			</ul>
 		</div>
 	</div>
 
-	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#chatting").click(function(){
+				window.open("chat.do?groupnum=${groupdto.groupno}","a","width=400,height=550,left=100,top=50")
+			});
+		});
+	</script>
 		
 <footer>
 		<div class="copy-right">
