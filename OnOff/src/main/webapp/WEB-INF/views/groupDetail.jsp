@@ -129,7 +129,7 @@
 		
 		$(document).ready(function(){
 			$("#chatting").click(function(){
-				window.open("chat.do?groupnum=${groupdto.groupno}","a","width=400,height=500,left=100,top=50");
+				window.open("chat.do?groupnum=${groupdto.groupno}","a","width=400,height=550,left=100,top=50");
 			});
 		});
 			 
