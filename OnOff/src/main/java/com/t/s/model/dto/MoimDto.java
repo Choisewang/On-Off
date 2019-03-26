@@ -162,15 +162,21 @@ public class MoimDto {
 		this.lng = lng;
 	}
 
-
+	
 	@Override
+	public String toString() {
+		return "MoimDto [moimtitle=" + moimtitle + ", moimaddr=" + moimaddr + ", moimdate=" + moimdate + "]";
+	}
+	
+
+/*	@Override
 	public String toString() {
 		return "MoimDto [moimno=" + moimno + ", userid=" + userid + ", groupno=" + groupno + ", moimtitle=" + moimtitle
 				+ ", moimcontent=" + moimcontent + ", moimrecruit=" + moimrecruit + ", moimaddr=" + moimaddr
 				+ ", moimregdate=" + moimregdate + ", moimenddate=" + moimenddate + ", moimdate=" + moimdate + ", lat="
 				+ lat + ", lng=" + lng + "]";
 	}
-
+*/
 	
 
 

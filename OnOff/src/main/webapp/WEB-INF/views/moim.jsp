@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<% request.setCharacterEncoding("UTF-8"); %>
+<% response.setContentType("text/html; charset=utf-8"); %>
+
+
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -17,6 +22,14 @@
 		<!-- Style & Common Css --> 
 		<link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/main.css">
+
+	<!-- 달력 css/script -->	
+    <link href='css/fullcalendar.min.css' rel='stylesheet' />
+	<link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src='js/moment.min.js'></script>
+	<script src='js/fullcalendar.min.js'></script>
+
 
 	<style type="text/css">
 	
@@ -43,9 +56,105 @@
 	}
 	
 	
+	#calendar{
+		height:600px;
 	
+	}
+		
 	
 	</style>
+
+
+
+		<script>
+		 
+		$(document).ready(
+				function() {
+					//{"title":"value"}
+					//{title:}
+					
+					$.ajax({
+					type:"GET",
+					url:"calAjax.do",
+					success: function(msg) {
+						
+						//String을 JSON형식으로 파싱
+						var jsonMsg = JSON.parse(msg);
+						
+						//객체생성
+						var test = [];
+						
+						//반복문으로 createObj 메소드를 반복적으로 실행해서 리턴받은 객체를 test배열에 push로 반복해서 넣어줌
+						for(var i=0; i<jsonMsg.events.length; i++){
+							
+						test.push(createObj(jsonMsg.events[i].start,jsonMsg.events[i].title,jsonMsg.events[i].addr));
+							
+						};
+						
+						/* alert(test); */
+						
+						//달력에 배열을 넣어줌
+						$('#calendar').fullCalendar(
+							{
+								events:test
+								
+							}		
+						);
+						
+					},error: function() {
+						alert("에러");
+						
+					}
+					});
+					/* 
+					//ajax로 접근해서 데이터 받아와야겠는데여
+					$('#calendar').fullCalendar(
+							{	
+								 events :  [
+										{
+											title : '제목 : ' + '받자' + '\n장소 : '
+													+ '받자' + '\n시간 : ' + '받자',
+											url : 'http://naver.com/',
+											start : '2019-03-01'
+										},
+										{
+											title : '제목2 : ' + '받자' + '\n장소2 : '
+													+ '받자' + '\n시간2 : ' + '받자',
+											start : '2019-03-01'
+										}, {
+											title : 'Click for Google',
+											url : 'http://google.com/',
+											start : '2019-03-28'
+										},{
+											title : 'Click for Google',
+											url : 'http://google.com/',
+											start : '2019-03-28'
+										},
+										
+										
+										
+										] 
+							});
+	 */
+				});
+		
+		function createObj(startVal,titleVal,addrVal){
+			return {
+				start : startVal,
+				title : '제목:' + titleVal + '\n장소:' + addrVal
+				
+			}
+		}
+		
+		
+		
+		
+	</script>
+
+
+
+
+
 
 
     </head>
@@ -180,15 +289,15 @@
       <div id="paging" style="padding-left:350px;font-weight:bold;">
        
         <c:if test="${pageMaker.prev}">
-         <a href="paging.do?page=${startPage - 1}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
+         <a href="moim.do?page=${startPage - 1}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
         </c:if> 
          
         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-         <a href="paging.do?page=${idx}">${idx}&nbsp;&nbsp;</a>
+         <a href="moim.do?page=${idx}">${idx}&nbsp;&nbsp;</a>
         </c:forEach>
           
         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-         <a href="paging.do?page=${pageMaker.endPage + 1}">&nbsp;&nbsp;다음</a>
+         <a href="moim.do?page=${pageMaker.endPage + 1}">&nbsp;&nbsp;다음</a>
         </c:if> 
       
       </div>
@@ -201,6 +310,8 @@
 			
 			
 		<div class="right-box">
+		
+			<div id="calendar"></div>
 			
 			<%-- <jsp:include page="myCal.jsp"></jsp:include> --%>
 			<%-- 	<%@ include file="myCal.jsp" %> --%>
@@ -216,7 +327,7 @@
          </div>
       </footer>
 		 
-		<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- 		<script type="text/javascript" src="js/jquery.min.js"></script> -->
 		<script src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 		<script src="js/bootsnav.js"></script>

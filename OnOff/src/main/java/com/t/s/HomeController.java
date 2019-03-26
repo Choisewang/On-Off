@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,6 +106,52 @@ public class HomeController {
       
       return "moim";
    }
+   
+   @RequestMapping(value="/calAjax.do", method=RequestMethod.GET, produces = "application/text; charset=utf8")
+   @ResponseBody
+   public String calAjax(Criteria cri,HttpServletResponse resp) {
+	   
+	   resp.setContentType("text/html; charset=UTF-8");
+	   
+	   //달력 만들 리스트 가져오기(Json형태로 파싱)
+	   List<MoimDto> calList = moimbiz.selectMoimList();
+/*	   System.out.println(calList.get(1).toString());
+	   System.out.println(calList.get(1).getMoimtitle());
+	   System.out.println(calList.size());*/
+	   
+	   
+	   //Json 객체
+	   JSONObject obj = new JSONObject();
+	   
+	   //Json Array정보 담을 객체
+	   JSONArray jsonCalList = new JSONArray();
+	   
+	   //Json Array에 담기
+	   for(int i = 0; i<calList.size(); i++) {
+		   
+		   //JSONObject 만들어서 객체 정보 넣기
+		   JSONObject calListInfo = new JSONObject();
+		   
+		   calListInfo.put("title", calList.get(i).getMoimtitle());
+		   calListInfo.put("addr", calList.get(i).getMoimaddr());
+		   calListInfo.put("start", calList.get(i).getMoimdate());
+		   
+		   
+		   //Json Array에 넣기
+		   jsonCalList.add(calListInfo);
+	   };
+	   //Json 객체에 넣기
+	   obj.put("events", jsonCalList);
+	   
+	   System.out.println(jsonCalList);
+	   System.out.println(obj.toString());
+	   
+
+      return obj.toString();
+   }   
+   
+   
+   
    @RequestMapping(value="/moimDetail.do", method=RequestMethod.GET)
    public String moimDetail(HttpSession session, Model model, int moimno) {
       
@@ -719,7 +766,7 @@ public class HomeController {
 	
 	
 	
-	//페이징 테스트 메소드
+/*	//페이징 테스트 메소드
 	   @RequestMapping(value = "/paging.do", method = RequestMethod.GET)
 	   public String search(Model model,@ModelAttribute("cri") Criteria cri) {
 	      
@@ -732,7 +779,7 @@ public class HomeController {
 	      model.addAttribute("pageMaker", pageMaker);
 	      
 	      return "moim";
-	   }
+	   }*/
 	
 	
 	
