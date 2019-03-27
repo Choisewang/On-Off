@@ -1103,13 +1103,13 @@ public class HomeController {
 				   }
 
 			   model.addAttribute("res", moimbiz.selectMoim(moimno));
-				
+			   model.addAttribute("groupno",groupno);
 			   
 			   
-		      return "redirect:moimedit.do?groupno="+groupno;
+		      return "moimedit";
 		   }
 		   
-		   @RequestMapping(value="/moimupdate.do", method=RequestMethod.GET)
+		   @RequestMapping(value="/moimupdate.do", method=RequestMethod.POST)
 		   public String moimupdate(HttpSession session, Model model, MoimDto dto) {
 		      
 			   if(session.getAttribute("dto")!=null) {
@@ -1117,7 +1117,12 @@ public class HomeController {
 				   }
 			   int res = moimbiz.updateMoim(dto);
 				
-			   
+			   if(res>0) {
+				   
+				   System.out.println("수정됨");
+			   }else {
+				   System.out.println("안돼ㅐㅐㅐㅐㅐ");
+			   }
 			   
 		      return "redirect:moim.do?groupno="+dto.getGroupno();
 		   }
