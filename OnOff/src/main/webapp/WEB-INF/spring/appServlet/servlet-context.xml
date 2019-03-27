@@ -21,6 +21,7 @@
 	<resources mapping="/img/**" location="/img/" /> 
 	<resources mapping="/js/**" location="/js/" /> 
 	<resources mapping="/captchaImage/**" location="/captchaImage/" />
+	<resources mapping="/photoUpload/**" location="/photoUpload/" />
 	
 	
 	

@@ -34,4 +34,13 @@ GroupUserDto dtoResult = new GroupUserDto();
 		return res;
 	}
 
+	@Override
+	public int groupOutUser(GroupUserDto groupuserdto) {
+int res = 0;
+		
+		res = sqlSession.insert(NAMESPACE+"groupOutUser",groupuserdto);
+		
+		return res;
+	}
+
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>    
 
@@ -64,7 +66,7 @@
 	</head>
 
 	<body>
-		<!-- Navigation Start  -->
+<!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      
             <!-- Start Header Navigation -->

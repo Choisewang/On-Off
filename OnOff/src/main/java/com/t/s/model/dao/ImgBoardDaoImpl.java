@@ -39,7 +39,29 @@ public class ImgBoardDaoImpl implements ImgBoardDao {
 	public int insertImgBoard(ImgBoardDto imgboarddto) {
 		
 		int res = 0;
+		
 		res = sqlSession.insert(NAMESPACE+"imgBoardInsert",imgboarddto);
+		
+		return res;
+	}
+
+	@Override
+	public int updateImgBoard(ImgBoardDto imgboarddto) {
+
+
+		int res = 0;
+		
+		res = sqlSession.update(NAMESPACE+"imgBoardUpdate",imgboarddto);
+		
+		return res;
+	}
+
+	@Override
+	public int deleteImgBoard(int imgboardno) {
+		
+		int res = 0;
+		
+		res = sqlSession.delete(NAMESPACE+"imgBoardDelete",imgboardno);
 		
 		return res;
 	}

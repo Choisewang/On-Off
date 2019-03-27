@@ -14,5 +14,7 @@ public interface ImgBoardDao {
 	public List<ImgBoardDto> selectImgBoardList(int groupno);
 	public ImgBoardDto selectImgBoardDetail(int imgboardno);
 	public int insertImgBoard(ImgBoardDto imgboarddto);
+	public int updateImgBoard(ImgBoardDto imgboarddto);
+	public int deleteImgBoard(int imgboardno);
 
 }

@@ -35,7 +35,7 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"
 	src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
+
 <script type="text/javascript">
 	$(function() {
 		//전역변수
@@ -55,28 +55,14 @@
 			}
 		});
 		//전송버튼
-		$("#insertBoard").click(function() {
+		$("#updateBoard").click(function() {
 			//id가 smarteditor인 textarea에 에디터에서 대입
 			obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-			
-			if($("#title").val().length == 0){
-				alert("제목을 넣어주세요");
-				return ;
-			}
-			if($("#editor").val().length == 0){
-				alert("설명을 입력해주세요");
-				return ;
-			}
-			if($("#title").val().length != 0 && $("#editor").val().length != 0){
-				//폼 submit
-				$("#insertBoardFrm").submit();
-			}
-			
-			
+			//폼 submit
+			$("#updateBoardFrm").submit();
 		});
 	});
 </script>
-
 
 </head>
 
@@ -128,11 +114,11 @@
 								<!-- 	Daniel Duke<span>Web designer</span> -->
 								<!-- </h2> -->
 								<!-- <p>Soft Techi Infoteck Pvt.</p> -->
-								<form action="boardWriteRes.do" id="insertBoardFrm" enctype="multipart/form-data">
+								<form action="boardUpdateRes.do" id="updateBoardFrm" enctype="multipart/form-data">
 									<ul class="information">
 										<li><span>Title</span>
 											<div class="features-content" style="float: none; width: 740px; display: inline-block;">
-												<input type="text" name="boardtitle" id="title" style="width: 700px; border: 0; outline: none;" />
+												<input type="text" name="boardtitle" value="${freeboarddto.boardtitle }" style="width: 700px; border: 0; outline: none;" />
 											</div></li>
 										<li><span>content<br />
 											<br />
@@ -146,24 +132,23 @@
 											<div class="features-content"
 												style="float: none; width: 740px; display: inline-block;">
 												<textarea name="boardcontent" id="editor"
-													style="width: 700px; height: 400px;"></textarea>
+													style="width: 700px; height: 400px;">${freeboarddto.boardcontent }</textarea>
 											</div></li>
-										<li><span>Date</span><%=sys.format(sysda)%></li>
+										<li><span>Date</span>${regdate }</li>
 									</ul>
 
 									<!-- hidden을 이용하여 나머지 값을 다 받아 옵시당 세션 -->
-									<input type="hidden" name="userid" value="${dto.userid }" /> <input
-										type="hidden" name="groupno" value="${groupno }" />
+									<input type="hidden" name="userid" value="${dto.userid }" /> 
+									<input type="hidden" name="groupno" value="${groupno }" />
+									<input type="hidden" name="boardno" value="${freeboarddto.boardno }" />
 								</form>
 							</div>
 						</div>
 					</div>
 
-					<!-- 글쓰기버튼 -->
 					<div class="row">
-						<input type="button" class="btn brows-btn" value="글 올리기"
-							id="insertBoard" />
-						<!-- <input type="button" class="btn brows-btn" id="insertBoard" value="글 올리기" style="margin-left: 300px;" /> -->
+						<input type="button" class="btn brows-btn" value="수정하기" id="updateBoard" />
+						<input type="button" class="btn brows-btn" value="뒤로가기" onclick="history.back(); return false;" />						
 					</div>
 				</div>
 			</div>

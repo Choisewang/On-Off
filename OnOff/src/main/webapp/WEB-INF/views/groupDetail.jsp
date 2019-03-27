@@ -113,7 +113,7 @@
 				
 				<c:if test="${!empty resUser }">
 					<!-- 여기 잘 처리해야한당 -->
-					<form action="#" method="get">
+					<form action="groupUserOut.do" method="get">
 						<input type="hidden" value="${dto.userid }" name="userid" />
 						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
 						<input type="submit" value="탈퇴하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />

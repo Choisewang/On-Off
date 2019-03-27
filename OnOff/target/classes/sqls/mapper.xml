@@ -200,14 +200,14 @@
 	
 	<select id="selectOneMoim" parameterType="int" resultType="MoimDto">
 	
-	SELECT USERID,MOIMTITLE,MOIMCONTENT,MOIMRECRUIT,MOIMADDR,MOIMREGDATE,MOIMENDDATE,MOIMDATE,LAT,LNG FROM MOIM WHERE MOIMNO=#{moimno}
+	SELECT USERID,MOIMTITLE,MOIMCONTENT,MOIMRECRUIT,MOIMADDR,MOIMREGDATE,MOIMENDDATE,MOIMDATE,LAT,LNG,MOIMNO FROM MOIM WHERE MOIMNO=#{moimno}
 	
 	</select>
 	
 	
 	
 	<insert id="insertMoim" parameterType="MoimDto">
-		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},1,#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
+		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},#{groupno},#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
 	</insert>
 	
 
@@ -218,20 +218,33 @@
     from (
         select MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,
             row_number() over(order by MOIMNO desc) as rNum
-        from MOIM
+        from MOIM where GROUPNO=#{groupno}
         ) mb
     where rNum between #{rowStart} and #{rowEnd}
         order by MOIMNO desc
 	
 	</select>
 	
-	<select id="listCount" resultType="int">
+	<select id="listCount" parameterType="int" resultType="int">
 	
 	select count(MOIMNO)
 		from MOIM
-			where MOIMNO>0
+			where MOIMNO>0 and GROUPNO=#{groupno}
 	
 	</select>
+	
+	<delete id="moimdelete" parameterType="int">
+	
+		DELETE FROM MOIM WHERE MOIMNO=#{moimno}
+	
+	</delete>
+	
+	
+	<update id="updateMoim" parameterType="MoimDto">
+	
+		UPDATE MOIM SET MOIMTITLE=#{moimtitle},MOIMDATE=#{moimdate},MOIMRECRUIT=#{moimrecruit},MOIMADDR=#{moimaddr},MOIMENDDATE=#{moimenddate},MOIMCONTENT=#{moimcontent},LAT=#{lat},LNG=#{lng} WHERE MOIMNO=#{moimno}
+	
+	</update>
 	
 	
 	<!-- ******************************************************************************* -->
@@ -345,6 +358,11 @@
 		INSERT INTO GROUPUSER VALUES(#{userid}, #{groupno}, #{groupusergrade}, SYSDATE)
 	</insert>
 	
+	<!-- 그룹 유저 -->
+	<insert id="groupOutUser" parameterType="GroupUserDto">
+		DELETE FROM GROUPUSER WHERE USERID=#{userid} AND GROUPNO=#{groupno}
+	</insert>
+	
 	<!-- 자유게시판 -->
 	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="int">
 		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno}
@@ -358,6 +376,28 @@
 		INSERT INTO FREEBOARD VALUES(BOARDSEQ.NEXTVAL, #{userid}, #{groupno}, #{boardtitle}, #{boardcontent}, SYSDATE)
 	</insert>
 	
+	<update id="freeBoardUpdate" parameterType="FreeBoardDto">
+		UPDATE FREEBOARD SET BOARDTITLE=#{boardtitle}, BOARDCONTENT=#{boardcontent} WHERE BOARDNO=#{boardno}
+	</update>
+	
+	<delete id="freeBoardDelete" parameterType="int">
+		DELETE FROM FREEBOARD WHERE BOARDNO=#{boardno}
+	</delete>
+	
+	<!-- 자유게시판 댓글 -->
+	
+	<select id="freeBoardAnsList" parameterType="int" resultMap="FreeBoardAnsMap">
+		SELECT BOARDANSNO, BOARDNO, USERID, GROUPNO, BOARDANSCONTENT, BOARDANSREGDATE FROM FREEBOARDANS WHERE BOARDNO=#{boardno}
+	</select>
+	
+	<insert id="freeBoardAnsInsert" parameterType="FreeBoardAnsDto">
+		INSERT INTO FREEBOARDANS VALUES(BOARDANSSEQ.NEXTVAL, #{boardno}, #{userid}, #{groupno}, #{boardanscontent}, SYSDATE)
+	</insert>
+	
+	<delete id="freeBoardAnsDelete" parameterType="int">
+		DELETE FROM FREEBOARDANS WHERE BOARDANSNO=#{boardansno}
+	</delete>
+	
 	<!-- 이미지게시판 -->
 	<select id="imgboardlist" resultMap="ImgBoardMap" parameterType="int">
 		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE GROUPNO=#{groupno}
@@ -370,6 +410,27 @@
 	<insert id="imgBoardInsert" parameterType="ImgBoardDto">
 		INSERT INTO IMGBOARD VALUES(IMGBOARDSEQ.NEXTVAL, #{moimno}, #{userid}, #{groupno}, #{imgboardtitle}, #{imgboardcontent}, SYSDATE, #{imgboardimg})
 	</insert>
+	
+	<update id="imgBoardUpdate" parameterType="ImgBoardDto">
+		UPDATE IMGBOARD SET IMGBOARDTITLE=#{imgboardtitle}, IMGBOARDCONTENT=#{imgboardcontent}, IMGBOARDIMG=#{imgboardimg} WHERE IMGBOARDNO=#{imgboardno}
+	</update>
+	
+	<delete id="imgBoardDelete" parameterType="int">
+		DELETE FROM IMGBOARD WHERE IMGBOARDNO=#{imgboardno}
+	</delete>
+	
+	<!-- 이미지게시판 댓글 -->
+	<select id="imgBoardAnsList" parameterType="int" resultMap="ImgBoardAnsMap">
+		SELECT IMGANSNO, IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGANSCONTENT, IMGANSREGDATE FROM IMGBOARDANS WHERE IMGBOARDNO=#{imgboardno}
+	</select>
+	
+	<insert id="imgBoardAnsInsert" parameterType="ImgBoardAnsDto">
+		INSERT INTO IMGBOARDANS VALUES(IMGBOARDANSSEQ.NEXTVAL, #{imgboardno}, #{moimno}, #{userid}, #{groupno}, #{imganscontent}, SYSDATE)
+	</insert>
+	
+	<delete id="imgBoardAnsDelete" parameterType="int">
+		DELETE FROM IMGBOARDANS WHERE IMGANSNO=#{imgansno}
+	</delete>
 	
 	<!-- ******************************************************************************* -->
 

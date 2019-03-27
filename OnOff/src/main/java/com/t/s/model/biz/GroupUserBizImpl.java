@@ -22,4 +22,9 @@ public class GroupUserBizImpl implements GroupUserBiz {
 		return dao.groupInUser(groupuserdto);
 	}
 
+	@Override
+	public int groupOutUser(GroupUserDto groupuserdto) {
+		return dao.groupOutUser(groupuserdto);
+	}
+
 }

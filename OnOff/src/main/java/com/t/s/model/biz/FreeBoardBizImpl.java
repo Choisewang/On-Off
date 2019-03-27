@@ -32,4 +32,16 @@ public class FreeBoardBizImpl implements FreeBoardBiz {
 		return dao.insertFreeBoard(freeboarddto);
 	}
 
+	@Override
+	public int updateFreeBoard(FreeBoardDto freeboarddto) {
+		// TODO Auto-generated method stub
+		return dao.updateFreeBoard(freeboarddto);
+	}
+
+	@Override
+	public int deleteFreeBoard(int boardno) {
+		// TODO Auto-generated method stub
+		return dao.deleteFreeBoard(boardno);
+	}
+
 }

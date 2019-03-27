@@ -7,5 +7,6 @@ public interface GroupUserBiz {
 	public GroupUserDto selGroupnoGroupuser(GroupUserDto dto);
 	
 	public int groupInUser(GroupUserDto groupuserdto);
+	public int groupOutUser(GroupUserDto groupuserdto);
 	
 }

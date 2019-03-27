@@ -32,4 +32,16 @@ public class ImgBoardBizImpl implements ImgBoardBiz {
 		return dao.insertImgBoard(imgboarddto);
 	}
 
+	@Override
+	public int updateImgBoard(ImgBoardDto imgboarddto) {
+		// TODO Auto-generated method stub
+		return dao.updateImgBoard(imgboarddto);
+	}
+
+	@Override
+	public int deleteImgBoard(int imgboardno) {
+		// TODO Auto-generated method stub
+		return dao.deleteImgBoard(imgboardno);
+	}
+
 }

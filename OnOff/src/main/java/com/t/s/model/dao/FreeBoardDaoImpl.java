@@ -45,4 +45,23 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		return res;
 	}
 
+	@Override
+	public int updateFreeBoard(FreeBoardDto freeboarddto) {
+		
+		int res = 0;
+		
+		res = sqlSession.update(NAMESPACE+"freeBoardUpdate", freeboarddto);
+		
+		return res;
+	}
+
+	@Override
+	public int deleteFreeBoard(int boardno) {
+		int res = 0;
+		
+		res = sqlSession.delete(NAMESPACE+"freeBoardDelete", boardno);
+		
+		return res;
+	}
+
 }

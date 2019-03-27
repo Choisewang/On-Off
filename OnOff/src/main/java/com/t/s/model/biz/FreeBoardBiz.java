@@ -14,4 +14,6 @@ public interface FreeBoardBiz {
 
 	// 자유게시판 글 생성
 	public int insertFreeBoard(FreeBoardDto freeboarddto);
+	public int updateFreeBoard(FreeBoardDto freeboarddto);
+	public int deleteFreeBoard(int boardno);
 }

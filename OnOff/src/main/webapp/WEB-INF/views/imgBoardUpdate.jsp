@@ -46,11 +46,11 @@
 					}
 				});
 				//전송버튼
-				$("#insertImgBoard").click(function() {
+				$("#updateImgBoard").click(function() {
 					//id가 smarteditor인 textarea에 에디터에서 대입
 					obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 					//폼 submit
-					$("#insertImgBoardFrm").submit();
+					$("#updateImgBoardFrm").submit();
 				});
 				
 				
@@ -124,25 +124,25 @@
 									<!-- 	Daniel Duke<span>Web designer</span> -->
 									<!-- </h2> -->
 									<!-- <p>Soft Techi Infoteck Pvt.</p> -->
-									<form action="imgBoardWriteRes.do" id="insertImgBoardFrm" enctype="multipart/form-data">
+									<form action="imgBoardUpdateRes.do" id="updateImgBoardFrm" enctype="multipart/form-data">
 										<ul class="information">
-											<li><span>모임명</span><input type="text" name="imgboardtitle"></li>
+											<li><span>모임명</span><input type="text" name="imgboardtitle" value="${imgboarddto.imgboardtitle }" readonly="readonly"></li>
 											<li>
 												<span>대표이미지<br/><br/><br/><br/><br/></span>
 												<div class="features-content" style="float: none; max-width: 100%; display: inline-block; ">
 													<div style="max-width: 600px;">
-														<img style="width: 100%;" id="inimg" class="sampleimg" src="img/logo.png" />
+														<img style="width: 100%;" id="inimg" class="sampleimg" src="${imgboarddto.imgboardimg }" />
 													</div>
 													<div>
                 										<input type="button" class="btn brows-btn" value="이미지 등록" onclick="openPre()">
-                										<input type="hidden"  id="intext" name="imgboardimg" />
+                										<input type="hidden"  id="intext" name="imgboardimg" value="${imgboarddto.imgboardimg }" />
             										</div>
 												</div>
 											</li>
 											
 											<li>
 												<span>한마디 및 사진 등록</span>
-												<textarea name="imgboardcontent" id="editor" style="width: 700px; height: 400px;"></textarea>
+												<textarea name="imgboardcontent" id="editor" style="width: 700px; height: 400px;">${imgboarddto.imgboardcontent }</textarea>
 											</li>
 											<li>
 												<span>참여자</span>
@@ -151,9 +151,10 @@
 										</ul>
 										
 										<!-- hidden을 이용하여 나머지 값을 다 받아 옵시당 여기에 userid가 필요합니다. -->
-										<input type="hidden" name="moimno" value="10"/>
+										<input type="hidden" name="imgboardno" value="${imgboarddto.imgboardno }"/>
+										<input type="hidden" name="moimno" value="${imgboarddto.moimno }"/>
 										<input type="hidden" name="userid" value="${dto.userid }"/>
-										<input type="hidden" name="groupno" value="${groupno }"/>
+										<input type="hidden" name="groupno" value="${imgboarddto.groupno }"/>
 									</form>
 								</div>
 							</div>
@@ -161,8 +162,8 @@
 	
 						<!-- 글쓰기버튼 -->
 						<div class="row">
-							<input type="button" class="btn brows-btn" value="글 올리기" id="insertImgBoard" />
-							<!-- <input type="button" class="btn brows-btn" id="insertBoard" value="글 올리기" style="margin-left: 300px;" /> -->
+							<input type="button" class="btn brows-btn" value="수정하기" id="updateImgBoard" />
+							<input type="button" class="btn brows-btn" value="뒤로가기" onclick="history.back(); return false;" />			
 						</div>
 					</div>
 				</div>
