@@ -80,6 +80,21 @@ public class MoimDaoImpl implements MoimDao {
 		return res;
 	}
 	
+	@Override
+	public int moimdelete(int moimno) {
+
+		int res = sqlSession.delete(NAMESPACE+"moimdelete",moimno);
+		
+		return res;
+	}
+
+	@Override
+	public int updateMoim(MoimDto moimdto) {
+
+		int res = sqlSession.update(NAMESPACE+"updateMoim",moimdto);
+		
+		return res;
+	}
 	
 	
 }

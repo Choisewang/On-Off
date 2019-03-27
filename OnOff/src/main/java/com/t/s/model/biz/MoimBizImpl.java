@@ -43,4 +43,15 @@ public class MoimBizImpl implements MoimBiz {
 	public int listCount() {
 		return dao.listCount();
 	}
+	
+	@Override
+	public int moimdelete(int moimno) {
+		return dao.moimdelete(moimno);
+	}
+
+	@Override
+	public int updateMoim(MoimDto moimdto) {
+		return dao.updateMoim(moimdto);
+	}
+	
 }

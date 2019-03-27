@@ -200,14 +200,14 @@
 	
 	<select id="selectOneMoim" parameterType="int" resultType="MoimDto">
 	
-	SELECT USERID,MOIMTITLE,MOIMCONTENT,MOIMRECRUIT,MOIMADDR,MOIMREGDATE,MOIMENDDATE,MOIMDATE,LAT,LNG FROM MOIM WHERE MOIMNO=#{moimno}
+	SELECT USERID,MOIMTITLE,MOIMCONTENT,MOIMRECRUIT,MOIMADDR,MOIMREGDATE,MOIMENDDATE,MOIMDATE,LAT,LNG,MOIMNO FROM MOIM WHERE MOIMNO=#{moimno}
 	
 	</select>
 	
 	
 	
 	<insert id="insertMoim" parameterType="MoimDto">
-		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},1,#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
+		INSERT INTO MOIM VALUES(MOIMSEQ.NEXTVAL,#{userid},#{groupno},#{moimtitle},#{moimcontent},#{moimrecruit},#{moimaddr},#{lat},#{lng},SYSDATE,#{moimenddate},#{moimdate})
 	</insert>
 	
 
@@ -232,6 +232,19 @@
 			where MOIMNO>0
 	
 	</select>
+	
+	<delete id="moimdelete" parameterType="int">
+	
+		DELETE FROM MOIM WHERE MOIMNO=#{moimno}
+	
+	</delete>
+	
+	
+	<update id="updateMoim" parameterType="MoimDto">
+	
+		UPDATE MOIM SET MOIMTITLE=#{moimtitle},MOIMDATE=#{moimdate},MOIMRECRUIT=#{moimrecruit},MOIMADDR=#{moimaddr},MOIMENDDATE=#{moimenddate},MOIMCONTENT=#{moimcontent},LAT=#{lat},LNG=#{lng} WHERE MOIMNO=#{moimno}
+	
+	</update>
 	
 	
 	<!-- ******************************************************************************* -->

@@ -21,4 +21,9 @@ public interface MoimDao {
 	public List<MoimDto> listPage(Criteria cri);
 	
 	public int listCount();
+
+	public int moimdelete(int moimno);
+	
+	public int updateMoim(MoimDto moimdto);
+
 }

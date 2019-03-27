@@ -209,7 +209,8 @@
 		</br>
 		</br>
 		<button class="btn brows-btn" id="moimjoin" style="display: inline-block; margin-left: 900px;">참가신청</button>
-		<button class="btn brows-btn" id="moimedit" style="display: inline-block; margin-left: 900px;">수정하기</button>
+		<button class="btn brows-btn" id="moimedit" style="display: inline-block; margin-left: 700px;" onclick="location.href='moimedit.do?moimno=${res.moimno}&groupno=${groupno}'">수정하기</button>
+		<button class="btn brows-btn" id="moimdelete" style="display: inline-block; margin-left:260px;" onclick="location.href='moimdelete.do?moimno=${res.moimno}&groupno=${groupno}'">삭제하기</button>
 		
 	</section>		
 

@@ -248,7 +248,7 @@
 									
 								<tr>
 									<td>${dto.moimno }</td>
-									<td><a href="moimDetail.do?moimno=${dto.moimno }">${dto.moimtitle }</a></td>
+									<td><a href="moimDetail.do?moimno=${dto.moimno }&groupno=${groupno}">${dto.moimtitle }</a></td>
 									<td>${dto.userid }</td>
 									<td>${dto.moimregdate }</td>
 								</tr>		
@@ -263,8 +263,7 @@
 							
 								 <tr>
 			 						<td colspan="4">
-			 							<input type="button" value="글쓰기" onclick="location.href='moimwrite.do'">
-			 							<input type="submit" value="삭제" /> <!-- onclick= -->
+			 							<input type="button" value="글쓰기" onclick="location.href='moimwrite.do?groupno=${groupno}'">
 									</td>
 								</tr>	
 							</table>						

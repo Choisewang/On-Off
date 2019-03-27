@@ -90,29 +90,29 @@ public class HomeController {
 //
 
    
-   @RequestMapping(value="/moim.do", method=RequestMethod.GET)
-   public String moim(HttpSession session, Model model, Criteria cri) {
-	   
-	   if(session.getAttribute("dto")!=null) {
-		   model.addAttribute("dto", session.getAttribute("dto"));
-		   }
-	
-	   
-	   
-	   //리스트, 페이징
-	   
-	      List<MoimDto> list = moimbiz.listPage(cri);   
-	      model.addAttribute("list",list);
+	  @RequestMapping(value="/moim.do", method=RequestMethod.GET)
+	   public String moim(HttpSession session, Model model, Criteria cri, int groupno) {
+		   
+		   if(session.getAttribute("dto")!=null) {
+			   model.addAttribute("dto", session.getAttribute("dto"));
+			   }
+		
+		   
+		   	  model.addAttribute("groupno", groupno);
+		   //리스트, 페이징
+		   
+		      List<MoimDto> list = moimbiz.listPage(cri);   
+		      model.addAttribute("list",list);
+		      
+		      PageMaker pageMaker = new PageMaker();
+		      pageMaker.setCri(cri);
+		      pageMaker.setTotalCount(moimbiz.listCount());
+		      model.addAttribute("pageMaker", pageMaker);
+		
+		   
 	      
-	      PageMaker pageMaker = new PageMaker();
-	      pageMaker.setCri(cri);
-	      pageMaker.setTotalCount(moimbiz.listCount());
-	      model.addAttribute("pageMaker", pageMaker);
-	
-	   
-      
-      return "moim";
-   }
+	      return "moim";
+	   }
    
    @RequestMapping(value="/calAjax.do", method=RequestMethod.GET, produces = "application/text; charset=utf8")
    @ResponseBody
@@ -160,12 +160,12 @@ public class HomeController {
    
    
    @RequestMapping(value="/moimDetail.do", method=RequestMethod.GET)
-   public String moimDetail(HttpSession session, Model model, int moimno) {
+   public String moimDetail(HttpSession session, Model model, int moimno, int groupno) {
       
 	   if(session.getAttribute("dto")!=null) {
 		   model.addAttribute("dto", session.getAttribute("dto"));
 		   }
-	
+	   model.addAttribute("groupno",groupno);
 	   model.addAttribute("res", moimbiz.selectMoim(moimno));
 		
 	/*	MoimDto res = moimbiz.selectMoim(moimno);
@@ -201,13 +201,11 @@ public class HomeController {
 	@RequestMapping(value = "/mapRes.do", method = RequestMethod.POST)
 	public String mapRes(HttpSession session, Locale locale, Model model, MoimDto moimdto ) {
 
-		
-		
+
 		Date date = new Date();
 		
 		moimdto.setMoimregdate(date);
 		
-		System.out.println(moimdto);
 		
 		int res = moimbiz.insertMoim(moimdto);
 		
@@ -218,13 +216,20 @@ public class HomeController {
 				}
 			   
 			   }
+		   
 		
-		return "redirect:moim.do";
+		return "redirect:moim.do?groupno="+moimdto.getGroupno();
 	}
   
 	   @RequestMapping(value="/moimwrite.do", method=RequestMethod.GET)
-	   public String moimwrite() {
+	   public String moimwrite(HttpSession session, Model model, int groupno) {
 	      
+		   if(session.getAttribute("dto")!=null) {
+			   model.addAttribute("dto", session.getAttribute("dto"));
+			   }
+		
+		   model.addAttribute("groupno", groupno);
+		   
 	      return "moimwrite";
 	   }
 	   
@@ -1075,5 +1080,48 @@ public class HomeController {
 		}
 	
 	
+		   @RequestMapping(value="/moimdelete.do", method=RequestMethod.GET)
+		   public String moimdelete(HttpSession session, Model model, int moimno, int groupno) {
+		      
+			   if(session.getAttribute("dto")!=null) {
+				   model.addAttribute("dto", session.getAttribute("dto"));
+				   }
+			   model.addAttribute("groupno",groupno);
+			   int res = moimbiz.moimdelete(moimno);
+				
+			   
+			   
+		      return "redirect:moim.do?groupno="+groupno;
+		   }
+	
+		   
+		   @RequestMapping(value="/moimedit.do", method=RequestMethod.GET)
+		   public String moimedit(HttpSession session, Model model, int moimno, int groupno) {
+		      
+			   if(session.getAttribute("dto")!=null) {
+				   model.addAttribute("dto", session.getAttribute("dto"));
+				   }
+
+			   model.addAttribute("res", moimbiz.selectMoim(moimno));
+				
+			   
+			   
+		      return "redirect:moimedit.do?groupno="+groupno;
+		   }
+		   
+		   @RequestMapping(value="/moimupdate.do", method=RequestMethod.GET)
+		   public String moimupdate(HttpSession session, Model model, MoimDto dto) {
+		      
+			   if(session.getAttribute("dto")!=null) {
+				   model.addAttribute("dto", session.getAttribute("dto"));
+				   }
+			   int res = moimbiz.updateMoim(dto);
+				
+			   
+			   
+		      return "redirect:moim.do?groupno="+dto.getGroupno();
+		   }
+	
+		
 	
 }

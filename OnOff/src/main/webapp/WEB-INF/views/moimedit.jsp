@@ -138,22 +138,22 @@
 
 
 	<section class="profile-detail">
-		<p style="font-size:20px; margin-left: 570px;"><모임 만들기></p>
+		<p style="font-size:20px; margin-left: 570px;"><모임 수정하기></p>
 		<div class="container" style="margin-left: 550px;">
-			<form action="mapRes.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
+			<form action="moimupdate.do" method="post" id="insertBoardFrm" enctype="multipart/form-data">
 				<label>제목 :</label>
-				<input type="text" name="moimtitle" id="edittitle" style="white-space:nowrap; width: 660px; height: 30px; margin-bottom: 1px;" placeholder="제목을 입력해주세요." required="required"/><br/>
+				<input type="text" name="moimtitle" id="edittitle" value="${res.moimtitle }" style="white-space:nowrap; width: 660px; height: 30px; margin-bottom: 1px;" placeholder="제목을 입력해주세요." required="required"/><br/>
          		<label>모임날짜 :</label>
-        		<input type="date" name="moimdate" id="date" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
+        		<input type="date" name="moimdate" id="date" value="${res.moimdate }" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
         		<label>모집인원 :</label>
-        		<input type="text" name="moimrecruit" id="person" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 인원" required="required"/></br>
+        		<input type="text" name="moimrecruit" id="person" value="${res.moimrecruit }" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 인원" required="required"/></br>
         		<label>모임지역 :</label>
-        		<input type="text" name="moimaddr" id="location" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모임 지역" required="required"/>
+        		<input type="text" name="moimaddr" id="location" value="${res.moimaddr }" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모임 지역" required="required"/>
         		<label>모집기간 :</label>
-        		<input type="date" name="moimenddate" id="endDate" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
-        		 <input type="hidden"name="userid" value="${dto.userid }">
-        		 <input type="hidden"name="groupno" value="${groupno }">        		 
-        		<textarea name="moimcontent" id="editor" style="width: 700px; height: 400px;"></textarea>
+        		<input type="date" name="moimenddate" id="endDate" value="${res.moimenddate }" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
+        		 <input type="hidden"name="userid" value="${res.userid }">
+        		 <input type="hidden"name="groupno" value="${groupno }">
+        		<textarea name="moimcontent" id="editor" value="${res.moimcontent }" style="width: 700px; height: 400px;"></textarea>
        	<div>
 			<p style="font-size:20px;"><모임 위치></p>
 		
@@ -463,7 +463,7 @@ function removeAllChildNods(el) {
  				<input type="text" id="Lat" name="lat" value="" style="display: none">
  				<input type="text" id="Lng" name="lng" value="" style="display: none">
        			
-       			<input type="button" class="btn brows-btn" id="insertBoard" value="글 올리기" style="margin-left: 300px;" />
+       			<input type="button" class="btn brows-btn" id="insertBoard" value="글 수정하기" style="margin-left: 300px;" />
        			
    		 	</form>
 		</div>
