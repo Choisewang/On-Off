@@ -153,6 +153,7 @@
         		<input type="date" name="moimenddate" id="endDate" value="${res.moimenddate }" style="height: 30px; width: 277px; margin-bottom: 1px;" placeholder="모집 기간" required="required"/>
         		 <input type="hidden"name="userid" value="${res.userid }">
         		 <input type="hidden"name="groupno" value="${groupno }">
+        		 <input type="hidden"name="moimno" value="${res.moimno }">
         		<textarea name="moimcontent" id="editor" value="${res.moimcontent }" style="width: 700px; height: 400px;"></textarea>
        	<div>
 			<p style="font-size:20px;"><모임 위치></p>

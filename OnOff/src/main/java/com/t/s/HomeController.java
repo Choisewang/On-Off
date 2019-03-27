@@ -1117,13 +1117,7 @@ public class HomeController {
 				   }
 			   int res = moimbiz.updateMoim(dto);
 				
-			   if(res>0) {
-				   
-				   System.out.println("수정됨");
-			   }else {
-				   System.out.println("안돼ㅐㅐㅐㅐㅐ");
-			   }
-			   
+		   
 		      return "redirect:moim.do?groupno="+dto.getGroupno();
 		   }
 	
