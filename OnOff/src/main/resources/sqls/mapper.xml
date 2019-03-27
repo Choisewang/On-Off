@@ -218,18 +218,18 @@
     from (
         select MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,
             row_number() over(order by MOIMNO desc) as rNum
-        from MOIM
+        from MOIM where GROUPNO=#{groupno}
         ) mb
     where rNum between #{rowStart} and #{rowEnd}
         order by MOIMNO desc
 	
 	</select>
 	
-	<select id="listCount" resultType="int">
+	<select id="listCount" parameterType="int" resultType="int">
 	
 	select count(MOIMNO)
 		from MOIM
-			where MOIMNO>0
+			where MOIMNO>0 and GROUPNO=#{groupno}
 	
 	</select>
 	

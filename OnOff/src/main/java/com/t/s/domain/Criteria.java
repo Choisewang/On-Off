@@ -6,8 +6,17 @@ public class Criteria {
 	 private int perPageNum;
 	 private int rowStart;
 	 private int rowEnd;
+	 private int groupno;
 	 
-	 public Criteria()
+	 public int getGroupno() {
+		return groupno;
+	}
+
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
+	}
+
+	public Criteria()
 	 {
 	  this.page = 1;
 	  this.perPageNum = 5;

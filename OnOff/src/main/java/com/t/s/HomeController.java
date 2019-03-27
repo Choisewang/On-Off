@@ -100,13 +100,13 @@ public class HomeController {
 		   
 		   	  model.addAttribute("groupno", groupno);
 		   //리스트, 페이징
-		   
+		   	  cri.setGroupno(groupno);
 		      List<MoimDto> list = moimbiz.listPage(cri);   
 		      model.addAttribute("list",list);
 		      
 		      PageMaker pageMaker = new PageMaker();
 		      pageMaker.setCri(cri);
-		      pageMaker.setTotalCount(moimbiz.listCount());
+		      pageMaker.setTotalCount(moimbiz.listCount(cri.getGroupno()));
 		      model.addAttribute("pageMaker", pageMaker);
 		
 		   

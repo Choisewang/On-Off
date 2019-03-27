@@ -40,8 +40,8 @@ public class MoimBizImpl implements MoimBiz {
 	}
 
 	@Override
-	public int listCount() {
-		return dao.listCount();
+	public int listCount(int groupno) {
+		return dao.listCount(groupno);
 	}
 	
 	@Override

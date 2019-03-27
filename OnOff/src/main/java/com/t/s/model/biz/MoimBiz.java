@@ -15,7 +15,7 @@ public interface MoimBiz {
 	
 	public List<MoimDto> listPage(Criteria cri);
 	
-	public int listCount();
+	public int listCount(int groupno);
 	
 	public int moimdelete(int moimno);
 	

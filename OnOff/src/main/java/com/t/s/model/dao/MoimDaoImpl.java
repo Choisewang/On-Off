@@ -71,11 +71,11 @@ public class MoimDaoImpl implements MoimDao {
 	}
 
 	@Override
-	public int listCount() {
+	public int listCount(int groupno) {
 		
 
 		
-		int res = sqlSession.selectOne(NAMESPACE+"listCount");
+		int res = sqlSession.selectOne(NAMESPACE+"listCount", groupno);
 		
 		return res;
 	}

@@ -288,15 +288,15 @@
       <div id="paging" style="padding-left:350px;font-weight:bold;">
        
         <c:if test="${pageMaker.prev}">
-         <a href="moim.do?page=${startPage - 1}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
+         <a href="moim.do?page=${startPage - 1}&groupno=${groupno}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
         </c:if> 
          
         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-         <a href="moim.do?page=${idx}">${idx}&nbsp;&nbsp;</a>
+         <a href="moim.do?page=${idx}&groupno=${groupno}">${idx}&nbsp;&nbsp;</a>
         </c:forEach>
           
         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-         <a href="moim.do?page=${pageMaker.endPage + 1}">&nbsp;&nbsp;다음</a>
+         <a href="moim.do?page=${pageMaker.endPage + 1}&groupno=${groupno}">&nbsp;&nbsp;다음</a>
         </c:if> 
       
       </div>
