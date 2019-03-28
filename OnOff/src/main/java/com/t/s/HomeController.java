@@ -1,3 +1,4 @@
+
 package com.t.s;
 
 import java.io.BufferedReader;
@@ -116,10 +117,13 @@ public class HomeController {
 
 	@RequestMapping(value = "/calAjax.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String calAjax(Criteria cri, HttpServletResponse resp) {
+	public String calAjax(Criteria cri, HttpServletResponse resp, String groupno) {
 
 		resp.setContentType("text/html; charset=UTF-8");
 
+		   System.out.println(">"+groupno);
+		   
+		   
 		// 달력 만들 리스트 가져오기(Json형태로 파싱)
 		List<MoimDto> calList = moimbiz.selectMoimList();
 		/*
@@ -143,7 +147,8 @@ public class HomeController {
 			calListInfo.put("title", calList.get(i).getMoimtitle());
 			calListInfo.put("addr", calList.get(i).getMoimaddr());
 			calListInfo.put("start", calList.get(i).getMoimdate());
-
+			calListInfo.put("url", "moimDetail.do?moimno="+calList.get(i).getMoimno()+"&groupno="+groupno);
+			
 			// Json Array에 넣기
 			jsonCalList.add(calListInfo);
 		}
@@ -589,9 +594,11 @@ public class HomeController {
 	// 마이페이지
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
 	public String mypage(Model model, HttpSession session) {
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
+		
 		return "mypage";
 	}
 
@@ -631,7 +638,6 @@ public class HomeController {
 		return "myCal";
 	}
 
-	// 내 달력
 	@RequestMapping(value = "/myGroupManager.do", method = RequestMethod.GET)
 	public String myGroupManager(Model model, HttpSession session) {
 
@@ -664,7 +670,7 @@ public class HomeController {
 	// 내 정보 수정 폼
 	@RequestMapping(value = "/updateMyInfo.do", method = RequestMethod.GET)
 	public String updateMyInfo(Model model, HttpSession session) {
-		
+
 		model.addAttribute("dto", biz.myinfo(session.getAttribute("id").toString()));
 
 		return "updateMyInfo";

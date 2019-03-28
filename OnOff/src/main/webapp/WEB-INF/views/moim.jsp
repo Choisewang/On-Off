@@ -75,7 +75,8 @@
 					
 					$.ajax({
 					type:"GET",
-					url:"calAjax.do",
+					url:"calAjax.do?groupno="+${groupno},
+//					data: {groupno:${groupno}},
 					success: function(msg) {
 						
 						//String을 JSON형식으로 파싱
@@ -87,7 +88,7 @@
 						//반복문으로 createObj 메소드를 반복적으로 실행해서 리턴받은 객체를 test배열에 push로 반복해서 넣어줌
 						for(var i=0; i<jsonMsg.events.length; i++){
 							
-						test.push(createObj(jsonMsg.events[i].start,jsonMsg.events[i].title,jsonMsg.events[i].addr));
+							test.push(createObj(jsonMsg.events[i].start,jsonMsg.events[i].title,jsonMsg.events[i].addr,jsonMsg.events[i].url));
 							
 						};
 						
@@ -138,11 +139,11 @@
 	 */
 				});
 		
-		function createObj(startVal,titleVal,addrVal){
+		function createObj(startVal,titleVal,addrVal,urlVal){
 			return {
 				start : startVal,
-				title : '제목:' + titleVal + '\n장소:' + addrVal
-				
+				title : '제목:' + titleVal + '\n장소:' + addrVal,
+				url : urlVal
 			}
 		}
 		
@@ -226,12 +227,12 @@
 					<h1 style="font-size:40px;">일정</h1>
 					<input type="hidden" value="">
 							<table border="1">
-									<col width="50px">
+								<%-- 	<col width="50px"> --%>
 									<col width="450px">
 									<col width="100px">
 									<col width="100px">
 								<tr id="">
-									<th>No.</th>
+								<!-- 	<th>No.</th> -->
 									<th>진행중인 일정</th>
 									<th>주최자</th>
 									<th>작성일자</th>
@@ -247,7 +248,7 @@
 										<c:forEach items="${list }" var="dto">
 									
 								<tr>
-									<td>${dto.moimno }</td>
+								<%-- 	<td>${dto.moimno }</td> --%>
 									<td><a href="moimDetail.do?moimno=${dto.moimno }&groupno=${groupno}">${dto.moimtitle }</a></td>
 									<td>${dto.userid }</td>
 									<td>${dto.moimregdate }</td>
