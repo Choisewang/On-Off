@@ -93,7 +93,7 @@ ul.sub li:hover {
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-							${dto.grouptitle }<span class="full-time"onclick="location.href='survey.do?groupno=${dto.groupno}'"></span>
+							${dto.grouptitle }<span class="full-time"onclick="location.href='survey.do?groupno=${dto.groupno}'">${dto.groupno}번 그룹 설문조사</span>
 						</h3>
 						<p>
 							<span class="company-name">${dto.groupcontent }<br/>${dto.groupregdate }</span>
