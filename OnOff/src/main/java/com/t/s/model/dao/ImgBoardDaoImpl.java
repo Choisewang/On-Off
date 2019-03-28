@@ -1,7 +1,9 @@
 package com.t.s.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,14 @@ public class ImgBoardDaoImpl implements ImgBoardDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ImgBoardDto> selectImgBoardList(int groupno) {
+	public List<ImgBoardDto> selectImgBoardList(int groupno, int pagenum) {
 		
 		List<ImgBoardDto> list = new ArrayList<ImgBoardDto>();
+		Map<String, Integer> map = new HashMap<>();
+		map.put("groupno", groupno);
+		map.put("pagenum", pagenum);
 		
-		list = sqlSession.selectList(NAMESPACE+"imgboardlist", groupno);
+		list = sqlSession.selectList(NAMESPACE+"imgboardlist", map);
 		
 		return list;
 	}
@@ -62,6 +67,15 @@ public class ImgBoardDaoImpl implements ImgBoardDao {
 		int res = 0;
 		
 		res = sqlSession.delete(NAMESPACE+"imgBoardDelete",imgboardno);
+		
+		return res;
+	}
+
+	@Override
+	public int selectImgBoardListCnt(int groupno) {
+		int res = 0;
+		
+		res = sqlSession.selectOne(NAMESPACE+"imgboardlistCnt",groupno);
 		
 		return res;
 	}

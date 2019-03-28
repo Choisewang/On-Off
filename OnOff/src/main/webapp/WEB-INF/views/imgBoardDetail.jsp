@@ -138,6 +138,7 @@ $(function() {
 								<form action="imgBoardDelete.do" method="get" id="deleteImgBoardFrm" style="display: inline-block;">
 									<input type="hidden" name="imgboardno" value="${imgboarddto.imgboardno }" /> 
 									<input type="hidden" name="groupno" value="${imgboarddto.groupno }" /> 
+									<input type="hidden" name="pagenum" value="1" />
 									<input type="button" id="deletebtn" class="btn brows-btn" value="삭제" style="display: inline-block; margin-right: 10px;" />
 								</form>
 							</div>
@@ -174,8 +175,9 @@ $(function() {
 				<input type="hidden" name="userid" value="${dto.userid }" /> 
 				<input type="hidden" name="groupno" value="${imgboarddto.groupno }" />
 			</div>
-			<input type="submit" class="btn brows-btn" value="댓글쓰기"
-				style="display: inline-block; margin-left: 20px;" />
+			<input type="submit" class="btn brows-btn" value="댓글쓰기" style="font-size: 10pt; display: inline-block; margin-left: 20px;" />
+			<input type="button" class="btn brows-btn" value="목록으로" onclick="location.href='imgBoardList.do?groupno=${imgboarddto.groupno }&pagenum=1'" style="font-size: 10pt;display: inline-block; margin-left: 20px;" />
+		
 		</div>
 	</form>
 

@@ -1,7 +1,9 @@
 package com.t.s.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,26 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<FreeBoardDto> selectFreeBoardList(int groupno) {
+	public List<FreeBoardDto> selectFreeBoardList(int groupno, int pagenum) {
 		
 		List<FreeBoardDto> list = new ArrayList<FreeBoardDto>();
+		Map<String, Integer> map = new HashMap<>();
+		map.put("groupno", groupno);
+		map.put("pagenum", pagenum);
 		
-		list = sqlSession.selectList(NAMESPACE+"freeboardlist",groupno);
+		list = sqlSession.selectList(NAMESPACE+"freeboardlist",map);
 		
 		return list;
+	}
+	
+	@Override
+	public int selectFreeBoardListCnt(int groupno) {
+		
+		int res = 0;
+		
+		res = sqlSession.selectOne(NAMESPACE+"freeboardlistCnt",groupno);
+		
+		return res;
 	}
 
 	@Override
@@ -63,5 +78,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		
 		return res;
 	}
+
+	
 
 }

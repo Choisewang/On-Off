@@ -23,6 +23,19 @@
 
 </head>
 
+<script type="text/javascript">
+			window.onload=function(){
+				var size = document.getElementById("listsize").value;
+				var taga = document.getElementById("pagingT");
+				var groupno = document.getElementById("groupno").value;
+				
+				for(var i=0; i < size/5; i++){
+					taga.innerHTML += " <a  class='page-link' href='imgBoardList.do?groupno="+ groupno + "&pagenum=" + (i+1) +"'>"+ (i+1) + "</a> ";
+					////<a class="page-link" href="#">1</a>
+				}
+			};
+		</script>
+
 <body>
 
 	<!-- Navigation Start  -->
@@ -138,22 +151,62 @@
 			</div>
 
 			<div class="paging">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<li class="page-item disabled"><a class="page-link" href="#"
-							tabindex="-1" aria-disabled="true">&laquo;</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-					</ul>
-				</nav>
-			</div>
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item disabled">
+										<c:set var="pagenum" value="${pagenum }" /> 
+										<c:set var="size" value="${listsize }" /> 
+										<c:choose>
+											<c:when test="${size/5 == 0 }">
 
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${pagenum <= 1 }">
+														<a class="page-link">&laquo;</a>
+													</c:when>
+													<c:otherwise>
+														<a class="page-link" href="imgBoardList.do?groupno=${groupno }&pagenum=${pagenum-1}">&laquo;</a>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+										</c:choose>
+									</li>
+										
+									<li class="page-item" id="pagingT"></li>
+									
+									<li class="page-item disabled">
+										<c:choose>
+											<c:when test="${size/5 == 0 }">
+
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${pagenum >= size/5 }">
+														<a class="page-link">&raquo;</a>
+													</c:when>
+													<c:otherwise>
+														<a class="page-link" href="imgBoardList.do?groupno=${groupno }&pagenum=${pagenum+1}">&raquo;</a>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+										</c:choose>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+			<input type="hidden" id="listsize" value="${listsize }" />
+			<input type="hidden" id="groupno" value="${groupno }" />
+			
 			<!-- 글쓰기버튼 -->
-			<div class="row">
+			<div class="row" align="right">
 				<input type="button" class="btn brows-btn" value="글쓰기"
-					onclick="location.href='imgBoardWrite.do?groupno=${groupno}'" />
+					onclick="location.href='imgBoardWrite.do?groupno=${groupno}'"
+					style="display: inline-block;" /> <input type="button"
+					class="btn brows-btn" value="그룹으로"
+					onclick="location.href='groupDetail.do?groupno=${groupno}'"
+					style="display: inline-block;" />
 			</div>
 		</div>
 	</section>

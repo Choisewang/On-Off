@@ -115,19 +115,16 @@
 						<c:if test="${loginid eq writerid }">
 							<!-- 본인만 보이게 할겁니다 ㅇㅇㅇ -->
 							<div align="right">
-								<form action="boardUpdate.do" method="get">
-									<input type="hidden" name="boardno"
-										value="${freeboarddetail.boardno }" /> <input type="hidden"
-										name="groupno" value="${freeboarddetail.groupno }" /> <input
-										type="submit" class="btn brows-btn" value="수정"
-										style="display: inline-block; margin-right: 5px;" />
+								<form action="boardUpdate.do" method="get" style="display: inline-block;">
+									<input type="hidden" name="boardno" value="${freeboarddetail.boardno }" /> 
+									<input type="hidden" name="groupno" value="${freeboarddetail.groupno }" /> 
+									<input type="submit" class="btn brows-btn" value="수정" style="display: inline-block; margin-right: 5px;" />
 								</form>
-								<form action="boardDelete.do" method="get" id="deleteBoardFrm">
-									<input type="hidden" name="boardno"
-										value="${freeboarddetail.boardno }" /> <input type="hidden"
-										name="groupno" value="${freeboarddetail.groupno }" /> <input
-										type="button" id="deletebtn" class="btn brows-btn" value="삭제"
-										style="display: inline-block; margin-right: 10px;" />
+								<form action="boardDelete.do" method="get" id="deleteBoardFrm" style="display: inline-block;">
+									<input type="hidden" name="boardno" value="${freeboarddetail.boardno }" /> 
+									<input type="hidden" name="groupno" value="${freeboarddetail.groupno }" /> 
+									<input type="hidden" name="pagenum" value="1" />
+									<input type="button" id="deletebtn" class="btn brows-btn" value="삭제" style="display: inline-block; margin-right: 10px;" />
 								</form>
 							</div>
 						</c:if>
@@ -141,16 +138,14 @@
 
 	<form action="freeBoardAnsInsert.do" method="get">
 		<div class="row" align="center">
-			<div class="features-content"
-				style="float: none; max-width: 100%; display: inline-block;">
+			<div class="features-content" style="float: none; max-width: 100%; display: inline-block;">
 				<input type="text" name="boardanscontent" size="50" style="font-size: 15pt; vertical-align: middle; border: 0; outline: none;" />
-				<input type="hidden" name="boardno"
-					value="${freeboarddetail.boardno }" /> <input type="hidden"
-					name="userid" value="${dto.userid }" /> <input type="hidden"
-					name="groupno" value="${freeboarddetail.groupno }" />
+				<input type="hidden" name="boardno" value="${freeboarddetail.boardno }" /> 
+				<input type="hidden" name="userid" value="${dto.userid }" /> 
+				<input type="hidden" name="groupno" value="${freeboarddetail.groupno }" />
 			</div>
-			<input type="submit" class="btn brows-btn" value="댓글쓰기"
-				style="display: inline-block; margin-left: 20px;" />
+			<input type="submit" class="btn brows-btn" value="댓글쓰기" style="font-size: 10pt; display: inline-block; margin-left: 20px;" />
+			<input type="button" class="btn brows-btn" value="목록으로" onclick="location.href='boardList.do?groupno=${freeboarddetail.groupno }&pagenum=1'" style="font-size: 10pt;display: inline-block; margin-left: 20px;" />
 		</div>
 	</form>
 

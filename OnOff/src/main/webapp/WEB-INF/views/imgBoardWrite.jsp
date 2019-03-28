@@ -50,7 +50,14 @@
 					//id가 smarteditor인 textarea에 에디터에서 대입
 					obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 					//폼 submit
-					$("#insertImgBoardFrm").submit();
+					
+					if($("#intext").val().length == 0){
+						alert("대표이미지를 등록해주세요");
+					}
+					else{
+						$("#insertImgBoardFrm").submit();
+					}
+					
 				});
 				
 				

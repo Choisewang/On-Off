@@ -15,9 +15,14 @@ public class FreeBoardBizImpl implements FreeBoardBiz {
 	private FreeBoardDao dao;
 
 	@Override
-	public List<FreeBoardDto> selectFreeBoardList(int groupno) {
+	public List<FreeBoardDto> selectFreeBoardList(int groupno, int pagenum) {
 		// TODO Auto-generated method stub
-		return dao.selectFreeBoardList(groupno);
+		return dao.selectFreeBoardList(groupno,pagenum);
+	}
+	@Override
+	public int selectFreeBoardListCnt(int groupno) {
+		// TODO Auto-generated method stub
+		return dao.selectFreeBoardListCnt(groupno);
 	}
 
 	@Override
@@ -43,5 +48,7 @@ public class FreeBoardBizImpl implements FreeBoardBiz {
 		// TODO Auto-generated method stub
 		return dao.deleteFreeBoard(boardno);
 	}
+
+	
 
 }

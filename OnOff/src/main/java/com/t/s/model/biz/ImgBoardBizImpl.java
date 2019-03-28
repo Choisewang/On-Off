@@ -15,9 +15,9 @@ public class ImgBoardBizImpl implements ImgBoardBiz {
 	private ImgBoardDao dao;
 
 	@Override
-	public List<ImgBoardDto> selectImgBoardList(int groupno) {
+	public List<ImgBoardDto> selectImgBoardList(int groupno, int pagenum) {
 		// TODO Auto-generated method stub
-		return dao.selectImgBoardList(groupno);
+		return dao.selectImgBoardList(groupno,pagenum);
 	}
 
 	@Override
@@ -42,6 +42,12 @@ public class ImgBoardBizImpl implements ImgBoardBiz {
 	public int deleteImgBoard(int imgboardno) {
 		// TODO Auto-generated method stub
 		return dao.deleteImgBoard(imgboardno);
+	}
+
+	@Override
+	public int selectImgBoardListCnt(int groupno) {
+		// TODO Auto-generated method stub
+		return dao.selectImgBoardListCnt(groupno);
 	}
 
 }

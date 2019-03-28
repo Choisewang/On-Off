@@ -376,8 +376,18 @@
 	</insert>
 	
 	<!-- 자유게시판 -->
-	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="int">
-		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno}
+	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="hashmap">
+	<![CDATA[
+		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE, R 
+		FROM (SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE, ROWNUM R
+			  FROM (SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno} ORDER BY BOARDNO DESC )
+			  WHERE ROWNUM <= #{pagenum}*5) 
+		WHERE R > ((#{pagenum}-1)*5)
+		]]>
+	</select>
+	
+	<select id="freeboardlistCnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM FREEBOARD WHERE GROUPNO=#{groupno}
 	</select>
 	
 	<select id="freeboarddetail" parameterType="int" resultType="FreeBoardDto">
@@ -411,8 +421,19 @@
 	</delete>
 	
 	<!-- 이미지게시판 -->
-	<select id="imgboardlist" resultMap="ImgBoardMap" parameterType="int">
-		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE GROUPNO=#{groupno}
+	
+	<select id="imgboardlist" resultMap="ImgBoardMap" parameterType="hashmap">
+	<![CDATA[
+		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG, R 
+		FROM (SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG, ROWNUM R
+			  FROM (SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE GROUPNO=#{groupno} ORDER BY IMGBOARDNO DESC )
+			  WHERE ROWNUM <= #{pagenum}*5) 
+		WHERE R > ((#{pagenum}-1)*5)
+		]]>
+	</select>
+	
+	<select id="imgboardlistCnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM IMGBOARD WHERE GROUPNO=#{groupno}
 	</select>
 	
 	<select id="imgboarddetail" parameterType="int" resultType="ImgBoardDto">

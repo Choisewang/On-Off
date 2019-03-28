@@ -860,7 +860,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/groupInsertRes.do", method = RequestMethod.GET)
-	public String groupInsertRes(Model model, GroupDto groupdto) {
+	public String groupInsertRes(HttpSession session, Model model, GroupDto groupdto) {
+		
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		UserDto user = (UserDto) session.getAttribute("dto");
 
 		int res = groupbiz.insertGroup(groupdto);
 
@@ -869,8 +874,17 @@ public class HomeController {
 			String findImg = groupdto.getGroupimg();
 
 			int resNo = groupbiz.findGroupNo(findImg);
+			
+			
+			GroupUserDto groupuserdto = new GroupUserDto();
+			groupuserdto.setUserid(user.getUserid());
+			groupuserdto.setGroupno(resNo);
+			groupuserdto.setGroupusergrade("MASTER");
+			
+			int userres = groupuserbiz.groupInUser(groupuserdto);
 
 			model.addAttribute("groupno", resNo);
+			
 			return "redirect:/groupDetail.do";
 		} else {
 			return "groupInsert";
@@ -992,10 +1006,17 @@ public class HomeController {
 	private FreeBoardBiz freeboardbiz;
 
 	@RequestMapping(value = "/boardList.do", method = RequestMethod.GET)
-	public String boardList(Model model, int groupno) {
+	public String boardList(Model model, int groupno, int pagenum) {
 
-		model.addAttribute("freeboardlist", freeboardbiz.selectFreeBoardList(groupno));
+		// 여기 리스트를 원하는 갯수만 가져온다
+		model.addAttribute("freeboardlist", freeboardbiz.selectFreeBoardList(groupno,pagenum));
+		
+		// 총 갯수를 가져온다.
+		model.addAttribute("listsize", freeboardbiz.selectFreeBoardListCnt(groupno));
+		
 		model.addAttribute("groupno", groupno);
+		model.addAttribute("pagenum",pagenum);
+		
 		return "boardList";
 	}
 
@@ -1038,6 +1059,26 @@ public class HomeController {
 		return "boardWrite";
 	}
 	
+	@RequestMapping(value = "/boardWriteRes.do", method = RequestMethod.GET)
+	public String boardWriteRes(HttpSession session, Model model, FreeBoardDto freeboarddto) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		
+		int res = freeboardbiz.insertFreeBoard(freeboarddto);
+
+		if (res > 0) {
+			model.addAttribute("groupno", freeboarddto.getGroupno());
+			model.addAttribute("pagenum", 1);
+			return "redirect:/boardList.do";
+		} else {
+			
+			model.addAttribute("groupno", freeboarddto.getGroupno());
+			return "redirect:/boardWrite.do";
+		}
+	}
+	
 	@RequestMapping(value = "/boardUpdate.do", method = RequestMethod.GET)
 	public String boardUpdate(HttpSession session, Model model, int groupno, int boardno) {
 
@@ -1057,25 +1098,6 @@ public class HomeController {
 		model.addAttribute("regdate",regdate);
 
 		return "boardUpdate";
-	}
-
-	@RequestMapping(value = "/boardWriteRes.do", method = RequestMethod.GET)
-	public String boardWriteRes(HttpSession session, Model model, FreeBoardDto freeboarddto) {
-
-		if (session.getAttribute("dto") != null) {
-			model.addAttribute("dto", session.getAttribute("dto"));
-		}
-		
-		int res = freeboardbiz.insertFreeBoard(freeboarddto);
-
-		if (res > 0) {
-			model.addAttribute("groupno", freeboarddto.getGroupno());
-			return "redirect:/boardList.do";
-		} else {
-			
-			model.addAttribute("groupno", freeboarddto.getGroupno());
-			return "redirect:/boardWrite.do";
-		}
 	}
 	
 	@RequestMapping(value = "/boardUpdateRes.do", method = RequestMethod.GET)
@@ -1108,6 +1130,7 @@ public class HomeController {
 		
 		if(res >0) {
 			model.addAttribute("groupno",groupno);
+			model.addAttribute("pagenum",1);
 			return "redirect:/boardList.do";
 		}
 		else {
@@ -1168,14 +1191,17 @@ public class HomeController {
 	private ImgBoardBiz imgboardbiz;
 
 	@RequestMapping(value = "/imgBoardList.do", method = RequestMethod.GET)
-	public String imgBoardList(HttpSession session, Model model, int groupno) {
+	public String imgBoardList(HttpSession session, Model model, int groupno, int pagenum) {
 		
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
 
-		model.addAttribute("imgboardlist", imgboardbiz.selectImgBoardList(groupno));
+		model.addAttribute("imgboardlist", imgboardbiz.selectImgBoardList(groupno,pagenum));
+		model.addAttribute("listsize",imgboardbiz.selectImgBoardListCnt(groupno));
+		
 		model.addAttribute("groupno", groupno);
+		model.addAttribute("pagenum",pagenum);
 
 		return "imgBoardList";
 	}
@@ -1204,6 +1230,7 @@ public class HomeController {
 
 		if (res > 0) {
 			model.addAttribute("groupno", imgboarddto.getGroupno());
+			model.addAttribute("pagenum",1);
 			return "redirect:/imgBoardList.do";
 		} else {
 			model.addAttribute("groupno", imgboarddto.getGroupno());
@@ -1286,6 +1313,7 @@ public class HomeController {
 		
 		if(res >0) {
 			model.addAttribute("groupno",groupno);
+			model.addAttribute("pagenum",1);
 			return "redirect:/imgBoardList.do";
 		}
 		else {

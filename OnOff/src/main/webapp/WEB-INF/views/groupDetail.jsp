@@ -103,9 +103,9 @@
 				<c:if test="${empty resUser }">
 					<!-- 여기 잘 처리해야한당 -->
 					<form action="groupUserIn.do" method="get">
-						<input type="hidden" value="${dto.userid }" name="userid" "/>
+						<input type="hidden" value="${dto.userid }" name="userid" />
 						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
-						<input type="submit" value="가입하기" class="btn brows-btn" style="display: inline-block; margin: 0;" id="join"/>
+						<input type="submit" value="가입하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />
 					</form>
 				</c:if>
 				
@@ -114,7 +114,7 @@
 					<form action="groupUserOut.do" method="get">
 						<input type="hidden" value="${dto.userid }" name="userid" />
 						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
-						<input type="submit" value="탈퇴하기" class="btn brows-btn" style="display: inline-block; margin: 0; " id="join" />
+						<input type="submit" value="탈퇴하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />
 					</form>
 				</c:if>
 				<!-- <button class="btn brows-btn" style="display: inline-block; margin: 0;">가입하기</button> -->
@@ -129,8 +129,8 @@
 	<div class="container" style="margin-bottom: 100px;">
 		<div class="collapse navbar-collapse" id="navbar-menu" >
 			<ul id="menu2" data-in="fadeInDown" data-out="fadeOutUp">
-				<li><button class="btn brows-btn" onclick="location.href='boardList.do?groupno=${groupdto.groupno}'" >자유게시판</button></li>			
-				<li><button class="btn brows-btn" onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}'" >사진게시판</button></li>
+				<li><button class="btn brows-btn" onclick="location.href='boardList.do?groupno=${groupdto.groupno}&pagenum=1'" >자유게시판</button></li>			
+				<li><button class="btn brows-btn" onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}&pagenum=1'" >사진게시판</button></li>
 				<li><button class="btn brows-btn" onclick="location.href='moim.do?groupno=${groupdto.groupno}'">모임게시판</button></li>
 				<li><button class="btn brows-btn" >라이브</button></li>
 				<li><button class="btn brows-btn" id="chatting" >채팅</button></li>
@@ -144,13 +144,6 @@
 			$("#chatting").click(function(){
 				window.open("chat.do?groupnum=${groupdto.groupno}","a","width=400,height=550,left=100,top=50")
 			});
-			
-			if($("#join").val()=="가입하기"){
-				$("#menu2").hide();
-			} else {
-				$("#menu2").show();
-			}
-			
 		});
 	</script>
 		
