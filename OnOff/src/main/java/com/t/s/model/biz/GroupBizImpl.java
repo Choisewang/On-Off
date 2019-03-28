@@ -45,4 +45,14 @@ public class GroupBizImpl implements GroupBiz {
 		return dao.groupSearch_listCount();
 	}
 
+	@Override
+	public List<GroupDto> selGroupinfoManager(String userId) {
+		return dao.selGroupinfoManager(userId);
+	}
+
+	@Override
+	public List<GroupDto> selGroupinfoUser(String userId) {
+		return dao.selGroupinfoUser(userId);
+	}
+
 }

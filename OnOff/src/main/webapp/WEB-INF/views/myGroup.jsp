@@ -72,37 +72,40 @@ ul.sub li:hover {
 </head>
 <body>
 	
-	
-	
-	
 	<!-- 검색 결과 창이랑 비슷하게 하면 될거 같아요 -->
-
-	
 
 	<div class="companies">
 
 		<!-- 여기에서 포문 시작 -->
+		<c:choose>
+	<c:when test="${empty list }">
+		<h3>저장된 그룹이 없습니다.</h3>
+	</c:when>
+	<c:otherwise>
+	<c:forEach items="${list }" var="dto">	
 		<div class="company-list" style="min-width: 80%;">
-			<div class="row">
+			<div class="row" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
 				<div class="col-md-2 col-sm-2">
 					<div class="company-logo">
-						<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
+						<img src="img/${dto.groupimg }.jpg" class="img-responsive" alt="" />
 					</div>
 				</div>
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-							웹 개발 프로젝트<span class="full-time">모집중</span>
+							${dto.grouptitle }<span class="full-time"><a href="survey.do?groupno=${dto.groupno}">${dto.groupno}번그룹 설문조사</a>	</span>
 						</h3>
 						<p>
-							<span class="company-name">같이 프로젝트 해요</span>
+							<span class="company-name">${dto.groupcontent }<br/>${dto.groupregdate }</span>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
+	</c:forEach>	
+	</c:otherwise>
+	</c:choose>
 		<!-- 여기세서 포문 종료 -->
-
 	</div>
 	
 </body>

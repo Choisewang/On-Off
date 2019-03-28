@@ -187,7 +187,7 @@
 						<c:otherwise>
 							<c:forEach items="${list}" var="dto">
 								<div class="company-list">
-									<div class="row">
+									<div class="row" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
 										<div class="col-md-2 col-sm-2">
 											<div class="company-logo">
 												<img src="img/sample_koala.jpg" class="img-responsive" alt="" />

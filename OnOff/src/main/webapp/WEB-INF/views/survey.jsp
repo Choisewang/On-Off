@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   request.setCharacterEncoding("UTF-8"); //받아올 데이터의 인코딩
-  String moimNo = request.getParameter("moimNo"); //넘겨오는 데이터중에 irum속성을 가져옴
+  String groupno = request.getParameter("groupno"); //넘겨오는 데이터중에 irum속성을 가져옴
   %>
 <!doctype html>
 <html class="no-js">
@@ -194,7 +194,7 @@ var surveyJSON =
 	function sendDataToServer(survey) {
 		//send Ajax request to your web server.
 		var allData = survey.data; //object
-		allData["moimno"]="<%=moimNo%>";
+		allData["groupno"]="<%=groupno%>";
 		//alert("The results are:" + JSON.stringify(allData)); //{"Q1":"10","Q2":"10","Q3":"10","Q4":"5","Q5":"10","Q6":"ㅎㅎ"}
 		$.ajax({
 			url : "surveyResult.do",

@@ -588,8 +588,10 @@ public class HomeController {
 
 	// 마이페이지
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-	public String mypage() {
-
+	public String mypage(Model model, HttpSession session) {
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
 		return "mypage";
 	}
 
@@ -611,6 +613,9 @@ public class HomeController {
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
+		String userId = session.getAttribute("id").toString();
+		List<GroupDto> list = groupbiz.selGroupinfoUser(userId);
+		model.addAttribute("list", list);
 
 		return "myGroup";
 	}
@@ -633,6 +638,9 @@ public class HomeController {
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
+		String userId = session.getAttribute("id").toString();
+		List<GroupDto> list = groupbiz.selGroupinfoManager(userId);
+		model.addAttribute("list", list);
 
 		return "myGroupManager";
 	}
@@ -656,7 +664,7 @@ public class HomeController {
 	// 내 정보 수정 폼
 	@RequestMapping(value = "/updateMyInfo.do", method = RequestMethod.GET)
 	public String updateMyInfo(Model model, HttpSession session) {
-
+		
 		model.addAttribute("dto", biz.myinfo(session.getAttribute("id").toString()));
 
 		return "updateMyInfo";
@@ -718,7 +726,7 @@ public class HomeController {
 	private MoimUserBiz moimUserBiz;
 
 	@RequestMapping(value = "/survey.do", method = RequestMethod.GET)
-	public String survey(@RequestParam("moimNo") int moimNo, Model model, HttpServletRequest request,
+	public String survey(@RequestParam("groupno") int groupno, Model model, HttpServletRequest request,
 			HttpSession session) {
 		if (session.getAttribute("dto") == null) {// 로그인되어있지 않다면
 			model.addAttribute("msg", "<script type='text/javascript'>alert('로그인해주세요.');</script>");
@@ -729,19 +737,18 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/surveyResult.do", method = RequestMethod.GET)
-	public String surveyResult(HttpServletRequest request, Model model, HttpSession session,
-			@ModelAttribute MoimUserDto dto) {
+	public String surveyResult(HttpServletRequest request, Model model, HttpSession session, @ModelAttribute MoimUserDto dto) {
 		String userid = session.getAttribute("id").toString();
-		int moimno = Integer.parseInt(request.getParameter("moimno"));
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		int Q1 = Integer.parseInt(request.getParameter("Q1"));
 		int Q2 = Integer.parseInt(request.getParameter("Q2"));
 		int Q3 = Integer.parseInt(request.getParameter("Q3"));
 		int Q4 = Integer.parseInt(request.getParameter("Q4"));
 		int Q5 = Integer.parseInt(request.getParameter("Q5"));
 		String Q6 = request.getParameter("Q6");
-		dto.setMoimno(moimno);
+		dto.setMoimno(0);
 		dto.setUserid(userid);
-		dto.setGroupno(0);
+		dto.setGroupno(groupno);
 		dto.setMoimq1(Q1);
 		dto.setMoimq2(Q2);
 		dto.setMoimq3(Q3);

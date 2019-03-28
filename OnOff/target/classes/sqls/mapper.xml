@@ -183,6 +183,18 @@
 		FROM MOIMUSER
 		WHERE MOIMNO = #{moimno}	
 	</select>
+	<select id="groupinfoManager" parameterType="String" resultMap="GroupMap">
+		SELECT GROUPNO,GROUPTITLE,GROUPCONTENT,GROUPREGDATE,GROUPIMG
+		FROM GROUPINFO
+		WHERE GROUPNO IN
+			(SELECT GROUPNO FROM GROUPUSER WHERE USERID=#{userid } AND GROUPUSERGRADE='MASTER')
+	</select>
+	<select id="groupinfoUser" parameterType="String" resultMap="GroupMap">
+		SELECT GROUPNO,GROUPTITLE,GROUPCONTENT,GROUPREGDATE,GROUPIMG
+		FROM GROUPINFO
+		WHERE GROUPNO IN
+			(SELECT GROUPNO FROM GROUPUSER WHERE USERID=#{userid } AND GROUPUSERGRADE !='MASTER')
+	</select>
 	<!-- ******************************************************************************* -->
 	
 	

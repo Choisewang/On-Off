@@ -65,4 +65,18 @@ public class GroupDaoImpl implements GroupDao {
 		int res = sqlSession.selectOne(NAMESPACE+"groupSearch_listCount");
 		return res;
 	}
+
+	@Override
+	public List<GroupDto> selGroupinfoManager(String userId) {
+		List<GroupDto> res = new ArrayList<GroupDto>();
+		res = sqlSession.selectList(NAMESPACE+"groupinfoManager",userId);
+		return res;
+	}
+
+	@Override
+	public List<GroupDto> selGroupinfoUser(String userId) {
+		List<GroupDto> res = new ArrayList<GroupDto>();
+		res = sqlSession.selectList(NAMESPACE+"groupinfoUser",userId);
+		return res;
+	}
 }

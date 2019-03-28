@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,33 +74,42 @@ ul.sub li:hover {
 	
 	<a href="groupInsert.do">그룹 생성하기</a>
 	<a href="groupDetail.do?groupno=2">2번 그룹</a>
-	<a href="survey.do?moimNo=2">2번그룹 설문조사</a>
 
-	<div class="companies">
+<div class="companies">
 
-		<!-- 여기에서 포문 시작 -->
+	<!-- 여기에서 포문 시작 -->
+	<c:choose>
+	<c:when test="${empty list }">
+		<h3>저장된 그룹이 없습니다.</h3>
+	</c:when>
+	<c:otherwise>
+	<c:forEach items="${list }" var="dto">	
 		<div class="company-list" style="min-width: 80%;">
-			<div class="row">
+			<div class="row" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
 				<div class="col-md-2 col-sm-2">
 					<div class="company-logo">
-						<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
+						<img src="img/${dto.groupimg }.jpg" class="img-responsive" alt="" />
 					</div>
 				</div>
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-							웹 개발 프로젝트<span class="full-time">여기에 설정을 넣읍시다</span>
+							${dto.grouptitle }<span class="full-time">${dto.groupregdate }</span>
 						</h3>
 						<p>
-							<span class="company-name">같이 프로젝트 해요</span>
+							<span class="company-name">${dto.groupcontent }</span>
 						</p>
 					</div>
 				</div>
-			</div>
+			</div>		
 		</div>
-		<!-- 여기세서 포문 종료 -->
+		
+	</c:forEach>	
+	</c:otherwise>
+	</c:choose>
+	<!-- 여기세서 포문 종료 -->
 
-	</div>
+</div>
 
 	
 </body>

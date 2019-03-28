@@ -21,4 +21,8 @@ public interface GroupDao {
 	public int groupSearch_searchCount(SearchCriteria sc);
 	public int groupSearch_listCount();
 	
+	//groupinfo에서 매니저와 유저 뽑기
+	public List<GroupDto> selGroupinfoManager(String userId);
+	public List<GroupDto> selGroupinfoUser(String userId);
+	
 }

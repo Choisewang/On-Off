@@ -105,9 +105,9 @@
 				<c:if test="${empty resUser }">
 					<!-- 여기 잘 처리해야한당 -->
 					<form action="groupUserIn.do" method="get">
-						<input type="hidden" value="${dto.userid }" name="userid" />
+						<input type="hidden" value="${dto.userid }" name="userid" "/>
 						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
-						<input type="submit" value="가입하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />
+						<input type="submit" value="가입하기" class="btn brows-btn" style="display: inline-block; margin: 0;" id="join"/>
 					</form>
 				</c:if>
 				
@@ -116,7 +116,7 @@
 					<form action="groupUserOut.do" method="get">
 						<input type="hidden" value="${dto.userid }" name="userid" />
 						<input type="hidden" value="${groupdto.groupno }" name="groupno" />
-						<input type="submit" value="탈퇴하기" class="btn brows-btn" style="display: inline-block; margin: 0;" />
+						<input type="submit" value="탈퇴하기" class="btn brows-btn" style="display: inline-block; margin: 0; " id="join" />
 					</form>
 				</c:if>
 				<!-- <button class="btn brows-btn" style="display: inline-block; margin: 0;">가입하기</button> -->
@@ -146,6 +146,13 @@
 			$("#chatting").click(function(){
 				window.open("chat.do?groupnum=${groupdto.groupno}","a","width=400,height=550,left=100,top=50")
 			});
+			
+			if($("#join").val()=="가입하기"){
+				$("#menu2").hide();
+			} else {
+				$("#menu2").show();
+			}
+			
 		});
 	</script>
 		
