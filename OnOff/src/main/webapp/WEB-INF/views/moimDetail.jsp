@@ -73,6 +73,7 @@
 			$("#moimjoin").hide();
 		}else{
 			$("#moimedit").hide();
+			$("#moimdelete").hide();
 		};
 	});
 	

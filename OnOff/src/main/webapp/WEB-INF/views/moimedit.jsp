@@ -154,7 +154,7 @@
         		 <input type="hidden"name="userid" value="${res.userid }">
         		 <input type="hidden"name="groupno" value="${groupno }">
         		 <input type="hidden"name="moimno" value="${res.moimno }">
-        		<textarea name="moimcontent" id="editor" value="${res.moimcontent }" style="width: 700px; height: 400px;"></textarea>
+        		<textarea name="moimcontent" id="editor" style="width: 700px; height: 400px;">${res.moimcontent }</textarea>
        	<div>
 			<p style="font-size:20px;"><모임 위치></p>
 		

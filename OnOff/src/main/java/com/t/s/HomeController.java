@@ -116,10 +116,13 @@ public class HomeController {
 
 	@RequestMapping(value = "/calAjax.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String calAjax(Criteria cri, HttpServletResponse resp) {
+	public String calAjax(Criteria cri, HttpServletResponse resp, String groupno) {
 
 		resp.setContentType("text/html; charset=UTF-8");
 
+		   System.out.println(">"+groupno);
+		   
+		   
 		// 달력 만들 리스트 가져오기(Json형태로 파싱)
 		List<MoimDto> calList = moimbiz.selectMoimList();
 		/*
@@ -143,7 +146,8 @@ public class HomeController {
 			calListInfo.put("title", calList.get(i).getMoimtitle());
 			calListInfo.put("addr", calList.get(i).getMoimaddr());
 			calListInfo.put("start", calList.get(i).getMoimdate());
-
+			calListInfo.put("url", "moimDetail.do?moimno="+calList.get(i).getMoimno()+"&groupno="+groupno);
+			
 			// Json Array에 넣기
 			jsonCalList.add(calListInfo);
 		}

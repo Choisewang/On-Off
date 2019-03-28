@@ -96,9 +96,7 @@
 				<h3>${groupdto.grouptitle }</h3>
 				<h5>${groupregdate }</h5>
 				<div style="margin-bottom: 10px;">
-					<textarea  rows="7" cols="60" readonly="readonly"  style="border: 0; resize: none; outline: none;">
-						${groupdto.groupcontent }
-					</textarea>
+					<textarea  rows="7" cols="60" readonly="readonly"  style="border: 0; resize: none; outline: none;">${groupdto.groupcontent }</textarea>
 				</div>
 				<br/>
 				<c:set var="resUser" value="${resUser.userid }" />
