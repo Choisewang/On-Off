@@ -25,4 +25,7 @@ public interface GroupDao {
 	public List<GroupDto> selGroupinfoManager(String userId);
 	public List<GroupDto> selGroupinfoUser(String userId);
 	
+	 public int updateGroupinfo(GroupDto groupdto);
+	   public int delGroupinfo(int groupno);
+	
 }

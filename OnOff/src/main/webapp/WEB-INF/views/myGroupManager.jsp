@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,7 @@ ul.sub li:hover {
 	<c:otherwise>
 	<c:forEach items="${list }" var="dto">	
 		<div class="company-list" style="min-width: 80%;">
-			<div class="row" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
+			<div class="row" onclick="location.href='myGroupManagerPage.do?groupno=${dto.groupno}'">
 				<div class="col-md-2 col-sm-2">
 					<div class="company-logo">
 						<img src="img/${dto.groupimg }.jpg" class="img-responsive" alt="" />
@@ -94,7 +95,7 @@ ul.sub li:hover {
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-							${dto.grouptitle }<span class="full-time">${dto.groupregdate }</span>
+							${dto.grouptitle }<span class="full-time" ><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/></span>
 						</h3>
 						<p>
 							<span class="company-name">${dto.groupcontent }</span>

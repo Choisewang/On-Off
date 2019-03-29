@@ -54,5 +54,15 @@ public class GroupBizImpl implements GroupBiz {
 	public List<GroupDto> selGroupinfoUser(String userId) {
 		return dao.selGroupinfoUser(userId);
 	}
+	
+	@Override
+	public int updateGroupinfo(GroupDto groupdto) {
+		return dao.updateGroupinfo(groupdto);
+	}
+
+	@Override
+	public int delGroupinfo(int groupno) {
+		return dao.delGroupinfo(groupno);
+	}
 
 }

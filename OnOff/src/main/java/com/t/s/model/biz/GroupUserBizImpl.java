@@ -1,5 +1,7 @@
 package com.t.s.model.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,11 @@ public class GroupUserBizImpl implements GroupUserBiz {
 	@Override
 	public int groupOutUser(GroupUserDto groupuserdto) {
 		return dao.groupOutUser(groupuserdto);
+	}
+	
+	@Override
+	public List<GroupUserDto> selectAllGroupUser(int groupno) {
+		return dao.selectAllGroupUser(groupno);
 	}
 
 }

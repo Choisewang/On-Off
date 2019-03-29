@@ -701,6 +701,88 @@ public class HomeController {
 
 		return "myGroupManager";
 	}
+	
+	@RequestMapping(value = "/myGroupManagerPage.do", method = RequestMethod.GET)
+	public String myGroupManagerPage(Model model, HttpSession session, int groupno) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		String userId = session.getAttribute("id").toString();
+		List<GroupDto> list = groupbiz.selGroupinfoManager(userId);
+		model.addAttribute("list", list);
+		model.addAttribute("groupno", groupno);
+
+		return "myGroupManagerPage";
+	}
+	
+	@RequestMapping(value = "/userInGroup.do", method = RequestMethod.GET)
+	public String userInGroup(Model model, HttpSession session,int groupno) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		
+		System.out.println("얍"+groupno);
+		
+		List<GroupUserDto> groupuserdto = groupuserbiz.selectAllGroupUser(groupno);
+		model.addAttribute("groupuserdto", groupuserdto);
+
+		return "userInGroup";
+	}
+	
+	@RequestMapping(value = "/groupUpdate.do", method = RequestMethod.GET)
+	   public String groupUpdate(HttpSession session, Model model, int groupno) {
+
+	      if (session.getAttribute("dto") != null) {
+	         model.addAttribute("dto", session.getAttribute("dto"));
+	      }
+
+	      GroupDto GroupDto = groupbiz.selectGroupDetail(groupno);
+	      model.addAttribute("dto", GroupDto);
+	      return "groupUpdate";
+	   }
+	   
+	      @RequestMapping(value = "/groupUpdateRes.do", method = RequestMethod.POST)
+	      public String groupUpdateRes(HttpServletRequest request, HttpSession session, Model model, GroupDto dto) {
+
+	         if (session.getAttribute("dto") != null) {
+	            model.addAttribute("dto", session.getAttribute("dto"));
+	         }
+	         int groupno = Integer.parseInt(request.getParameter("groupno"));
+	         String grouptitle = request.getParameter("grouptitle");
+	         String groupcontent  = request.getParameter("groupcontent");
+	         
+	         dto.setGroupno(groupno);
+	         dto.setGrouptitle(grouptitle);
+	         dto.setGroupcontent(groupcontent);
+	         
+	         int res = groupbiz.updateGroupinfo(dto);
+	         if(res > 0) {
+	            System.out.println("그룹update성공!");
+	            return "redirect:myGroupManagerPage.do?groupno="+dto.getGroupno();
+	         }else {
+//	           model.addAttribute("msg", "<script type='text/javascript'>alert('실패');</script>");
+	            System.out.println("그룹update실패!");
+	            return "redirect:myGroupManagerPage?groupno="+dto.getGroupno();
+	         }
+	      }
+	   
+	   @RequestMapping(value = "/delGroupinfo.do", method = RequestMethod.GET)
+	   public String delGroupinfo(HttpSession session, Model model, int groupno) {
+
+	      if (session.getAttribute("dto") != null) {
+	         model.addAttribute("dto", session.getAttribute("dto"));
+	      }
+	      int res = groupbiz.delGroupinfo(groupno);
+	      if(res>0) {
+	         System.out.println("그룹delete성공!");
+	         return "mypage";
+	      }else {
+	         System.out.println("delete실패!");
+	         return "mypage";
+	      }
+	   }
 
 	// 탈퇴하기
 	@RequestMapping(value = "/dropUser.do", method = RequestMethod.GET)
@@ -823,20 +905,20 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/D3.do", method = RequestMethod.GET)
-	public String D3(Model model, @ModelAttribute MoimUserDto dto) {
-		dto.setMoimno(1);// 평균내고싶은 모임번호 넣음. 이전 페이지에서 에서 값 받아욤
+	public String D3(Model model, @ModelAttribute MoimUserDto dto, int groupno) {
+		dto.setMoimno(groupno);// 평균내고싶은 모임번호 넣음. 이전 페이지에서 에서 값 받아욤
 		int avgQ1 = (int) moimUserBiz.avgQ1(dto);
 		int avgQ2 = (int) moimUserBiz.avgQ2(dto);
 		int avgQ3 = (int) moimUserBiz.avgQ3(dto);
 		int avgQ4 = (int) moimUserBiz.avgQ4(dto);
 		int avgQ5 = (int) moimUserBiz.avgQ5(dto);
 		int avgAll = (int) moimUserBiz.avgAll(avgQ1, avgQ2, avgQ3, avgQ4, avgQ5);
-//		System.out.println("1번모임1번질문"+avgQ1);
-//		System.out.println("1번모임2번질문"+avgQ2);
-//		System.out.println("1번모임3번질문"+avgQ3);
-//		System.out.println("1번모임4번질문"+avgQ4);
-//		System.out.println("1번모임5번질문"+avgQ5);
-//		System.out.println("1번모임의 평균"+avgall);
+		System.out.println("1번모임1번질문"+avgQ1);
+		System.out.println("1번모임2번질문"+avgQ2);
+		System.out.println("1번모임3번질문"+avgQ3);
+		System.out.println("1번모임4번질문"+avgQ4);
+		System.out.println("1번모임5번질문"+avgQ5);
+		System.out.println("1번모임의 평균"+avgAll);
 		ArrayList<Integer> array = new ArrayList<Integer>();
 		array.add(avgQ1);
 		array.add(avgQ2);

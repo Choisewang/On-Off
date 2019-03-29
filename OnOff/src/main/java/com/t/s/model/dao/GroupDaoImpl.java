@@ -79,4 +79,19 @@ public class GroupDaoImpl implements GroupDao {
 		res = sqlSession.selectList(NAMESPACE+"groupinfoUser",userId);
 		return res;
 	}
+	
+	
+	   @Override
+	   public int updateGroupinfo(GroupDto groupdto) {
+	      int res = 0;
+	      res = sqlSession.update(NAMESPACE+"updateGroupinfo", groupdto);
+	      return res;
+	   }
+
+	   @Override
+	   public int delGroupinfo(int groupno) {
+	      int res = 0;
+	      res = sqlSession.delete(NAMESPACE+"delGroupinfo", groupno);
+	      return res;
+	   }
 }

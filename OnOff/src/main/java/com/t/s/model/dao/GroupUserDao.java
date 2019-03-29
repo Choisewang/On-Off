@@ -1,5 +1,7 @@
 package com.t.s.model.dao;
 
+import java.util.List;
+
 import com.t.s.model.dto.GroupUserDto;
 
 public interface GroupUserDao {
@@ -12,4 +14,5 @@ public interface GroupUserDao {
 	
 	public int groupInUser(GroupUserDto groupuserdto);
 	public int groupOutUser(GroupUserDto groupuserdto);
+	public List<GroupUserDto> selectAllGroupUser(int groupno);
 }

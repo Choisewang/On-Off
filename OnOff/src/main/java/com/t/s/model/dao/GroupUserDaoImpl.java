@@ -1,5 +1,8 @@
 package com.t.s.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,6 +42,15 @@ GroupUserDto dtoResult = new GroupUserDto();
 int res = 0;
 		
 		res = sqlSession.insert(NAMESPACE+"groupOutUser",groupuserdto);
+		
+		return res;
+	}
+	
+	@Override
+	public List<GroupUserDto> selectAllGroupUser(int groupno) {
+		List<GroupUserDto> res = new ArrayList<GroupUserDto>();
+		
+		res = sqlSession.selectList(NAMESPACE+"selectAllGroupUser",groupno);
 		
 		return res;
 	}

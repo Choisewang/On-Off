@@ -161,27 +161,27 @@
 	<select id="avgQ1" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ1)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}
+		WHERE GROUPNO = #{groupno}
 	</select>
 	<select id="avgQ2" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ2)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}
 	</select>
 	<select id="avgQ3" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ3)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}	
 	</select>
 	<select id="avgQ4" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ4)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}	
 	</select>
 	<select id="avgQ5" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ5)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}
 	</select>
 	<select id="groupinfoManager" parameterType="String" resultMap="GroupMap">
 		SELECT GROUPNO,GROUPTITLE,GROUPCONTENT,GROUPREGDATE,GROUPIMG
@@ -195,6 +195,12 @@
 		WHERE GROUPNO IN
 			(SELECT GROUPNO FROM GROUPUSER WHERE USERID=#{userid } AND GROUPUSERGRADE !='MASTER')
 	</select>
+	<update id="updateGroupinfo" parameterType="groupDto">
+        UPDATE GROUPINFO SET GROUPTITLE=#{grouptitle},GROUPCONTENT=#{groupcontent} WHERE GROUPNO = #{groupno}
+    </update>
+    <delete id="delGroupinfo" parameterType="int">
+        DELETE FROM GROUPINFO WHERE GROUPNO=#{groupno}
+    </delete>
 	<!-- ******************************************************************************* -->
 	
 	
@@ -202,9 +208,9 @@
 	
 	<!-- *********************************박정성****************************************** -->
 	
-	<select id="selectAllMoim" parameterType="MoimDto" resultMap="MoimMap">
+	<select id="selectAllMoim" parameterType="int" resultMap="MoimMap">
 	
-	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,MOIMADDR,MOIMDATE FROM MOIM
+	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,MOIMADDR,MOIMDATE FROM MOIM WHERE GROUPNO=#{groupno}
 		
 	
 	</select>
@@ -257,6 +263,31 @@
 		UPDATE MOIM SET MOIMTITLE=#{moimtitle},MOIMDATE=#{moimdate},MOIMRECRUIT=#{moimrecruit},MOIMADDR=#{moimaddr},MOIMENDDATE=#{moimenddate},MOIMCONTENT=#{moimcontent},LAT=#{lat},LNG=#{lng} WHERE MOIMNO=#{moimno}
 	
 	</update>
+	
+	<select id="selectmyMoimList" parameterType="String" resultMap="MoimMap">
+	
+	SELECT MOIMNO,GROUPNO,MOIMTITLE,MOIMADDR,MOIMDATE FROM MOIM WHERE MOIMNO IN (SELECT MOIMNO FROM MOIMUSER WHERE USERID=#{userid})
+	
+	</select>
+	
+	
+	<insert id="moimjoin" parameterType="MoimUserDto">
+	
+	INSERT INTO MOIMUSER VALUES(#{moimno},#{userid},#{groupno},NULL,NULL,NULL,NULL,NULL,NULL)
+	
+	</insert>
+	
+	<delete id="moimout" parameterType="MoimUserDto">
+	
+	DELETE FROM MOIMUSER WHERE MOIMNO=#{moimno} AND USERID=#{userid} AND GROUPNO=#{groupno}
+	
+	</delete>
+	
+	<select id="moimres" parameterType="MoimUserDto" resultType="MoimUserDto">
+	
+	SELECT MOIMNO FROM MOIMUSER WHERE MOIMNO=#{moimno} AND USERID=#{userid} AND GROUPNO=#{groupno}
+	
+	</select>
 	
 	
 	<!-- ******************************************************************************* -->
@@ -345,6 +376,10 @@
 		]]>
 	</select>
 	
+	<select id="selectAllGroupUser" resultMap="GroupUserMap" parameterType="int">
+		SELECT * FROM GROUPUSER WHERE GROUPNO = #{groupno}
+	</select>
+	
 	
 	<!-- ******************************************************************************* -->
 	
@@ -376,8 +411,18 @@
 	</insert>
 	
 	<!-- 자유게시판 -->
-	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="int">
-		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno}
+	<select id="freeboardlist" resultMap="FreeBoardMap" parameterType="hashmap">
+	<![CDATA[
+		SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE, R 
+		FROM (SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE, ROWNUM R
+			  FROM (SELECT BOARDNO, USERID, GROUPNO, BOARDTITLE, BOARDCONTENT, BOARDREGDATE FROM FREEBOARD WHERE GROUPNO=#{groupno} ORDER BY BOARDNO DESC )
+			  WHERE ROWNUM <= #{pagenum}*5) 
+		WHERE R > ((#{pagenum}-1)*5)
+		]]>
+	</select>
+	
+	<select id="freeboardlistCnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM FREEBOARD WHERE GROUPNO=#{groupno}
 	</select>
 	
 	<select id="freeboarddetail" parameterType="int" resultType="FreeBoardDto">
@@ -411,8 +456,19 @@
 	</delete>
 	
 	<!-- 이미지게시판 -->
-	<select id="imgboardlist" resultMap="ImgBoardMap" parameterType="int">
-		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE GROUPNO=#{groupno}
+	
+	<select id="imgboardlist" resultMap="ImgBoardMap" parameterType="hashmap">
+	<![CDATA[
+		SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG, R 
+		FROM (SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG, ROWNUM R
+			  FROM (SELECT IMGBOARDNO, MOIMNO, USERID, GROUPNO, IMGBOARDTITLE, IMGBOARDCONTENT, IMGBOARDREGDATE, IMGBOARDIMG FROM IMGBOARD WHERE GROUPNO=#{groupno} ORDER BY IMGBOARDNO DESC )
+			  WHERE ROWNUM <= #{pagenum}*5) 
+		WHERE R > ((#{pagenum}-1)*5)
+		]]>
+	</select>
+	
+	<select id="imgboardlistCnt" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM IMGBOARD WHERE GROUPNO=#{groupno}
 	</select>
 	
 	<select id="imgboarddetail" parameterType="int" resultType="ImgBoardDto">

@@ -161,27 +161,27 @@
 	<select id="avgQ1" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ1)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}
+		WHERE GROUPNO = #{groupno}
 	</select>
 	<select id="avgQ2" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ2)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}
 	</select>
 	<select id="avgQ3" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ3)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}	
 	</select>
 	<select id="avgQ4" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ4)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}	
 	</select>
 	<select id="avgQ5" parameterType="MoimuserDto" resultType="double">
 		SELECT AVG(MOIMQ5)
 		FROM MOIMUSER
-		WHERE MOIMNO = #{moimno}	
+		WHERE GROUPNO = #{groupno}
 	</select>
 	<select id="groupinfoManager" parameterType="String" resultMap="GroupMap">
 		SELECT GROUPNO,GROUPTITLE,GROUPCONTENT,GROUPREGDATE,GROUPIMG
@@ -195,6 +195,12 @@
 		WHERE GROUPNO IN
 			(SELECT GROUPNO FROM GROUPUSER WHERE USERID=#{userid } AND GROUPUSERGRADE !='MASTER')
 	</select>
+	<update id="updateGroupinfo" parameterType="groupDto">
+        UPDATE GROUPINFO SET GROUPTITLE=#{grouptitle},GROUPCONTENT=#{groupcontent} WHERE GROUPNO = #{groupno}
+    </update>
+    <delete id="delGroupinfo" parameterType="int">
+        DELETE FROM GROUPINFO WHERE GROUPNO=#{groupno}
+    </delete>
 	<!-- ******************************************************************************* -->
 	
 	
@@ -368,6 +374,10 @@
 		<![CDATA[
 		   GROUPNO > 0
 		]]>
+	</select>
+	
+	<select id="selectAllGroupUser" resultMap="GroupUserMap" parameterType="int">
+		SELECT * FROM GROUPUSER WHERE GROUPNO = #{groupno}
 	</select>
 	
 	

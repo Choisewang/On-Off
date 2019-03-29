@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
 <!DOCTYPE html>
 <html>
@@ -93,10 +94,10 @@ ul.sub li:hover {
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-							${dto.grouptitle }<span class="full-time"onclick="location.href='survey.do?groupno=${dto.groupno}'">${dto.groupno}번 그룹 설문조사</span>
-						</h3>
+                     ${dto.grouptitle }<span class="full-time"><a href="survey.do?groupno=${dto.groupno}" style="color:white;">${dto.groupno}번그룹 설문조사</a>   </span>
+                  </h3>
 						<p>
-							<span class="company-name">${dto.groupcontent }<br/>${dto.groupregdate }</span>
+							<span class="company-name">${dto.groupcontent }<br/><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/></span>
 						</p>
 					</div>
 				</div>

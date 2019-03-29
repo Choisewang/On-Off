@@ -22,5 +22,8 @@ public interface GroupBiz {
 	//groupinfo에서 매니저와 유저 뽑기
 	public List<GroupDto> selGroupinfoManager(String userId);
 	public List<GroupDto> selGroupinfoUser(String userId);
+	
+	 public int updateGroupinfo(GroupDto groupdto);
+	   public int delGroupinfo(int groupno);
 
 }
