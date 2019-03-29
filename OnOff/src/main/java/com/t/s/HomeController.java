@@ -852,7 +852,7 @@ public class HomeController {
 		if (sendguDto != null) {
 			System.out.println(sendguDto.getUserid() + ": sendguDto");
 			// model.addAttribute("id","dd");
-			session.setAttribute("groupnum", "1");
+			session.setAttribute("groupnum", groupnumber);
 			model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
 			return "chat";
 		} else {
