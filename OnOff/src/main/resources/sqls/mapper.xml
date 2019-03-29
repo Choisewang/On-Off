@@ -110,6 +110,7 @@
 	<resultMap type="com.t.s.model.dto.SessionIds" id="SessionIds">
       <result property="sessionid" column="SESSIONID"/>
       <result property="userid" column="USERID"/>
+      <result property="groupno" column="GROUPNO"/>
    </resultMap>
 	<!-- ****************************************************************************************************** -->
 	
@@ -131,7 +132,7 @@
 	
 	<insert id="insertSessionIds" parameterType="SessionIds">
       INSERT INTO SESSIONIDS
-      VALUES(#{sessionid}, #{userid})
+      VALUES(#{sessionid}, #{userid},#{groupno})
    </insert>
    
    <delete id="deleteSessionIds" parameterType="String">
