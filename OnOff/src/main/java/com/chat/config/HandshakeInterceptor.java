@@ -33,11 +33,11 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor{
   
         // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
         
-        groupUserdto.setUserid((String)req.getSession().getAttribute("id"));
+        groupUserdto.setUserid(req.getSession().getAttribute("id").toString());
         System.out.println("handshakerinterceptor에서 받아지는 값 : "+groupUserdto.getUserid());
         int groupnum =0;
         try {
-        	groupnum = Integer.parseInt((String)req.getSession().getAttribute("groupnum"));
+        	groupnum = Integer.parseInt(req.getSession().getAttribute("groupnum").toString());
         }catch (Exception e) {
         	System.out.println("숫자 예외처리함");
         }
