@@ -1603,5 +1603,51 @@ public class HomeController {
 		/*return "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.getMoimno();*/
 	}
 	
+	@RequestMapping(value = "/stream.do", method = RequestMethod.GET)
+	   public String stream(Model model, HttpSession session, HttpServletRequest request) {
+
+	      int groupnumber = Integer.parseInt((String) request.getParameter("groupnum"));
+	      if (session.getAttribute("id").toString() == null) {
+	         return "index";
+	      }
+	      model.addAttribute("id", session.getAttribute("id").toString());
+	      GroupUserDto guDto = new GroupUserDto();
+	      guDto.setUserid(session.getAttribute("id").toString());
+	      guDto.setGroupno(groupnumber);
+	      System.out.println("guDto 잘들어갔나 확인용 groupno():" + guDto.getGroupno() + ", userid : " + guDto.getUserid());
+	      GroupUserDto sendguDto = new GroupUserDto();
+	      sendguDto = gubiz.selGroupnoGroupuser(guDto);
+	      System.out.println(sendguDto.getUserid() + ": sendguDto");
+	      if (guDto != null) {
+	         session.setAttribute("groupnum", "1");
+	         model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
+	         return "stream";
+	      } else {
+	         return "error";
+	      }
+	   }
+	   
+	   @RequestMapping(value = "/pullstream.do", method = RequestMethod.GET)
+	   public String pullstream(Model model, HttpSession session, HttpServletRequest request) {
+	      int groupnumber = Integer.parseInt((String) request.getParameter("groupnum"));
+	      if (session.getAttribute("id").toString() == null) {
+	         return "index";
+	      }
+	      model.addAttribute("id", session.getAttribute("id").toString());
+	      GroupUserDto guDto = new GroupUserDto();
+	      guDto.setUserid(session.getAttribute("id").toString());
+	      guDto.setGroupno(groupnumber);
+	      System.out.println("guDto 잘들어갔나 확인용 groupno():" + guDto.getGroupno() + ", userid : " + guDto.getUserid());
+	      GroupUserDto sendguDto = new GroupUserDto();
+	      sendguDto = gubiz.selGroupnoGroupuser(guDto);
+	      System.out.println(sendguDto.getUserid() + ": sendguDto");
+	      if (guDto != null) {
+	         session.setAttribute("groupnum", "1");
+	         model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
+	         return "pullstream";
+	      } else {
+	         return "error";
+	      }
+	   }
 	
 }
