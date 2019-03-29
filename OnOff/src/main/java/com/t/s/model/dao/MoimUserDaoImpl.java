@@ -79,4 +79,29 @@ public class MoimUserDaoImpl implements MoimUserDao {
 		return avg;
 	}
 
+	@Override
+	public int moimjoin(MoimUserDto dto) {
+		
+		int res = sqlSession.insert(NAMESPACE+"moimjoin",dto);
+		
+		
+		return res;
+	}
+
+	@Override
+	public int moimout(MoimUserDto dto) {
+
+		int res = sqlSession.delete(NAMESPACE+"moimout",dto);
+		
+		return res;
+	}
+
+	@Override
+	public MoimUserDto moimres(MoimUserDto dto) {
+		
+		MoimUserDto res = sqlSession.selectOne(NAMESPACE+"moimres",dto);
+		
+		return res;
+	}
+	
 }

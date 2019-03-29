@@ -117,7 +117,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/calAjax.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String calAjax(Criteria cri, HttpServletResponse resp, String groupno) {
+	public String calAjax(Criteria cri, HttpServletResponse resp, int groupno) {
 
 		resp.setContentType("text/html; charset=UTF-8");
 
@@ -125,7 +125,7 @@ public class HomeController {
 		   
 		   
 		// 달력 만들 리스트 가져오기(Json형태로 파싱)
-		List<MoimDto> calList = moimbiz.selectMoimList();
+		List<MoimDto> calList = moimbiz.selectMoimList(groupno);
 		/*
 		 * System.out.println(calList.get(1).toString());
 		 * System.out.println(calList.get(1).getMoimtitle());
@@ -162,6 +162,57 @@ public class HomeController {
 		return obj.toString();
 	}
 
+	@RequestMapping(value = "/mycalAjax.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String mycalAjax(Criteria cri, HttpServletResponse resp, String userid) {
+		
+		resp.setContentType("text/html; charset=UTF-8");
+
+		 
+		   System.out.println("mycalAjax로 온 아이디 : "+userid);
+		   
+		// 달력 만들 리스트 가져오기(Json형태로 파싱)
+		/*List<MoimDto> calList = moimbiz.selectMoimList();*/
+		List<MoimDto> mycalList = moimbiz.selectmyMoimList(userid);
+		
+		System.out.println(mycalList.size());
+		
+/*		 System.out.println(mycalList.get(1).toString());
+		 System.out.println(mycalList.get(1).getMoimtitle());
+		 System.out.println(mycalList.size());
+*/		 
+
+		// Json 객체
+		JSONObject obj = new JSONObject();
+
+		// Json Array정보 담을 객체
+		JSONArray jsonCalList = new JSONArray();
+
+		// Json Array에 담기
+		for (int i = 0; i < mycalList.size(); i++) {
+
+			// JSONObject 만들어서 객체 정보 넣기
+			JSONObject calListInfo = new JSONObject();
+
+			calListInfo.put("title", mycalList.get(i).getMoimtitle());
+			calListInfo.put("addr", mycalList.get(i).getMoimaddr());
+			calListInfo.put("start", mycalList.get(i).getMoimdate());
+			calListInfo.put("url", "moimDetail.do?moimno="+mycalList.get(i).getMoimno()+"&groupno="+mycalList.get(i).getGroupno());
+			
+			// Json Array에 넣기
+			jsonCalList.add(calListInfo);
+		}
+		;
+		// Json 객체에 넣기
+		obj.put("events", jsonCalList);
+
+		System.out.println(jsonCalList);
+		System.out.println(obj.toString());
+
+		return obj.toString();
+	}
+	
+	
 	@RequestMapping(value = "/moimDetail.do", method = RequestMethod.GET)
 	public String moimDetail(HttpSession session, Model model, int moimno, int groupno) {
 
@@ -1406,4 +1457,69 @@ public class HomeController {
 		return "redirect:moim.do?groupno=" + dto.getGroupno();
 	}
 
+	
+	@RequestMapping(value = "/moimjoin.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String moimjoin(HttpSession session, Model model, MoimUserDto userdto, HttpServletResponse resp) {
+
+		resp.setContentType("text/html; charset=UTF-8");
+		
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		
+		System.out.println("모임넘버"+userdto.getMoimno()+"그룹넘버" +userdto.getGroupno() + "아이디:" +userdto.getUserid());
+		
+/*		String id = session.getId().toString();
+		System.out.println(id);
+		userdto.setUserid(id);
+	*/	
+		
+		//확인 후 인서트
+		MoimUserDto result = moimUserBiz.moimres(userdto);
+		if(result != null) {
+			return "이미 참가중입니다.";
+		}else {
+			int res = moimUserBiz.moimjoin(userdto);
+			return "참가신청되었습니다.";
+			
+		}
+
+		/*return "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.getMoimno();*/
+	}
+	
+	
+	@RequestMapping(value = "/moimout.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String moimout(HttpSession session, Model model, MoimUserDto userdto, HttpServletResponse resp) {
+
+		resp.setContentType("text/html; charset=UTF-8");
+		
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		
+		System.out.println("모임넘버"+userdto.getMoimno()+"그룹넘버" +userdto.getGroupno() + "아이디:" +userdto.getUserid());
+		
+/*		String id = session.getId().toString();
+		System.out.println(id);
+		userdto.setUserid(id);
+	*/	
+		
+		//확인 후 인서트
+		MoimUserDto result = moimUserBiz.moimres(userdto);
+		if(result != null) {
+			int res = moimUserBiz.moimout(userdto);
+			return "참가가 취소되었습니다.";
+		}else {
+			return "참여하고 있지 않습니다.";
+		}
+		
+		
+		
+
+		/*return "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.getMoimno();*/
+	}
+	
+	
 }

@@ -202,9 +202,9 @@
 	
 	<!-- *********************************박정성****************************************** -->
 	
-	<select id="selectAllMoim" parameterType="MoimDto" resultMap="MoimMap">
+	<select id="selectAllMoim" parameterType="int" resultMap="MoimMap">
 	
-	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,MOIMADDR,MOIMDATE FROM MOIM
+	SELECT MOIMNO,MOIMTITLE,USERID,MOIMREGDATE,MOIMADDR,MOIMDATE FROM MOIM WHERE GROUPNO=#{groupno}
 		
 	
 	</select>
@@ -257,6 +257,31 @@
 		UPDATE MOIM SET MOIMTITLE=#{moimtitle},MOIMDATE=#{moimdate},MOIMRECRUIT=#{moimrecruit},MOIMADDR=#{moimaddr},MOIMENDDATE=#{moimenddate},MOIMCONTENT=#{moimcontent},LAT=#{lat},LNG=#{lng} WHERE MOIMNO=#{moimno}
 	
 	</update>
+	
+	<select id="selectmyMoimList" parameterType="String" resultMap="MoimMap">
+	
+	SELECT MOIMNO,GROUPNO,MOIMTITLE,MOIMADDR,MOIMDATE FROM MOIM WHERE MOIMNO IN (SELECT MOIMNO FROM MOIMUSER WHERE USERID=#{userid})
+	
+	</select>
+	
+	
+	<insert id="moimjoin" parameterType="MoimUserDto">
+	
+	INSERT INTO MOIMUSER VALUES(#{moimno},#{userid},#{groupno},NULL,NULL,NULL,NULL,NULL,NULL)
+	
+	</insert>
+	
+	<delete id="moimout" parameterType="MoimUserDto">
+	
+	DELETE FROM MOIMUSER WHERE MOIMNO=#{moimno} AND USERID=#{userid} AND GROUPNO=#{groupno}
+	
+	</delete>
+	
+	<select id="moimres" parameterType="MoimUserDto" resultType="MoimUserDto">
+	
+	SELECT MOIMNO FROM MOIMUSER WHERE MOIMNO=#{moimno} AND USERID=#{userid} AND GROUPNO=#{groupno}
+	
+	</select>
 	
 	
 	<!-- ******************************************************************************* -->

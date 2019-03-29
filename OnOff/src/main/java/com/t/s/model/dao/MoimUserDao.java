@@ -15,4 +15,13 @@ public interface MoimUserDao {
 	public double avgQ4(MoimUserDto dto);
 	public double avgQ5(MoimUserDto dto);
 	
+	//모임가입
+	public int moimjoin(MoimUserDto dto);
+	
+	//모임탈퇴
+	public int moimout(MoimUserDto dto);
+	
+	//참가확인
+	public MoimUserDto moimres(MoimUserDto dto);
+
 }

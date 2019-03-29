@@ -61,7 +61,69 @@
 	
 	}
 		
+	table.blueTable {
+  border: 1px solid #1C6EA4;
+  background-color: #EEEEEE;
+  border-collapse: collapse;
+    }
+    
+    table.blueTable td, table.blueTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+	}
 	
+	
+	
+	table.blueTable tr:nth-child(even) {
+  background: #D0E4F5;
+	}
+	
+	table.blueTable thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+	}
+	
+	table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+	}
+    
+    table.blueTable thead th:first-child {
+  border-left: none;
+	}
+	
+	table.blueTable tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #D0E4F5;
+  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+  border-top: 2px solid #444444;
+	}
+	
+	table.blueTable tfoot td {
+  font-size: 14px;
+	}
+	
+	table.blueTable tfoot a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+	}
+	
+
+	table.blueTable tfoot {
+  text-align: right;
+	}
 	</style>
 
 
@@ -226,18 +288,19 @@
 				<form action="" method="post">
 					<h1 style="font-size:40px;">일정</h1>
 					<input type="hidden" value="">
-							<table border="1">
+							<table class="blueTable" border="1">
 								<%-- 	<col width="50px"> --%>
 									<col width="450px">
 									<col width="100px">
 									<col width="100px">
+								<thead>	
 								<tr id="">
 								<!-- 	<th>No.</th> -->
 									<th>진행중인 일정</th>
 									<th>주최자</th>
 									<th>작성일자</th>
 								</tr>
-								
+								</thead>
 								<c:choose>
 								<c:when test="${empty list }">
 									<tr>
@@ -261,30 +324,32 @@
 						
 
 
-							
+							<tfoot>
 								 <tr>
-			 						<td colspan="4">
-			 							<input type="button" value="글쓰기" onclick="location.href='moimwrite.do?groupno=${groupno}'">
+			 						<td colspan="3">
+			 							<input type="button" value="일정 만들기" onclick="location.href='moimwrite.do?groupno=${groupno}'" style="background-color: #1C6EA4; font-weight:bold;">
+			 							     <div id="paging" style="font-weight:bold; display: inline-block;" >
+       
+        <c:if test="${pageMaker.prev}">
+         <a href="moim.do?page=${startPage - 1}&groupno=${groupno}">이전&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </c:if> 
+         
+        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+         <a href="moim.do?page=${idx}&groupno=${groupno}">${idx}&nbsp;&nbsp;</a>
+        </c:forEach>
+          
+        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+         <a href="moim.do?page=${pageMaker.endPage + 1}&groupno=${groupno}">&nbsp;&nbsp;다음</a>
+        </c:if> 
+      
+      </div>
 									</td>
-								</tr>	
+									
+								</tr>
+								</tfoot>	
 							</table>						
 
-<%-- <div>
- <ul>
-  <c:if test="${pageMaker.prev}">
-   <li><a href="paging.do?page=${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-  </c:if> 
-  
-  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-   <li><a href="paging.do?page=${pageMaker.makeQuery(idx)}">${idx}</a></li>
-  </c:forEach>
-    
-  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-   <li><a href="paging.do?page=${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-  </c:if> 
- </ul>
-</div>
- --%>
+<%-- 
 
       <div id="paging" style="padding-left:350px;font-weight:bold;">
        
@@ -301,7 +366,7 @@
         </c:if> 
       
       </div>
-
+ --%>
 
 				</form>
 		</div>

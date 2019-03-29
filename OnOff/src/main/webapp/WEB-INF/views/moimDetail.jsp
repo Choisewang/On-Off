@@ -77,6 +77,49 @@
 		};
 	});
 	
+	function moimjoin() {
+		
+		$.ajax({
+			type:"GET",
+			url:"moimjoin.do?moimno="+${res.moimno}+'&groupno='+${groupno}+"&userid="+$("#di").val(),
+			success: function(msg) {
+				
+				alert(msg);
+				
+			},error: function() {
+				alert("에러");
+				
+			}
+			
+		});
+		
+		
+		
+		/* location.href="moimjoin.do?moimno="+${res.moimno}+'&groupno='+${groupno}+"&userid="+$("#di").val();
+		 */
+		
+	}
+	
+	
+	function moimout() {
+		
+		$.ajax({
+			type:"GET",
+			url:"moimout.do?moimno="+${res.moimno}+'&groupno='+${groupno}+"&userid="+$("#di").val(),
+			success: function(msg) {
+				
+				alert(msg);
+				
+			},error: function() {
+				alert("에러");
+				
+			}
+			
+		});
+		
+		/* location.href="moimout.do?moimno="+${res.moimno}+'&groupno='+${groupno}+"&userid="+$("#di").val();
+		 */
+	}
 	</script>
 	
 	
@@ -209,7 +252,8 @@
 		</br>
 		</br>
 		</br>
-		<button class="btn brows-btn" id="moimjoin" style="display: inline-block; margin-left: 900px;">참가신청</button>
+		<button class="btn brows-btn" id="moimjoin" style="display: inline-block; margin-left: 700px;" onclick="moimjoin();">참가신청</button>
+		<button class="btn brows-btn" id="moimout" style="display: inline-block; margin-left: 260px;" onclick="moimout();">참가취소</button>
 		<button class="btn brows-btn" id="moimedit" style="display: inline-block; margin-left: 700px;" onclick="location.href='moimedit.do?moimno=${res.moimno}&groupno=${groupno}'">수정하기</button>
 		<button class="btn brows-btn" id="moimdelete" style="display: inline-block; margin-left:260px;" onclick="location.href='moimdelete.do?moimno=${res.moimno}&groupno=${groupno}'">삭제하기</button>
 		

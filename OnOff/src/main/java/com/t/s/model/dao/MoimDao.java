@@ -16,7 +16,7 @@ public interface MoimDao {
 	
 	public MoimDto selectMoim(int num);
 	
-	public List<MoimDto> selectMoimList();
+	public List<MoimDto> selectMoimList(int groupno);
 	
 	public List<MoimDto> listPage(Criteria cri);
 	
@@ -25,5 +25,7 @@ public interface MoimDao {
 	public int moimdelete(int moimno);
 	
 	public int updateMoim(MoimDto moimdto);
+	
+	public List<MoimDto> selectmyMoimList(String userid);
 
 }

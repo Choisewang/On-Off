@@ -29,8 +29,8 @@ public class MoimBizImpl implements MoimBiz {
 	}
 
 	@Override
-	public List<MoimDto> selectMoimList() {
-		return dao.selectMoimList();
+	public List<MoimDto> selectMoimList(int groupno) {
+		return dao.selectMoimList(groupno);
 	}
 
 	@Override
@@ -52,6 +52,11 @@ public class MoimBizImpl implements MoimBiz {
 	@Override
 	public int updateMoim(MoimDto moimdto) {
 		return dao.updateMoim(moimdto);
+	}
+	
+	@Override
+	public List<MoimDto> selectmyMoimList(String userid) {
+		return dao.selectmyMoimList(userid);
 	}
 	
 }

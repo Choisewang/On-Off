@@ -49,4 +49,22 @@ public class MoimUserBizImpl implements MoimUserBiz {
 		return res;
 	}
 
+	
+	@Override
+	public int moimjoin(MoimUserDto dto) {
+		// TODO Auto-generated method stub
+		return dao.moimjoin(dto);
+	}
+
+	@Override
+	public int moimout(MoimUserDto dto) {
+		// TODO Auto-generated method stub
+		return dao.moimout(dto);
+	}
+
+	@Override
+	public MoimUserDto moimres(MoimUserDto dto) {
+		// TODO Auto-generated method stub
+		return dao.moimres(dto);
+	}
 }

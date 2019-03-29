@@ -49,11 +49,11 @@ public class MoimDaoImpl implements MoimDao {
 	}
 
 	@Override
-	public List<MoimDto> selectMoimList() {
+	public List<MoimDto> selectMoimList(int groupno) {
 
 		List<MoimDto> list = new ArrayList<MoimDto>();
 		
-		list = sqlSession.selectList(NAMESPACE+"selectAllMoim");
+		list = sqlSession.selectList(NAMESPACE+"selectAllMoim",groupno);
 		
 		return list;
 	}
@@ -96,5 +96,14 @@ public class MoimDaoImpl implements MoimDao {
 		return res;
 	}
 	
-	
+	@Override
+	public List<MoimDto> selectmyMoimList(String userid) {
+		System.out.println("왔냐" + userid);
+		List<MoimDto> mylistPage = new ArrayList<MoimDto>();
+		
+		mylistPage = sqlSession.selectList(NAMESPACE+"selectmyMoimList",userid.replace("'", ""));
+		
+		System.out.println(mylistPage);
+		return mylistPage;
+	}
 }

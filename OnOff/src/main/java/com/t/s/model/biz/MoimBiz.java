@@ -11,7 +11,7 @@ public interface MoimBiz {
 	
 	public MoimDto selectMoim(int num);
 	
-	public List<MoimDto> selectMoimList();
+	public List<MoimDto> selectMoimList(int groupno);
 	
 	public List<MoimDto> listPage(Criteria cri);
 	
@@ -21,4 +21,6 @@ public interface MoimBiz {
 	
 	public int updateMoim(MoimDto moimdto);
 
+	public List<MoimDto> selectmyMoimList(String userid);
+	
 }
