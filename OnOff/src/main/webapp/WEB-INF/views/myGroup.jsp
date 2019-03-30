@@ -96,7 +96,7 @@ ul.sub li:hover {
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-                     ${dto.grouptitle }<span class="full-time"><a href="survey.do?groupno=${dto.groupno}" style="color:white; text-decoration: blink;">${dto.groupno}번그룹 설문조사</a>   </span>
+                     ${dto.grouptitle }<span class="full-time"><a href="survey.do?groupno=${dto.groupno}" style="color:white; text-decoration: blink; ">${dto.groupno}번그룹 설문조사</a>   </span>
                   </h3>
 						<p>
 							<span class="company-name">${dto.groupcontent }<br/><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/></span>

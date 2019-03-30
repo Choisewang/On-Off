@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
 %>
@@ -162,7 +162,6 @@
 							<c:when test="${empty freeboardanslist }">
 								<div class="testimonial">
 									<p class="description">아직 댓글이 없습니다.</p>
-									<h3 class="testimonial-title">당장!!</h3>
 									<span class="post">운영자</span>
 								</div>
 							</c:when>
@@ -171,7 +170,7 @@
 								<c:forEach items="${freeboardanslist }" var="freeboardansdto">
 									<div class="testimonial">
 									<p class="description">${freeboardansdto.boardanscontent }</p>
-									<h3 class="testimonial-title">${freeboardansdto.boardansregdate }</h3>
+									<h3 class="testimonial-title"><fmt:formatDate value="${freeboardansdto.boardansregdate }" pattern="yyyy-MM-dd"/></h3>
 									<span class="post">${freeboardansdto.userid }</span>
 									<c:set var="answriter" value="${freeboardansdto.userid }" />
 									<c:if test="${loginid eq answriter }">
