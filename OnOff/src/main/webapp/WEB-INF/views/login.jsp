@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -18,10 +19,21 @@
         <link rel="stylesheet" href="css/main.css">
 
     </head>
-    
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>   
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
-	
+	$(document).ready(function() {
+        $("#id").keydown(function(key) {
+            if (key.keyCode == 13) {
+              login();
+            }
+        });
+        $("#pw").keydown(function(key) {
+            if (key.keyCode == 13) {
+              login();
+            }
+        });
+    });
 	//일반 로그인
 	function login(){
 		
@@ -66,7 +78,12 @@ width:100%;
 }	
 	</style>
     <body>
-	
+<script type="text/javascript">
+var msg = '${msg }';
+if(msg != ""){
+	alert(msg);
+}
+</script>	
 <!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      

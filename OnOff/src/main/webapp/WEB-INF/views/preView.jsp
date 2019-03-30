@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자식창</title>
+<title>이미지 업로드</title>
 
 	<!-- All Plugin Css -->
 		<link rel="stylesheet" href="css/plugins.css">
@@ -47,6 +47,7 @@
 			reader.readAsDataURL(f)
 		});
 	}
+
 </script>
 
 <style type="text/css">
@@ -62,7 +63,7 @@
 
 </head>
 <body>
-
+<label>이미지가 보일 때까지 기다려주세요.</label>
 <div>
 	<div class="img_wrap">
 		<img id="img" />

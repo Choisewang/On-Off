@@ -89,7 +89,12 @@ width:100%;
 		});
 
 		$("#delGroupinfo").click(function() {
-			$("#myPage").load("delGroupinfo.do?groupno=${groupno}");
+			if(confirm("그룹을 삭제하시겠습니까?")){
+				$("#myPage").load("delGroupinfo.do?groupno=${groupno}");
+			}else {
+				$("#myPage").load("groupUpdate.do?groupno=${groupno}");  
+			}
+			
 		});
 	});
 </script>
@@ -97,7 +102,6 @@ width:100%;
 </head>
 
 <body>
-
 <!-- Navigation Start  -->
       <nav class="navbar navbar-default navbar-sticky bootsnav">
          <div class="container">      
@@ -159,6 +163,10 @@ width:100%;
 			</td>
 		</tr>
 	</table>
-
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+		<script src="js/bootsnav.js"></script>
+		<script src="js/main.js"></script>
 </body>
 </html>

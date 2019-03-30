@@ -72,7 +72,9 @@ ul.sub li:hover {
 
 </head>
 <body>
-	
+<div id="where">
+<span>마이페이지 > </span> <span><a href="#">가입한 그룹</a></span>
+</div>	
 	<!-- 검색 결과 창이랑 비슷하게 하면 될거 같아요 -->
 
 	<div class="companies">
@@ -88,13 +90,13 @@ ul.sub li:hover {
 			<div class="row" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
 				<div class="col-md-2 col-sm-2">
 					<div class="company-logo">
-						<img src="img/${dto.groupimg }.jpg" class="img-responsive" alt="" />
+						<img src="${dto.groupimg }" class="img-responsive" alt="" />
 					</div>
 				</div>
 				<div class="col-md-10 col-sm-10">
 					<div class="company-content">
 						<h3>
-                     ${dto.grouptitle }<span class="full-time"><a href="survey.do?groupno=${dto.groupno}" style="color:white;">${dto.groupno}번그룹 설문조사</a>   </span>
+                     ${dto.grouptitle }<span class="full-time"><a href="survey.do?groupno=${dto.groupno}" style="color:white; text-decoration: blink;">${dto.groupno}번그룹 설문조사</a>   </span>
                   </h3>
 						<p>
 							<span class="company-name">${dto.groupcontent }<br/><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/></span>

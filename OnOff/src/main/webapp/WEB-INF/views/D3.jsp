@@ -25,6 +25,11 @@
 
 
 </style>
+</head>
+<body>
+<div id="where">
+		<span><a href="mypage.do">마이페이지 > </a></span> <span>그룹관리 > </span> <span><a href="#">설문조사통계</a></span>
+</div>
 <svg width="500" height="300"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
@@ -48,19 +53,7 @@ svg.selectAll("text")
     .attr("class", "text")
     .attr("x", function(d, i) {return 50 * i + 15})
     .attr("y", function(d, i) {return 200-d*20 + 15});
-
-
-
 </script>
-
-
-
-
-
-</head>
-<body>
-
-
 
 
 

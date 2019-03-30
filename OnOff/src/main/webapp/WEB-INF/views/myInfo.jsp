@@ -103,7 +103,9 @@ ul.sub li:hover {
 
 </head>
 <body>	
-
+<div id="where">
+<span>마이페이지 > </span> <span><a href="#">내정보</a></span>
+</div>
 	<section class="regist-wrapper">
 		<div class="container">
 			<div class="col-md-12">

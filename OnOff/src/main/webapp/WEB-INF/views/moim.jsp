@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=utf-8"); %>
-
-
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -266,8 +263,8 @@
 	<section class="inner-banner" style="backend:#242c36 url(https://via.placeholder.com/1920x600)no-repeat;">
 		<div class="container">
 			<div class="caption">
-				<h2>모임 일정</h2>
-				<p>현재 진행 예정인 모임<span>ㅇㅇ</span></p>
+				<h2>소모임 일정</h2>
+				<p>현재 진행 예정인 모임<span></span></p>
 			</div>
 		</div>
 	</section>
@@ -304,7 +301,7 @@
 								<c:choose>
 								<c:when test="${empty list }">
 									<tr>
-										<td>*******모임 정보가 없습니다*******</td>
+										<td style="text-align: center;">소모임 일정이 없습니다 :(</td>
 									</tr>
 								</c:when>
 									<c:otherwise>
@@ -314,7 +311,7 @@
 								<%-- 	<td>${dto.moimno }</td> --%>
 									<td><a href="moimDetail.do?moimno=${dto.moimno }&groupno=${groupno}">${dto.moimtitle }</a></td>
 									<td>${dto.userid }</td>
-									<td>${dto.moimregdate }</td>
+									<td><fmt:formatDate value="${dto.moimregdate }" pattern="yyyy-MM-dd"/></td>
 								</tr>		
 									
 										</c:forEach>
@@ -370,10 +367,6 @@
 
 				</form>
 		</div>
-			
-
-			
-			
 		<div class="right-box">
 		
 			<div id="calendar"></div>

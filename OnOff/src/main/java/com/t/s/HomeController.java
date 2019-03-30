@@ -645,12 +645,13 @@ public class HomeController {
 	// 마이페이지
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
 	public String mypage(Model model, HttpSession session) {
-
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
+			return "mypage";
+		} else {
+			model.addAttribute("msg","로그인 해주세요.");
+			return "login";
 		}
-		
-		return "mypage";
 	}
 
 	// 내 정보
@@ -704,10 +705,10 @@ public class HomeController {
 	
 	@RequestMapping(value = "/myGroupManagerPage.do", method = RequestMethod.GET)
 	public String myGroupManagerPage(Model model, HttpSession session, int groupno) {
-
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
+		
 		String userId = session.getAttribute("id").toString();
 		List<GroupDto> list = groupbiz.selGroupinfoManager(userId);
 		model.addAttribute("list", list);
@@ -760,10 +761,12 @@ public class HomeController {
 	         int res = groupbiz.updateGroupinfo(dto);
 	         if(res > 0) {
 	            System.out.println("그룹update성공!");
+	  	      	model.addAttribute("msg","수정되었습니다");
 	            return "redirect:myGroupManagerPage.do?groupno="+dto.getGroupno();
 	         }else {
 //	           model.addAttribute("msg", "<script type='text/javascript'>alert('실패');</script>");
 	            System.out.println("그룹update실패!");
+	  	      	model.addAttribute("msg","수정이 실패 되었습니다. 다시 시도해주세요.");
 	            return "redirect:myGroupManagerPage?groupno="+dto.getGroupno();
 	         }
 	      }
@@ -965,25 +968,29 @@ public class HomeController {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
+
+			GroupDto groupdto = new GroupDto();
+			UserDto userdto = (UserDto) session.getAttribute("dto");
+			GroupUserDto groupuserdto = new GroupUserDto();
+			groupuserdto.setUserid(userdto.getUserid());
+			groupuserdto.setGroupno(groupno);
+
+			GroupUserDto resUser = groupuserbiz.selGroupnoGroupuser(groupuserdto);
+
+			SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
+
+			groupdto = groupbiz.selectGroupDetail(groupno);
+
+			model.addAttribute("groupdto", groupdto);
+			model.addAttribute("groupregdate", sys.format(groupdto.getGroupregdate()));
+			model.addAttribute("resUser", resUser);
+
+			return "groupDetail";
+		} else {
+			model.addAttribute("msg","로그인 해주세요.");
+			return "login";
 		}
 
-		GroupDto groupdto = new GroupDto();
-		UserDto userdto = (UserDto) session.getAttribute("dto");
-		GroupUserDto groupuserdto = new GroupUserDto();
-		groupuserdto.setUserid(userdto.getUserid());
-		groupuserdto.setGroupno(groupno);
-
-		GroupUserDto resUser = groupuserbiz.selGroupnoGroupuser(groupuserdto);
-
-		SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
-
-		groupdto = groupbiz.selectGroupDetail(groupno);
-
-		model.addAttribute("groupdto", groupdto);
-		model.addAttribute("groupregdate", sys.format(groupdto.getGroupregdate()));
-		model.addAttribute("resUser", resUser);
-
-		return "groupDetail";
 	}
 
 	@RequestMapping(value = "/groupInsert.do", method = RequestMethod.GET)

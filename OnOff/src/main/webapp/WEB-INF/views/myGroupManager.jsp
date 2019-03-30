@@ -71,11 +71,10 @@ ul.sub li:hover {
 
 </head>
 <body>
-	<!-- 검색 결과 창이랑 비슷하게 하면 될거 같아요 -->
-	
-	<a href="groupInsert.do">그룹 생성하기</a>
-	<a href="groupDetail.do?groupno=2">2번 그룹</a>
-
+	<div id="where">
+		<span>마이페이지 > </span> <span><a href="#">그룹관리</a></span>
+	</div>
+	<input type="button" class="btn brows-btn2" value="그룹 생성하기" id="btn_update" onclick="location.href='groupInsert.do'" />
 <div class="companies">
 
 	<!-- 여기에서 포문 시작 -->
@@ -89,7 +88,7 @@ ul.sub li:hover {
 			<div class="row" onclick="location.href='myGroupManagerPage.do?groupno=${dto.groupno}'">
 				<div class="col-md-2 col-sm-2">
 					<div class="company-logo">
-						<img src="img/${dto.groupimg }.jpg" class="img-responsive" alt="" />
+						<img src="${dto.groupimg }" class="img-responsive" alt="" />
 					</div>
 				</div>
 				<div class="col-md-10 col-sm-10">

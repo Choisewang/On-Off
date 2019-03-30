@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html class="no-js">
 
@@ -100,7 +100,7 @@
 								<div class="col-md-2 col-sm-2">
 									<div class="company-logo">
 										<!-- 대표이미지 디비를 하나 만들어서 넣자 -->
-										<img src="img/google.png" class="img-responsive" alt="" />
+										<img src="" class="img-responsive" alt="" />
 									</div>
 								</div>
 
@@ -136,7 +136,7 @@
 											<p style="margin: 0; margin-top: 12px;">
 											<span class="company-name"><i class="fa fa-user fa-fw"></i>${imgboarddto.userid }</span>
 											<span class="company-location" id="regdate"><i
-												class="fa fa-calendar-times-o"></i>${imgboarddto.imgboardregdate }</span>
+												class="fa fa-calendar-times-o"></i><fmt:formatDate value="${imgboarddto.imgboardregdate }" pattern="yyyy-MM-dd"/></span>
 										</p>
 										</div>
 									</div>
@@ -218,8 +218,7 @@
 	<footer>
 		<div class="copy-right">
 			<p>
-				&copy;Copyright 2018 Final Project | Design By <a href="#">
-					Kh정보교육원_On조 </a>
+				&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조  </a>
 			</p>
 		</div>
 	</footer>

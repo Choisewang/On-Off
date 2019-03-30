@@ -30,10 +30,15 @@ if(document.getElementById("title").value==""||document.getElementById("content"
  document.getElementById("updateform").submit();
 }
 }
+
 </script>
 </head>
 <body>
 
+
+<div id="where">
+		<span><a href="mypage.do">마이페이지 > </a></span> <span>그룹관리 > </span> <span><a href="#">그룹정보수정</a></span>
+</div>
    <section class="regist-wrapper">
       <div class="container">
          <div class="col-md-12">
@@ -46,7 +51,7 @@ if(document.getElementById("title").value==""||document.getElementById("content"
                            <ul class="information">
                               <li><span>제목</span><label style="font-weight:normal;"><input id="title" name="grouptitle" type="text" value="${dto.grouptitle }" size="52"></label></li>
                               <li><span>내용</span><label style="font-weight:normal;"><textarea id="content" name="groupcontent" rows=5 cols=53>${dto.groupcontent }</textarea></label></li>
-                              <li><span>사진</span><label style="font-weight:normal;"><input type="hidden"><img src="img/${dto.groupimg }.jpg" class="img-responsive" alt="" /></label></li>
+                              <li><span>사진</span><img src="${dto.groupimg }" class="img-responsive" alt="" /></li>
                               <li><span>그룹생성날짜</span><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/><label></label></li>
                            </ul>                                    
                         </div>
@@ -62,6 +67,16 @@ if(document.getElementById("title").value==""||document.getElementById("content"
          </div>
       </div>
       </section>
-
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+		<script src="js/bootsnav.js"></script>
+		<script src="js/main.js"></script>
+	<script type="text/javascript">
+		var msg = '${msg }';
+		if (msg != "") {
+			alert(msg);
+		}
+	</script>
 </body>
 </html>

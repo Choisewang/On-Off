@@ -131,7 +131,7 @@
 			<ul id="menu2" data-in="fadeInDown" data-out="fadeOutUp">
 				<li><button class="btn brows-btn" onclick="location.href='boardList.do?groupno=${groupdto.groupno}&pagenum=1'" >자유게시판</button></li>			
 				<li><button class="btn brows-btn" onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}&pagenum=1'" >사진게시판</button></li>
-				<li><button class="btn brows-btn" onclick="location.href='moim.do?groupno=${groupdto.groupno}'">모임게시판</button></li>
+				<li><button class="btn brows-btn" onclick="location.href='moim.do?groupno=${groupdto.groupno}'">소모임일정</button></li>
 				<li><button class="btn brows-btn" >라이브</button></li>
 				<li><button class="btn brows-btn" id="chatting" >채팅</button></li>
 			</ul>
@@ -151,9 +151,9 @@
 	         } else {
 	            $("#menu2").show();
 	         }
-		});
+		});	
 	</script>
-		
+	
 <footer>
 		<div class="copy-right">
 			<p>&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조 </a></p>
@@ -161,6 +161,10 @@
 	</footer>
 	
 	
-
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+		<script src="js/bootsnav.js"></script>
+		<script src="js/main.js"></script>
 </body>
 </html>

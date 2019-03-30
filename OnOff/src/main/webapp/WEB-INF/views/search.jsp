@@ -16,7 +16,14 @@
 		
 		<!-- Style & Common Css --> 
 		<link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/search.css">
+		<link rel="stylesheet" href="css/main.css">
+<!--         <link rel="stylesheet" href="css/search.css"> -->
+        
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+		<script src="js/bootsnav.js"></script>
+		<script src="js/main.js"></script>
         <style>
         #paging li a:focus {
 			color:#fff;
@@ -33,21 +40,7 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script>
-		function selSearch(val){
-			//$("#search_input").attr("readonly",false);
-			/* if(val=="n"){
-				$("#search_input").attr("readonly",true);
-			} else if(val=="t"){
-				$("#search_input").attr("readonly",false);
-			} else if(val=="c"){
-				$("#search_input").attr("readonly",false);
-			} else if(val=="tc"){
-				$("#search_input").attr("readonly",false);
-			} */
-			
-	       // var select_name = $(this).children("option:selected").text();
-			
-			
+		function selSearch(val){		
 			if(val=="t"){
 				$("#selLabel").text("제목");
 			} else if(val=="c"){
@@ -55,7 +48,6 @@
 			} else if(val=="tc"){
 				$("#selLabel").text("제목+내용");
 			}
-	        
 		} 
 		
 	    //var select = $('#selectType select');
@@ -69,17 +61,11 @@
 	             search();
 	        }
 	    }
-
-		
 		function search(){
 	    	 self.location="search.do"+"${pageMaker.makeQuery(1)}"+"&searchType="+$("select option:selected").val()+"&keyword="+encodeURIComponent($('#search_input').val());
 	    }
-		
-		$(function() {
-			
+		$(function() {	
 			//$("#search_input").attr("readonly",true);
-	    
-		    
 		});
 
 </script>
@@ -153,7 +139,7 @@
 				</div>
 			</div>
 		</section>
-	
+		
 		<section class="jobs">
 			<div class="container">
 				<div class="row heading">
@@ -161,46 +147,31 @@
 				</div>
 				<div class="companies">
 					
-					<%-- <c:forEach items="${list}" var="dto">
-						<div class="company-list">
-							<div class="row">
-								<div class="col-md-2 col-sm-2">
-									<div class="company-logo">
-										<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
-									</div>
-								</div>
-								<div class="col-md-10 col-sm-10">
-									<div class="company-content">
-										<h3><span class="full-time"></span></h3>
-										<p><span class="company-name"><c:out value="${dto.moimcontent }"/></span></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach> --%>
-					
 					<c:choose>
 						<c:when test="${empty list }">
 							<div style="text-align:center;font-size:20px;">그룹 정보가 없습니다:(</div>
 							
 						</c:when>
+						
 						<c:otherwise>
 							<c:forEach items="${list}" var="dto">
-								<div class="company-list">
-									<div class="row" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
-										<div class="col-md-2 col-sm-2">
-											<div class="company-logo">
-												<img src="img/sample_koala.jpg" class="img-responsive" alt="" />
-											</div>
+								<div class="company-list" onclick="location.href='groupDetail.do?groupno=${dto.groupno}'">
+									<div class="row" >
+									<!-- 사진 -->
+									<div class="col-md-2 col-sm-2">
+										<div class="company-logo">
+											<img src="${dto.groupimg }" class="img-responsive" alt="사진" />
 										</div>
-										<div class="col-md-10 col-sm-10">
-											<div class="company-content">
-												<h3>${dto.grouptitle }<span class="full-time"><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/>~</span></h3>
-												<p><span class="company-name"><c:out value="${dto.groupcontent }"/></span></p>
-											</div>
+									</div>
+									
+									<div class="col-md-10 col-sm-10">
+										<div class="company-content">
+											<h3>${dto.grouptitle }<span class="full-time"><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/>~</span></h3>
+											<p style="margin: 0; margin-top: 12px;"><span class="company-name"><c:out value="${dto.groupcontent }"/></span></p>
 										</div>
 									</div>
 								</div>
+							</div>
 							</c:forEach>			
 						</c:otherwise>		
 					</c:choose>
@@ -247,71 +218,14 @@
 		</nav>
 		
 
-			
-		<!-- footer start -->
-		<footer>
-			<div class="container">
-				<div class="col-md-3 col-sm-6">
-					<h4>Featured Job</h4>
-					<ul>
-						<li><a href="#">Browse Jobs</a></li>
-						<li><a href="#">Premium MBA Jobs</a></li>
-						<li><a href="#">Access Database</a></li>
-						<li><a href="#">Manage Responses</a></li>
-						<li><a href="#">Report a Problem</a></li>
-						<li><a href="#">Mobile Site</a></li>
-						<li><a href="#">Jobs by Skill</a></li>
-					</ul>
-				</div>
-				
-				<div class="col-md-3 col-sm-6">
-					<h4>Latest Job</h4>
-					<ul>
-						<li><a href="#">Browse Jobs</a></li>
-						<li><a href="#">Premium MBA Jobs</a></li>
-						<li><a href="#">Access Database</a></li>
-						<li><a href="#">Manage Responses</a></li>
-						<li><a href="#">Report a Problem</a></li>
-						<li><a href="#">Mobile Site</a></li>
-						<li><a href="#">Jobs by Skill</a></li>
-					</ul>
-				</div>
-				
-				<div class="col-md-3 col-sm-6">
-					<h4>Reach Us</h4>
-					<address>
-					<ul>
-					<li>1201, Murakeu Market, QUCH07<br>
-					United Kingdon</li>
-					<li>Email: Support@job.com</li>
-					<li>Call: 044 123 458 65879</li>
-					<li>Skype: job@skype</li>
-					<li>FAX: 123 456 85</li>
-					</ul>
-					</address>
-				</div>
-				
-				<div class="col-md-3 col-sm-6">
-					<h4>Drop A Mail</h4>
-					<form>
-						<input type="text" class="form-control input-lg" placeholder="Your Name">
-						<input type="text" class="form-control input-lg" placeholder="Email...">
-						<textarea class="form-control" placeholder="Message"></textarea>
-						<button type="submit" class="btn btn-primary">Login</button>
-					</form>
-				</div>
-				
-				
-			</div>
-			<div class="copy-right">
-			 <p>&copy;Copyright 2018 Jober Desk | Design By <a href="https://themezhub.com/">ThemezHub</a></p>
-			</div>
-		</footer>
+	<!-- footer start -->
+	<footer>
+		<div class="copy-right">
+			<p>
+				&copy;Copyright 2018 Final Project | Design By <a href="#"> Kh정보교육원_On조  </a>
+			</p>
+		</div>
+	</footer>
 		 
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-		<script src="js/bootsnav.js"></script>
-		<script src="js/main.js"></script>
     </body>
 </html>

@@ -74,7 +74,9 @@ ul.sub li:hover {
 
 </head>
 <body>	
-
+<div id="where">
+		<span><a href="mypage.do">마이페이지 > </a></span> <span>그룹관리 > </span> <span><a href="#">회원조회</a></span>
+</div>
 	<section class="regist-wrapper">
 		<div class="container">
 			<div class="col-md-12">
