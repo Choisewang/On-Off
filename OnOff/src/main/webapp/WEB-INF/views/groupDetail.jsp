@@ -183,7 +183,8 @@
 							onclick="location.href='imgBoardList.do?groupno=${groupdto.groupno}&pagenum=1'">사진게시판</button></li>
 					<li><button class="btn brows-btn"
 							onclick="location.href='moim.do?groupno=${groupdto.groupno}'">소모임일정</button></li>
-					<li><button class="btn brows-btn">라이브</button></li>
+					<li><button class="btn brows-btn" id="stream">스트림</button></li>
+                	<li><button class="btn brows-btn" onclick="location.href='pullstream.do?groupnum=${groupdto.groupno}'">라이브</button></li>
 					<li><button class="btn brows-btn" id="chatting">채팅</button></li>
 				</ul>
 			</div>
@@ -209,6 +210,16 @@
 					} else {
 						$("#menu2").show();
 					}
+					
+					
+					$("#stream").click(function(){
+						alert("실행");
+				   		 window.open("stream.do?groupnum=${groupdto.groupno}","a","width=400,height=550,left=100,top=50");
+						
+					});	
+
+					
+					
 				});
 	</script>
 

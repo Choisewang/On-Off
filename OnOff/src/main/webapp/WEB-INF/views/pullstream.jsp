@@ -17,7 +17,7 @@
 <script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
 <script type="text/javascript">
 	
-var ws = new WebSocket("ws:192.168.10.15:8787/OnOff_test111111/video");
+var ws = new WebSocket("ws:192.168.0.9:8787/s/video");
 ws.binaryType = "blob";
 
 ws.onmessage = function(msg) {

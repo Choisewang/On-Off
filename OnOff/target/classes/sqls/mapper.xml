@@ -442,6 +442,10 @@
 		DELETE FROM FREEBOARD WHERE BOARDNO=#{boardno}
 	</delete>
 	
+	<delete id="freeBoardUserDelete" parameterType="String">
+		DELETE FROM FREEBOARD WHERE USERID=#{userid}
+	</delete>
+	
 	<!-- 자유게시판 댓글 -->
 	
 	<select id="freeBoardAnsList" parameterType="int" resultMap="FreeBoardAnsMap">
@@ -454,6 +458,10 @@
 	
 	<delete id="freeBoardAnsDelete" parameterType="int">
 		DELETE FROM FREEBOARDANS WHERE BOARDANSNO=#{boardansno}
+	</delete>
+	
+	<delete id="freeBoardUserAnsDelete" parameterType="String">
+		DELETE FROM FREEBOARDANS WHERE USERID=#{userid}
 	</delete>
 	
 	<!-- 이미지게시판 -->
@@ -499,6 +507,10 @@
 	
 	<delete id="imgBoardAnsDelete" parameterType="int">
 		DELETE FROM IMGBOARDANS WHERE IMGANSNO=#{imgansno}
+	</delete>
+	
+	<delete id="imgBoardUserAnsDelete" parameterType="String">
+		DELETE FROM IMGBOARDANS WHERE USERID=#{userid}
 	</delete>
 	
 	<!-- ******************************************************************************* -->

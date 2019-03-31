@@ -71,6 +71,7 @@
 		if(insertid == sessionid){
 			
 			$("#moimjoin").hide();
+			$("#moimout").hide();
 		}else{
 			$("#moimedit").hide();
 			$("#moimdelete").hide();

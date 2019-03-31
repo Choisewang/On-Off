@@ -218,24 +218,24 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
     marker.setPosition(latlng);
     
     //클릭한 좌표를 객체에 넣음
-    alert(latlng.getLat());
+/*     alert(latlng.getLat());
     alert(latlng.getLng());
-    
+  */   
     var latSet = latlng.getLat();
     var lngSet = latlng.getLng();
-    
+     
     $('#Lat').val(latSet);
     $('#Lng').val(lngSet);
      
     
     
-    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+ /*    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
     message += '경도는 ' + latlng.getLng() + ' 입니다';
     
     
     //위도, 경도 넘겨서 mapRes에 좌표 변경되고, 마커 고정
     alert(message);
-    
+     */
     
 });
 

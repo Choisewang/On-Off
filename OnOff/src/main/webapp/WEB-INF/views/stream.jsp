@@ -10,7 +10,7 @@
 <title>getUserMedia</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	var ws = new WebSocket("ws:localhost:8787/OnOff_test111111/video");
+	var ws = new WebSocket("ws:192.168.0.9:8787/s/video");
 	ws.binaryType = "blob";
 
 	ws.onmessage = function(msg) {
