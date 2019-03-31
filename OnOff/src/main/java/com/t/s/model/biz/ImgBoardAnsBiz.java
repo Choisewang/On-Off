@@ -9,4 +9,6 @@ public interface ImgBoardAnsBiz {
 	public int ImgBoardAnsInsert(ImgBoardAnsDto imgboardansdto);
 	public int ImgBoardAnsDelete(int imgansno);
 	public List<ImgBoardAnsDto> ImgBoardAnsList(int imgboardno);
+	
+	public int ImgBoardUserAnsDelete(String userid);
 }

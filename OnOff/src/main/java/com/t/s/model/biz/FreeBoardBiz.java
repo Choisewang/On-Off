@@ -17,4 +17,6 @@ public interface FreeBoardBiz {
 	public int insertFreeBoard(FreeBoardDto freeboarddto);
 	public int updateFreeBoard(FreeBoardDto freeboarddto);
 	public int deleteFreeBoard(int boardno);
+	
+	public int deleteUserFreeBoard(String userid);
 }

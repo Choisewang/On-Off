@@ -45,4 +45,14 @@ public class FreeBoardAnsDaoImpl implements FreeBoardAnsDao {
 		return res;
 	}
 
+	@Override
+	public int deleteUserAns(String userid) {
+		
+		int res = 0;
+		
+		res = sqlSession.delete(NAMESPACE+"freeBoardUserAnsDelete",userid);
+		
+		return res;
+	}
+
 }

@@ -32,4 +32,10 @@ public class FreeBoardAnsBizImpl implements FreeBoardAnsBiz {
 		return dao.FreeBoardAnsDelete(boardansno);
 	}
 
+	@Override
+	public int deleteUserAns(String userid) {
+		// TODO Auto-generated method stub
+		return dao.deleteUserAns(userid);
+	}
+
 }

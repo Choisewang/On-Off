@@ -121,9 +121,8 @@ public class HomeController {
 
 		resp.setContentType("text/html; charset=UTF-8");
 
-		   System.out.println(">"+groupno);
-		   
-		   
+		System.out.println(">" + groupno);
+
 		// 달력 만들 리스트 가져오기(Json형태로 파싱)
 		List<MoimDto> calList = moimbiz.selectMoimList(groupno);
 		/*
@@ -147,8 +146,8 @@ public class HomeController {
 			calListInfo.put("title", calList.get(i).getMoimtitle());
 			calListInfo.put("addr", calList.get(i).getMoimaddr());
 			calListInfo.put("start", calList.get(i).getMoimdate());
-			calListInfo.put("url", "moimDetail.do?moimno="+calList.get(i).getMoimno()+"&groupno="+groupno);
-			
+			calListInfo.put("url", "moimDetail.do?moimno=" + calList.get(i).getMoimno() + "&groupno=" + groupno);
+
 			// Json Array에 넣기
 			jsonCalList.add(calListInfo);
 		}
@@ -165,22 +164,22 @@ public class HomeController {
 	@RequestMapping(value = "/mycalAjax.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String mycalAjax(Criteria cri, HttpServletResponse resp, String userid) {
-		
+
 		resp.setContentType("text/html; charset=UTF-8");
 
-		 
-		   System.out.println("mycalAjax로 온 아이디 : "+userid);
-		   
+		System.out.println("mycalAjax로 온 아이디 : " + userid);
+
 		// 달력 만들 리스트 가져오기(Json형태로 파싱)
-		/*List<MoimDto> calList = moimbiz.selectMoimList();*/
+		/* List<MoimDto> calList = moimbiz.selectMoimList(); */
 		List<MoimDto> mycalList = moimbiz.selectmyMoimList(userid);
-		
+
 		System.out.println(mycalList.size());
-		
-/*		 System.out.println(mycalList.get(1).toString());
-		 System.out.println(mycalList.get(1).getMoimtitle());
-		 System.out.println(mycalList.size());
-*/		 
+
+		/*
+		 * System.out.println(mycalList.get(1).toString());
+		 * System.out.println(mycalList.get(1).getMoimtitle());
+		 * System.out.println(mycalList.size());
+		 */
 
 		// Json 객체
 		JSONObject obj = new JSONObject();
@@ -197,8 +196,9 @@ public class HomeController {
 			calListInfo.put("title", mycalList.get(i).getMoimtitle());
 			calListInfo.put("addr", mycalList.get(i).getMoimaddr());
 			calListInfo.put("start", mycalList.get(i).getMoimdate());
-			calListInfo.put("url", "moimDetail.do?moimno="+mycalList.get(i).getMoimno()+"&groupno="+mycalList.get(i).getGroupno());
-			
+			calListInfo.put("url", "moimDetail.do?moimno=" + mycalList.get(i).getMoimno() + "&groupno="
+					+ mycalList.get(i).getGroupno());
+
 			// Json Array에 넣기
 			jsonCalList.add(calListInfo);
 		}
@@ -211,8 +211,7 @@ public class HomeController {
 
 		return obj.toString();
 	}
-	
-	
+
 	@RequestMapping(value = "/moimDetail.do", method = RequestMethod.GET)
 	public String moimDetail(HttpSession session, Model model, int moimno, int groupno) {
 
@@ -300,47 +299,47 @@ public class HomeController {
 	}
 
 	// 다중파일업로드
-	   @RequestMapping(value = "/file_uploader_html5.do", method = RequestMethod.POST)
-	   @ResponseBody
-	   public String multiplePhotoUpload(HttpServletRequest request) {
-	      // 파일정보
-	      StringBuffer sb = new StringBuffer();
-	      try {
-	         // 파일명을 받는다 - 일반 원본파일명
-	         String oldName = request.getHeader("file-name");
-	         // 파일 기본경로 _ 상세경로
-	         String filePath = WebUtils.getRealPath(request.getSession().getServletContext(), "/photoUpload/");
-	         
-	         File folder = new File(WebUtils.getRealPath(request.getSession().getServletContext(), "/photoUpload"));
-	         
-	         if(!folder.exists()) {
-	            folder.mkdirs();
-	         }
-	         
-	         String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
-	               .append(UUID.randomUUID().toString()).append(oldName.substring(oldName.lastIndexOf(".")))
-	               .toString();
-	         System.out.println(filePath + saveName);
-	         InputStream is = request.getInputStream();
-	         OutputStream os = new FileOutputStream(filePath + saveName);
-	         int numRead;
-	         byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-	         while ((numRead = is.read(b, 0, b.length)) != -1) {
-	            os.write(b, 0, numRead);
-	         }
-	         os.flush();
-	         os.close();
-	         // 정보 출력
-	         sb = new StringBuffer();
-	         sb.append("&bNewLine=true").append("&sFileName=").append(oldName).append("&sFileURL=")
-	               .append(request.getContextPath() + "/photoUpload/").append(saveName);
-	         System.out.println(sb.toString());
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-	      return sb.toString();
-	   }
-	   /* 업로드 끝=============================================== */
+	@RequestMapping(value = "/file_uploader_html5.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String multiplePhotoUpload(HttpServletRequest request) {
+		// 파일정보
+		StringBuffer sb = new StringBuffer();
+		try {
+			// 파일명을 받는다 - 일반 원본파일명
+			String oldName = request.getHeader("file-name");
+			// 파일 기본경로 _ 상세경로
+			String filePath = WebUtils.getRealPath(request.getSession().getServletContext(), "/photoUpload/");
+
+			File folder = new File(WebUtils.getRealPath(request.getSession().getServletContext(), "/photoUpload"));
+
+			if (!folder.exists()) {
+				folder.mkdirs();
+			}
+
+			String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis()))
+					.append(UUID.randomUUID().toString()).append(oldName.substring(oldName.lastIndexOf(".")))
+					.toString();
+			System.out.println(filePath + saveName);
+			InputStream is = request.getInputStream();
+			OutputStream os = new FileOutputStream(filePath + saveName);
+			int numRead;
+			byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+			while ((numRead = is.read(b, 0, b.length)) != -1) {
+				os.write(b, 0, numRead);
+			}
+			os.flush();
+			os.close();
+			// 정보 출력
+			sb = new StringBuffer();
+			sb.append("&bNewLine=true").append("&sFileName=").append(oldName).append("&sFileURL=")
+					.append(request.getContextPath() + "/photoUpload/").append(saveName);
+			System.out.println(sb.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+	/* 업로드 끝=============================================== */
 
 	/////////////////////////////////////////////////////////////////
 	// 로그인
@@ -649,7 +648,7 @@ public class HomeController {
 			model.addAttribute("dto", session.getAttribute("dto"));
 			return "mypage";
 		} else {
-			model.addAttribute("msg","로그인 해주세요.");
+			model.addAttribute("msg", "로그인 해주세요.");
 			return "login";
 		}
 	}
@@ -702,13 +701,13 @@ public class HomeController {
 
 		return "myGroupManager";
 	}
-	
+
 	@RequestMapping(value = "/myGroupManagerPage.do", method = RequestMethod.GET)
 	public String myGroupManagerPage(Model model, HttpSession session, int groupno) {
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		String userId = session.getAttribute("id").toString();
 		List<GroupDto> list = groupbiz.selGroupinfoManager(userId);
 		model.addAttribute("list", list);
@@ -716,76 +715,76 @@ public class HomeController {
 
 		return "myGroupManagerPage";
 	}
-	
+
 	@RequestMapping(value = "/userInGroup.do", method = RequestMethod.GET)
-	public String userInGroup(Model model, HttpSession session,int groupno) {
+	public String userInGroup(Model model, HttpSession session, int groupno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
-		System.out.println("얍"+groupno);
-		
+
+		System.out.println("얍" + groupno);
+
 		List<GroupUserDto> groupuserdto = groupuserbiz.selectAllGroupUser(groupno);
 		model.addAttribute("groupuserdto", groupuserdto);
 
 		return "userInGroup";
 	}
-	
+
 	@RequestMapping(value = "/groupUpdate.do", method = RequestMethod.GET)
-	   public String groupUpdate(HttpSession session, Model model, int groupno) {
+	public String groupUpdate(HttpSession session, Model model, int groupno) {
 
-	      if (session.getAttribute("dto") != null) {
-	         model.addAttribute("dto", session.getAttribute("dto"));
-	      }
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
 
-	      GroupDto GroupDto = groupbiz.selectGroupDetail(groupno);
-	      model.addAttribute("dto", GroupDto);
-	      return "groupUpdate";
-	   }
-	   
-	      @RequestMapping(value = "/groupUpdateRes.do", method = RequestMethod.POST)
-	      public String groupUpdateRes(HttpServletRequest request, HttpSession session, Model model, GroupDto dto) {
+		GroupDto GroupDto = groupbiz.selectGroupDetail(groupno);
+		model.addAttribute("dto", GroupDto);
+		return "groupUpdate";
+	}
 
-	         if (session.getAttribute("dto") != null) {
-	            model.addAttribute("dto", session.getAttribute("dto"));
-	         }
-	         int groupno = Integer.parseInt(request.getParameter("groupno"));
-	         String grouptitle = request.getParameter("grouptitle");
-	         String groupcontent  = request.getParameter("groupcontent");
-	         
-	         dto.setGroupno(groupno);
-	         dto.setGrouptitle(grouptitle);
-	         dto.setGroupcontent(groupcontent);
-	         
-	         int res = groupbiz.updateGroupinfo(dto);
-	         if(res > 0) {
-	            System.out.println("그룹update성공!");
-	  	      	model.addAttribute("msg","수정되었습니다");
-	            return "redirect:myGroupManagerPage.do?groupno="+dto.getGroupno();
-	         }else {
+	@RequestMapping(value = "/groupUpdateRes.do", method = RequestMethod.POST)
+	public String groupUpdateRes(HttpServletRequest request, HttpSession session, Model model, GroupDto dto) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		int groupno = Integer.parseInt(request.getParameter("groupno"));
+		String grouptitle = request.getParameter("grouptitle");
+		String groupcontent = request.getParameter("groupcontent");
+
+		dto.setGroupno(groupno);
+		dto.setGrouptitle(grouptitle);
+		dto.setGroupcontent(groupcontent);
+
+		int res = groupbiz.updateGroupinfo(dto);
+		if (res > 0) {
+			System.out.println("그룹update성공!");
+			model.addAttribute("msg", "수정되었습니다");
+			return "redirect:myGroupManagerPage.do?groupno=" + dto.getGroupno();
+		} else {
 //	           model.addAttribute("msg", "<script type='text/javascript'>alert('실패');</script>");
-	            System.out.println("그룹update실패!");
-	  	      	model.addAttribute("msg","수정이 실패 되었습니다. 다시 시도해주세요.");
-	            return "redirect:myGroupManagerPage?groupno="+dto.getGroupno();
-	         }
-	      }
-	   
-	   @RequestMapping(value = "/delGroupinfo.do", method = RequestMethod.GET)
-	   public String delGroupinfo(HttpSession session, Model model, int groupno) {
+			System.out.println("그룹update실패!");
+			model.addAttribute("msg", "수정이 실패 되었습니다. 다시 시도해주세요.");
+			return "redirect:myGroupManagerPage?groupno=" + dto.getGroupno();
+		}
+	}
 
-	      if (session.getAttribute("dto") != null) {
-	         model.addAttribute("dto", session.getAttribute("dto"));
-	      }
-	      int res = groupbiz.delGroupinfo(groupno);
-	      if(res>0) {
-	         System.out.println("그룹delete성공!");
-	         return "mypage";
-	      }else {
-	         System.out.println("delete실패!");
-	         return "mypage";
-	      }
-	   }
+	@RequestMapping(value = "/delGroupinfo.do", method = RequestMethod.GET)
+	public String delGroupinfo(HttpSession session, Model model, int groupno) {
+
+		if (session.getAttribute("dto") != null) {
+			model.addAttribute("dto", session.getAttribute("dto"));
+		}
+		int res = groupbiz.delGroupinfo(groupno);
+		if (res > 0) {
+			System.out.println("그룹delete성공!");
+			return "mypage";
+		} else {
+			System.out.println("delete실패!");
+			return "mypage";
+		}
+	}
 
 	// 탈퇴하기
 	@RequestMapping(value = "/dropUser.do", method = RequestMethod.GET)
@@ -879,7 +878,8 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/surveyResult.do", method = RequestMethod.GET)
-	public String surveyResult(HttpServletRequest request, Model model, HttpSession session, @ModelAttribute MoimUserDto dto) {
+	public String surveyResult(HttpServletRequest request, Model model, HttpSession session,
+			@ModelAttribute MoimUserDto dto) {
 		String userid = session.getAttribute("id").toString();
 		int groupno = Integer.parseInt(request.getParameter("groupno"));
 		int Q1 = Integer.parseInt(request.getParameter("Q1"));
@@ -916,12 +916,12 @@ public class HomeController {
 		int avgQ4 = (int) moimUserBiz.avgQ4(dto);
 		int avgQ5 = (int) moimUserBiz.avgQ5(dto);
 		int avgAll = (int) moimUserBiz.avgAll(avgQ1, avgQ2, avgQ3, avgQ4, avgQ5);
-		System.out.println("1번모임1번질문"+avgQ1);
-		System.out.println("1번모임2번질문"+avgQ2);
-		System.out.println("1번모임3번질문"+avgQ3);
-		System.out.println("1번모임4번질문"+avgQ4);
-		System.out.println("1번모임5번질문"+avgQ5);
-		System.out.println("1번모임의 평균"+avgAll);
+		System.out.println("1번모임1번질문" + avgQ1);
+		System.out.println("1번모임2번질문" + avgQ2);
+		System.out.println("1번모임3번질문" + avgQ3);
+		System.out.println("1번모임4번질문" + avgQ4);
+		System.out.println("1번모임5번질문" + avgQ5);
+		System.out.println("1번모임의 평균" + avgAll);
 		ArrayList<Integer> array = new ArrayList<Integer>();
 		array.add(avgQ1);
 		array.add(avgQ2);
@@ -987,7 +987,7 @@ public class HomeController {
 
 			return "groupDetail";
 		} else {
-			model.addAttribute("msg","로그인 해주세요.");
+			model.addAttribute("msg", "로그인 해주세요.");
 			return "login";
 		}
 
@@ -1001,7 +1001,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/groupInsertRes.do", method = RequestMethod.GET)
 	public String groupInsertRes(HttpSession session, Model model, GroupDto groupdto) {
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
@@ -1014,17 +1014,16 @@ public class HomeController {
 			String findImg = groupdto.getGroupimg();
 
 			int resNo = groupbiz.findGroupNo(findImg);
-			
-			
+
 			GroupUserDto groupuserdto = new GroupUserDto();
 			groupuserdto.setUserid(user.getUserid());
 			groupuserdto.setGroupno(resNo);
 			groupuserdto.setGroupusergrade("MASTER");
-			
+
 			int userres = groupuserbiz.groupInUser(groupuserdto);
 
 			model.addAttribute("groupno", resNo);
-			
+
 			return "redirect:/groupDetail.do";
 		} else {
 			return "groupInsert";
@@ -1084,7 +1083,7 @@ public class HomeController {
 			// 정보 출력
 			sb = new StringBuffer();
 			sb.append("&bNewLine=true").append("&sFileName=").append(filename).append("&sFileURL=")
-					.append(request.getContextPath()+"/photoUpload/").append(saveName);
+					.append(request.getContextPath() + "/photoUpload/").append(saveName);
 
 			test = request.getContextPath() + "/photoUpload/" + saveName;
 		} catch (IOException e) {
@@ -1125,13 +1124,23 @@ public class HomeController {
 			return "error";
 		}
 	}
-	
+
 	@RequestMapping(value = "/groupUserOut.do", method = RequestMethod.GET)
 	public String groupUserOut(Model model, GroupUserDto groupuserdto) {
 
 		int res = 0;
 
 		res = groupuserbiz.groupOutUser(groupuserdto);
+
+		// 이미지게시판 댓글지우기
+		imgboardansbiz.ImgBoardUserAnsDelete(groupuserdto.getUserid());
+		// 모임게시판 댓글 지우기
+		// 이건 내가 건들게 아니다
+		// 자유게시판 댓글 지우기
+		freeboardansbiz.deleteUserAns(groupuserdto.getUserid());
+		// 자유게시판 글 지우기
+		freeboardbiz.deleteUserFreeBoard(groupuserdto.getUserid());
+		// 이미지게시판이랑 모임게시판은 내비둘게여
 
 		if (res > 0) {
 			model.addAttribute("groupno", groupuserdto.getGroupno());
@@ -1149,14 +1158,14 @@ public class HomeController {
 	public String boardList(Model model, int groupno, int pagenum) {
 
 		// 여기 리스트를 원하는 갯수만 가져온다
-		model.addAttribute("freeboardlist", freeboardbiz.selectFreeBoardList(groupno,pagenum));
-		
+		model.addAttribute("freeboardlist", freeboardbiz.selectFreeBoardList(groupno, pagenum));
+
 		// 총 갯수를 가져온다.
 		model.addAttribute("listsize", freeboardbiz.selectFreeBoardListCnt(groupno));
-		
+
 		model.addAttribute("groupno", groupno);
-		model.addAttribute("pagenum",pagenum);
-		
+		model.addAttribute("pagenum", pagenum);
+
 		return "boardList";
 	}
 
@@ -1181,8 +1190,8 @@ public class HomeController {
 		// 여기에 댓글을 추가해여함
 		List<FreeBoardAnsDto> freeboardanslist = new ArrayList<>();
 		freeboardanslist = freeboardansbiz.FreeBoardAnsList(boardno);
-		
-		model.addAttribute("freeboardanslist",freeboardanslist);
+
+		model.addAttribute("freeboardanslist", freeboardanslist);
 
 		return "boardDetail";
 	}
@@ -1193,19 +1202,19 @@ public class HomeController {
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		model.addAttribute("groupno", groupno);
 
 		return "boardWrite";
 	}
-	
+
 	@RequestMapping(value = "/boardWriteRes.do", method = RequestMethod.GET)
 	public String boardWriteRes(HttpSession session, Model model, FreeBoardDto freeboarddto) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = freeboardbiz.insertFreeBoard(freeboarddto);
 
 		if (res > 0) {
@@ -1213,40 +1222,40 @@ public class HomeController {
 			model.addAttribute("pagenum", 1);
 			return "redirect:/boardList.do";
 		} else {
-			
+
 			model.addAttribute("groupno", freeboarddto.getGroupno());
 			return "redirect:/boardWrite.do";
 		}
 	}
-	
+
 	@RequestMapping(value = "/boardUpdate.do", method = RequestMethod.GET)
 	public String boardUpdate(HttpSession session, Model model, int groupno, int boardno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		FreeBoardDto freeboarddto = new FreeBoardDto();
-		
+
 		freeboarddto = freeboardbiz.selectFreeBoardDetail(boardno);
-		
+
 		SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
 		String regdate = sys.format(freeboarddto.getBoardregdate());
-		
-		model.addAttribute("freeboarddto",freeboarddto);
+
+		model.addAttribute("freeboarddto", freeboarddto);
 		model.addAttribute("groupno", groupno);
-		model.addAttribute("regdate",regdate);
+		model.addAttribute("regdate", regdate);
 
 		return "boardUpdate";
 	}
-	
+
 	@RequestMapping(value = "/boardUpdateRes.do", method = RequestMethod.GET)
 	public String boardUpdateRes(HttpSession session, Model model, FreeBoardDto freeboarddto) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = freeboardbiz.updateFreeBoard(freeboarddto);
 
 		if (res > 0) {
@@ -1254,71 +1263,68 @@ public class HomeController {
 			return "redirect:/boardDetail.do";
 		} else {
 			model.addAttribute("groupno", freeboarddto.getGroupno());
-			model.addAttribute("boardno",freeboarddto.getBoardno());
+			model.addAttribute("boardno", freeboarddto.getBoardno());
 			return "redirect:/boardUpdate.do";
 		}
 	}
-	
+
 	@RequestMapping(value = "/boardDelete.do", method = RequestMethod.GET)
 	public String boardDelete(HttpSession session, Model model, int boardno, int groupno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = freeboardbiz.deleteFreeBoard(boardno);
-		
-		if(res >0) {
-			model.addAttribute("groupno",groupno);
-			model.addAttribute("pagenum",1);
+
+		if (res > 0) {
+			model.addAttribute("groupno", groupno);
+			model.addAttribute("pagenum", 1);
 			return "redirect:/boardList.do";
-		}
-		else {
+		} else {
 			model.addAttribute("boardno", boardno);
 			return "redirect:/boardDetail.do";
 		}
 	}
-	
+
 	// 자유게시판 댓글
-	
+
 	@Autowired
 	private FreeBoardAnsBiz freeboardansbiz;
-	
+
 	@RequestMapping(value = "/freeBoardAnsInsert.do", method = RequestMethod.GET)
 	public String freeBoardAnsInsert(HttpSession session, Model model, FreeBoardAnsDto freeboardansdto) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = freeboardansbiz.FreeBoardAnsInsert(freeboardansdto);
-		
-		if(res > 0) {
-			model.addAttribute("boardno",freeboardansdto.getBoardno());
+
+		if (res > 0) {
+			model.addAttribute("boardno", freeboardansdto.getBoardno());
 			return "redirect:/boardDetail.do";
-		}
-		else {
-			model.addAttribute("boardno",freeboardansdto.getBoardno());
+		} else {
+			model.addAttribute("boardno", freeboardansdto.getBoardno());
 			return "redirect:/boardDetail.do";
 		}
 	}
-	
+
 	@RequestMapping(value = "/freeBoardAnsDelete.do", method = RequestMethod.GET)
 	public String freeBoardAnsDelete(HttpSession session, Model model, int boardansno, int boardno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = freeboardansbiz.FreeBoardAnsDelete(boardansno);
-		
-		if(res > 0) {
-			model.addAttribute("boardno",boardno);
+
+		if (res > 0) {
+			model.addAttribute("boardno", boardno);
 			System.out.println("댓글 삭제 성공");
 			return "redirect:/boardDetail.do";
-		}
-		else {
-			model.addAttribute("boardno",boardno);
+		} else {
+			model.addAttribute("boardno", boardno);
 			System.out.println("댓글 삭제 실패");
 			return "redirect:/boardDetail.do";
 		}
@@ -1332,16 +1338,16 @@ public class HomeController {
 
 	@RequestMapping(value = "/imgBoardList.do", method = RequestMethod.GET)
 	public String imgBoardList(HttpSession session, Model model, int groupno, int pagenum) {
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
 
-		model.addAttribute("imgboardlist", imgboardbiz.selectImgBoardList(groupno,pagenum));
-		model.addAttribute("listsize",imgboardbiz.selectImgBoardListCnt(groupno));
-		
+		model.addAttribute("imgboardlist", imgboardbiz.selectImgBoardList(groupno, pagenum));
+		model.addAttribute("listsize", imgboardbiz.selectImgBoardListCnt(groupno));
+
 		model.addAttribute("groupno", groupno);
-		model.addAttribute("pagenum",pagenum);
+		model.addAttribute("pagenum", pagenum);
 
 		return "imgBoardList";
 	}
@@ -1349,11 +1355,11 @@ public class HomeController {
 	@RequestMapping(value = "/imgBoardWrite.do", method = RequestMethod.GET)
 	public String imgBoardWrite(HttpSession session, Model model, int groupno) {
 		// Model model, int moimno, int groupno 파라미터 바꿔야함 글쓰기 버튼이 여기에 있으면 안되거든
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		model.addAttribute("groupno", groupno);
 
 		return "imgBoardWrite";
@@ -1361,7 +1367,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/imgBoardWriteRes.do", method = RequestMethod.GET)
 	public String imgBoardWriteRes(HttpSession session, Model model, ImgBoardDto imgboarddto) {
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
@@ -1370,7 +1376,7 @@ public class HomeController {
 
 		if (res > 0) {
 			model.addAttribute("groupno", imgboarddto.getGroupno());
-			model.addAttribute("pagenum",1);
+			model.addAttribute("pagenum", 1);
 			return "redirect:/imgBoardList.do";
 		} else {
 			model.addAttribute("groupno", imgboarddto.getGroupno());
@@ -1380,7 +1386,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/imgBoardDetail.do", method = RequestMethod.GET)
 	public String boardDetailPhoto(HttpSession session, Model model, int imgboardno) {
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
@@ -1392,44 +1398,44 @@ public class HomeController {
 
 		model.addAttribute("imgboarddto", imgboarddto);
 		model.addAttribute("imgboardregdate", sys.format(imgboarddto.getImgboardregdate()));
-		
+
 		// 여기에 댓글을 추가해여함
 		List<ImgBoardAnsDto> imgboardanslist = new ArrayList<>();
 		imgboardanslist = imgboardansbiz.ImgBoardAnsList(imgboardno);
-				
-		model.addAttribute("imgboardanslist",imgboardanslist);
+
+		model.addAttribute("imgboardanslist", imgboardanslist);
 
 		return "imgBoardDetail";
 	}
-	
+
 	@RequestMapping(value = "/imgBoardUpdate.do", method = RequestMethod.GET)
 	public String imgBoardUpdate(HttpSession session, Model model, int groupno, int imgboardno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		ImgBoardDto imgboarddto = new ImgBoardDto();
-		
+
 		imgboarddto = imgboardbiz.selectImgBoardDetail(imgboardno);
-		
+
 		SimpleDateFormat sys = new SimpleDateFormat("yyyy-MM-dd");
 		String regdate = sys.format(imgboarddto.getImgboardregdate());
-		
-		model.addAttribute("imgboarddto",imgboarddto);
+
+		model.addAttribute("imgboarddto", imgboarddto);
 		model.addAttribute("groupno", groupno);
-		model.addAttribute("regdate",regdate);
+		model.addAttribute("regdate", regdate);
 
 		return "imgBoardUpdate";
 	}
-	
+
 	@RequestMapping(value = "/imgBoardUpdateRes.do", method = RequestMethod.GET)
 	public String imgBoardUpdateRes(HttpSession session, Model model, ImgBoardDto imgboarddto) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = imgboardbiz.updateImgBoard(imgboarddto);
 
 		if (res > 0) {
@@ -1437,78 +1443,72 @@ public class HomeController {
 			return "redirect:/imgBoardDetail.do";
 		} else {
 			model.addAttribute("groupno", imgboarddto.getGroupno());
-			model.addAttribute("imgboardno",imgboarddto.getImgboardno());
+			model.addAttribute("imgboardno", imgboarddto.getImgboardno());
 			return "redirect:/imgBoardUpdate.do";
 		}
 	}
-	
+
 	@RequestMapping(value = "/imgBoardDelete.do", method = RequestMethod.GET)
 	public String imgBoardDelete(HttpSession session, Model model, int imgboardno, int groupno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = imgboardbiz.deleteImgBoard(imgboardno);
-		
-		if(res >0) {
-			model.addAttribute("groupno",groupno);
-			model.addAttribute("pagenum",1);
+
+		if (res > 0) {
+			model.addAttribute("groupno", groupno);
+			model.addAttribute("pagenum", 1);
 			return "redirect:/imgBoardList.do";
-		}
-		else {
+		} else {
 			model.addAttribute("imgboardno", imgboardno);
 			return "redirect:/imgBoardDetail.do";
 		}
 	}
-	
-	//이미지게시판 댓글
-	
+
+	// 이미지게시판 댓글
+
 	@Autowired
 	private ImgBoardAnsBiz imgboardansbiz;
-	
+
 	@RequestMapping(value = "/imgBoardAnsInsert.do", method = RequestMethod.GET)
 	public String imgBoardAnsInsert(HttpSession session, Model model, ImgBoardAnsDto imgboardansdto) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = imgboardansbiz.ImgBoardAnsInsert(imgboardansdto);
-		
-		if(res > 0) {
-			model.addAttribute("imgboardno",imgboardansdto.getImgboardno());
+
+		if (res > 0) {
+			model.addAttribute("imgboardno", imgboardansdto.getImgboardno());
 			return "redirect:/imgBoardDetail.do";
-		}
-		else {
-			model.addAttribute("imgboardno",imgboardansdto.getImgboardno());
+		} else {
+			model.addAttribute("imgboardno", imgboardansdto.getImgboardno());
 			return "redirect:/imgBoardDetail.do";
 		}
 	}
-	
+
 	@RequestMapping(value = "/imgBoardAnsDelete.do", method = RequestMethod.GET)
 	public String imgBoardAnsDelete(HttpSession session, Model model, int imgansno, int imgboardno) {
 
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
+
 		int res = imgboardansbiz.ImgBoardAnsDelete(imgansno);
-		
-		if(res > 0) {
-			model.addAttribute("imgboardno",imgboardno);
+
+		if (res > 0) {
+			model.addAttribute("imgboardno", imgboardno);
 			System.out.println("이미지댓글 삭제 성공");
 			return "redirect:/imgBoardDetail.do";
-		}
-		else {
-			model.addAttribute("imgboardno",imgboardno);
+		} else {
+			model.addAttribute("imgboardno", imgboardno);
 			System.out.println("이미지댓글 삭제 실패");
 			return "redirect:/imgBoardDetail.do";
 		}
 	}
-	
-	
-	
 
 	@RequestMapping(value = "/moimdelete.do", method = RequestMethod.GET)
 	public String moimdelete(HttpSession session, Model model, int moimno, int groupno) {
@@ -1546,115 +1546,118 @@ public class HomeController {
 		return "redirect:moim.do?groupno=" + dto.getGroupno();
 	}
 
-	
 	@RequestMapping(value = "/moimjoin.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String moimjoin(HttpSession session, Model model, MoimUserDto userdto, HttpServletResponse resp) {
 
 		resp.setContentType("text/html; charset=UTF-8");
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
-		System.out.println("모임넘버"+userdto.getMoimno()+"그룹넘버" +userdto.getGroupno() + "아이디:" +userdto.getUserid());
-		
-/*		String id = session.getId().toString();
-		System.out.println(id);
-		userdto.setUserid(id);
-	*/	
-		
-		//확인 후 인서트
+
+		System.out.println("모임넘버" + userdto.getMoimno() + "그룹넘버" + userdto.getGroupno() + "아이디:" + userdto.getUserid());
+
+		/*
+		 * String id = session.getId().toString(); System.out.println(id);
+		 * userdto.setUserid(id);
+		 */
+
+		// 확인 후 인서트
 		MoimUserDto result = moimUserBiz.moimres(userdto);
-		if(result != null) {
+		if (result != null) {
 			return "이미 참가중입니다.";
-		}else {
+		} else {
 			int res = moimUserBiz.moimjoin(userdto);
 			return "참가신청되었습니다.";
-			
+
 		}
 
-		/*return "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.getMoimno();*/
+		/*
+		 * return
+		 * "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.
+		 * getMoimno();
+		 */
 	}
-	
-	
+
 	@RequestMapping(value = "/moimout.do", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String moimout(HttpSession session, Model model, MoimUserDto userdto, HttpServletResponse resp) {
 
 		resp.setContentType("text/html; charset=UTF-8");
-		
+
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		
-		System.out.println("모임넘버"+userdto.getMoimno()+"그룹넘버" +userdto.getGroupno() + "아이디:" +userdto.getUserid());
-		
-/*		String id = session.getId().toString();
-		System.out.println(id);
-		userdto.setUserid(id);
-	*/	
-		
-		//확인 후 인서트
+
+		System.out.println("모임넘버" + userdto.getMoimno() + "그룹넘버" + userdto.getGroupno() + "아이디:" + userdto.getUserid());
+
+		/*
+		 * String id = session.getId().toString(); System.out.println(id);
+		 * userdto.setUserid(id);
+		 */
+
+		// 확인 후 인서트
 		MoimUserDto result = moimUserBiz.moimres(userdto);
-		if(result != null) {
+		if (result != null) {
 			int res = moimUserBiz.moimout(userdto);
 			return "참가가 취소되었습니다.";
-		}else {
+		} else {
 			return "참여하고 있지 않습니다.";
 		}
-		
-		
-		
 
-		/*return "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.getMoimno();*/
+		/*
+		 * return
+		 * "redirect:moimDetail.do?groupno="+userdto.getGroupno()+"&moimno="+userdto.
+		 * getMoimno();
+		 */
 	}
-	
-	@RequestMapping(value = "/stream.do", method = RequestMethod.GET)
-	   public String stream(Model model, HttpSession session, HttpServletRequest request) {
 
-	      int groupnumber = Integer.parseInt((String) request.getParameter("groupnum"));
-	      if (session.getAttribute("id").toString() == null) {
-	         return "index";
-	      }
-	      model.addAttribute("id", session.getAttribute("id").toString());
-	      GroupUserDto guDto = new GroupUserDto();
-	      guDto.setUserid(session.getAttribute("id").toString());
-	      guDto.setGroupno(groupnumber);
-	      System.out.println("guDto 잘들어갔나 확인용 groupno():" + guDto.getGroupno() + ", userid : " + guDto.getUserid());
-	      GroupUserDto sendguDto = new GroupUserDto();
-	      sendguDto = gubiz.selGroupnoGroupuser(guDto);
-	      System.out.println(sendguDto.getUserid() + ": sendguDto");
-	      if (guDto != null) {
-	         session.setAttribute("groupnum", "1");
-	         model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
-	         return "stream";
-	      } else {
-	         return "error";
-	      }
-	   }
-	   
-	   @RequestMapping(value = "/pullstream.do", method = RequestMethod.GET)
-	   public String pullstream(Model model, HttpSession session, HttpServletRequest request) {
-	      int groupnumber = Integer.parseInt((String) request.getParameter("groupnum"));
-	      if (session.getAttribute("id").toString() == null) {
-	         return "index";
-	      }
-	      model.addAttribute("id", session.getAttribute("id").toString());
-	      GroupUserDto guDto = new GroupUserDto();
-	      guDto.setUserid(session.getAttribute("id").toString());
-	      guDto.setGroupno(groupnumber);
-	      System.out.println("guDto 잘들어갔나 확인용 groupno():" + guDto.getGroupno() + ", userid : " + guDto.getUserid());
-	      GroupUserDto sendguDto = new GroupUserDto();
-	      sendguDto = gubiz.selGroupnoGroupuser(guDto);
-	      System.out.println(sendguDto.getUserid() + ": sendguDto");
-	      if (guDto != null) {
-	         session.setAttribute("groupnum", "1");
-	         model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
-	         return "pullstream";
-	      } else {
-	         return "error";
-	      }
-	   }
-	
+	@RequestMapping(value = "/stream.do", method = RequestMethod.GET)
+	public String stream(Model model, HttpSession session, HttpServletRequest request) {
+
+		int groupnumber = Integer.parseInt((String) request.getParameter("groupnum"));
+		if (session.getAttribute("id").toString() == null) {
+			return "index";
+		}
+		model.addAttribute("id", session.getAttribute("id").toString());
+		GroupUserDto guDto = new GroupUserDto();
+		guDto.setUserid(session.getAttribute("id").toString());
+		guDto.setGroupno(groupnumber);
+		System.out.println("guDto 잘들어갔나 확인용 groupno():" + guDto.getGroupno() + ", userid : " + guDto.getUserid());
+		GroupUserDto sendguDto = new GroupUserDto();
+		sendguDto = gubiz.selGroupnoGroupuser(guDto);
+		System.out.println(sendguDto.getUserid() + ": sendguDto");
+		if (guDto != null) {
+			session.setAttribute("groupnum", "1");
+			model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
+			return "stream";
+		} else {
+			return "error";
+		}
+	}
+
+	@RequestMapping(value = "/pullstream.do", method = RequestMethod.GET)
+	public String pullstream(Model model, HttpSession session, HttpServletRequest request) {
+		int groupnumber = Integer.parseInt((String) request.getParameter("groupnum"));
+		if (session.getAttribute("id").toString() == null) {
+			return "index";
+		}
+		model.addAttribute("id", session.getAttribute("id").toString());
+		GroupUserDto guDto = new GroupUserDto();
+		guDto.setUserid(session.getAttribute("id").toString());
+		guDto.setGroupno(groupnumber);
+		System.out.println("guDto 잘들어갔나 확인용 groupno():" + guDto.getGroupno() + ", userid : " + guDto.getUserid());
+		GroupUserDto sendguDto = new GroupUserDto();
+		sendguDto = gubiz.selGroupnoGroupuser(guDto);
+		System.out.println(sendguDto.getUserid() + ": sendguDto");
+		if (guDto != null) {
+			session.setAttribute("groupnum", "1");
+			model.addAttribute("groupnum", Integer.toString(guDto.getGroupno()));
+			return "pullstream";
+		} else {
+			return "error";
+		}
+	}
+
 }

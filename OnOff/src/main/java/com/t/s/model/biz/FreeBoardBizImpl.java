@@ -48,6 +48,11 @@ public class FreeBoardBizImpl implements FreeBoardBiz {
 		// TODO Auto-generated method stub
 		return dao.deleteFreeBoard(boardno);
 	}
+	@Override
+	public int deleteUserFreeBoard(String userid) {
+		// TODO Auto-generated method stub
+		return dao.deleteUserFreeBoard(userid);
+	}
 
 	
 

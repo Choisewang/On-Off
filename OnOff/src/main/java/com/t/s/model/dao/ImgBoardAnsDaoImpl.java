@@ -42,4 +42,14 @@ public class ImgBoardAnsDaoImpl implements ImgBoardAnsDao {
 		return list;
 	}
 
+	@Override
+	public int ImgBoardUserAnsDelete(String userid) {
+		
+		int res = 0;
+		
+		res = sqlSession.delete(NAMESPACE+"imgBoardUserAnsDelete",userid);
+		
+		return res;
+	}
+
 }

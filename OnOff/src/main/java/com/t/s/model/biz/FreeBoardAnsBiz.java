@@ -9,4 +9,6 @@ public interface FreeBoardAnsBiz {
 	public int FreeBoardAnsInsert(FreeBoardAnsDto freeboardansdto);
 	public int FreeBoardAnsDelete(int boardansno);
 	public List<FreeBoardAnsDto> FreeBoardAnsList(int boardno);
+	
+	public int deleteUserAns(String userid);
 }

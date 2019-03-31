@@ -13,5 +13,7 @@ public interface FreeBoardAnsDao {
 	public int FreeBoardAnsInsert(FreeBoardAnsDto freeboardansdto);
 	public List<FreeBoardAnsDto> FreeBoardAnsList(int boardno);
 	public int FreeBoardAnsDelete(int boardansno);
+	
+	public int deleteUserAns(String userid);
 
 }

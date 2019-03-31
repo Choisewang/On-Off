@@ -32,4 +32,10 @@ public class ImgBoardAnsBizImpl implements ImgBoardAnsBiz {
 		return dao.ImgBoardAnsList(imgboardno);
 	}
 
+	@Override
+	public int ImgBoardUserAnsDelete(String userid) {
+		// TODO Auto-generated method stub
+		return dao.ImgBoardUserAnsDelete(userid);
+	}
+
 }
