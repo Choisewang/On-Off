@@ -194,10 +194,10 @@
 		SELECT GROUPNO,GROUPTITLE,GROUPCONTENT,GROUPREGDATE,GROUPIMG
 		FROM GROUPINFO
 		WHERE GROUPNO IN
-			(SELECT GROUPNO FROM GROUPUSER WHERE USERID=#{userid } AND GROUPUSERGRADE !='MASTER')
+			(SELECT GROUPNO FROM GROUPUSER WHERE USERID=#{userid })
 	</select>
 	<update id="updateGroupinfo" parameterType="groupDto">
-        UPDATE GROUPINFO SET GROUPTITLE=#{grouptitle},GROUPCONTENT=#{groupcontent} WHERE GROUPNO = #{groupno}
+        UPDATE GROUPINFO SET GROUPTITLE=#{grouptitle},GROUPCONTENT=#{groupcontent},GROUPIMG=#{groupimg}  WHERE GROUPNO = #{groupno}
     </update>
     <delete id="delGroupinfo" parameterType="int">
         DELETE FROM GROUPINFO WHERE GROUPNO=#{groupno}
@@ -288,6 +288,12 @@
 	
 	SELECT MOIMNO FROM MOIMUSER WHERE MOIMNO=#{moimno} AND USERID=#{userid} AND GROUPNO=#{groupno}
 	
+	</select>
+	
+	<select id="findMoimNo" parameterType="MoimUserDto" resultType="int">
+		SELECT MOIMNO
+		FROM (SELECT MOIMNO FROM MOIM WHERE USERID=#{userid} AND GROUPNO=#{groupno} ORDER BY MOIMREGDATE DESC)
+		WHERE ROWNUM = 1
 	</select>
 	
 	

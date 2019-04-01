@@ -268,8 +268,18 @@ public class HomeController {
 			if (res > 0) {
 				model.addAttribute("dto", session.getAttribute("dto"));
 			}
-
 		}
+		
+		//인서트 모임 후에 디비 접근해서
+		//최신 moim을 찾아서 유저 인서트를 한다 ㅇㅇ
+		MoimUserDto moimuserdto = new MoimUserDto();
+		moimuserdto.setGroupno(moimdto.getGroupno());
+		moimuserdto.setUserid(moimdto.getUserid());
+		
+		int moimno = moimUserBiz.findMoimNo(moimuserdto);
+		moimuserdto.setMoimno(moimno);
+		
+		int join = moimUserBiz.moimjoin(moimuserdto);
 
 		return "redirect:moim.do?groupno=" + moimdto.getGroupno();
 	}
@@ -749,19 +759,13 @@ public class HomeController {
 		if (session.getAttribute("dto") != null) {
 			model.addAttribute("dto", session.getAttribute("dto"));
 		}
-		int groupno = Integer.parseInt(request.getParameter("groupno"));
-		String grouptitle = request.getParameter("grouptitle");
-		String groupcontent = request.getParameter("groupcontent");
-
-		dto.setGroupno(groupno);
-		dto.setGrouptitle(grouptitle);
-		dto.setGroupcontent(groupcontent);
 
 		int res = groupbiz.updateGroupinfo(dto);
+		
 		if (res > 0) {
 			System.out.println("그룹update성공!");
 			model.addAttribute("msg", "수정되었습니다");
-			return "redirect:myGroupManagerPage.do?groupno=" + dto.getGroupno();
+			return "redirect:groupDetail.do?groupno=" + dto.getGroupno();
 		} else {
 //	           model.addAttribute("msg", "<script type='text/javascript'>alert('실패');</script>");
 			System.out.println("그룹update실패!");
@@ -1570,7 +1574,6 @@ public class HomeController {
 		} else {
 			int res = moimUserBiz.moimjoin(userdto);
 			return "참가신청되었습니다.";
-
 		}
 
 		/*

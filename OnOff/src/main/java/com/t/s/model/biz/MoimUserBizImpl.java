@@ -67,4 +67,10 @@ public class MoimUserBizImpl implements MoimUserBiz {
 		// TODO Auto-generated method stub
 		return dao.moimres(dto);
 	}
+
+	@Override
+	public int findMoimNo(MoimUserDto moimuserdto) {
+		// TODO Auto-generated method stub
+		return dao.findMoimNo(moimuserdto);
+	}
 }

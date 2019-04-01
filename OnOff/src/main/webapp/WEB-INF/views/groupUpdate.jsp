@@ -32,6 +32,21 @@ if(document.getElementById("title").value==""||document.getElementById("content"
 }
 
 </script>
+
+<script type="text/javascript">
+
+			var openWin;
+	
+			 function openPre()
+		     {
+		         // window.name = "부모창 이름"; 
+		         window.name = "parentForm";
+		         // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		         openWin = window.open("preView.do",
+		                 "childForm", "width=570, height=350, resizable = no, scrollbars = no");    
+		     }
+
+		</script>
 </head>
 <body>
 
@@ -51,9 +66,20 @@ if(document.getElementById("title").value==""||document.getElementById("content"
                            <ul class="information">
                               <li><span>제목</span><label style="font-weight:normal;"><input id="title" name="grouptitle" type="text" value="${dto.grouptitle }" size="52"></label></li>
                               <li><span>내용</span><label style="font-weight:normal;"><textarea id="content" name="groupcontent" rows=5 cols=53>${dto.groupcontent }</textarea></label></li>
-                              <li><span>사진</span><img src="${dto.groupimg }" class="img-responsive" alt="" /></li>
+                              <li>
+                              	<span>사진</span>
+                              		<div class="features-content" style="float: none; max-width: 100%; display: inline-block; ">
+										<div style="max-width: 600px;">
+											<img style="width: 100%;" id="inimg" class="sampleimg" src="${dto.groupimg }" />
+										</div>
+										<div>
+                							<input type="button" class="btn brows-btn" value="이미지 등록" onclick="openPre()">
+                							<input type="hidden"  id="intext" name="groupimg" />
+            							</div>
+									</div>
+                              </li>
                               <li><span>그룹생성날짜</span><fmt:formatDate value="${dto.groupregdate }" pattern="yyyy-MM-dd"/><label></label></li>
-                           </ul>                                    
+                           </ul>                                     
                         </div>
                      </div>
                   </div>

@@ -103,5 +103,15 @@ public class MoimUserDaoImpl implements MoimUserDao {
 		
 		return res;
 	}
+
+	@Override
+	public int findMoimNo(MoimUserDto moimuserdto) {
+		
+		int res = 0;
+		
+		res = sqlSession.selectOne(NAMESPACE+"findMoimNo",moimuserdto);
+		
+		return res;
+	}
 	
 }

@@ -23,5 +23,8 @@ public interface MoimUserDao {
 	
 	//참가확인
 	public MoimUserDto moimres(MoimUserDto dto);
+	
+	//작성자 moimno찾기
+	public int findMoimNo(MoimUserDto moimuserdto);
 
 }
