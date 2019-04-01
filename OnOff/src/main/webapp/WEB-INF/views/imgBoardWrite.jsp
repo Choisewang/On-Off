@@ -51,10 +51,16 @@
 					obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 					//폼 submit
 					
+					if($("#title").val().length == 0){
+						alert("모임명을 입력해주세요");
+						return ;
+					}
+					
 					if($("#intext").val().length == 0){
 						alert("대표이미지를 등록해주세요");
+						return ;
 					}
-					else{
+					if($("#intext").val().length != 0 && $("#title").val().length != 0){
 						$("#insertImgBoardFrm").submit();
 					}
 					
@@ -133,7 +139,11 @@
 									<!-- <p>Soft Techi Infoteck Pvt.</p> -->
 									<form action="imgBoardWriteRes.do" id="insertImgBoardFrm" enctype="multipart/form-data">
 										<ul class="information">
-											<li><span>모임명</span><input type="text" name="imgboardtitle"></li>
+											<li>
+												<span>모임명</span>
+												<div class="features-content" style="float: none; width: 550px; display: inline-block;">
+												<input type="text" name="imgboardtitle" id="title" style="width: 500px; border: 0; outline: none;" />
+											</div>
 											<li>
 												<span>대표이미지<br/><br/><br/><br/><br/></span>
 												<div class="features-content" style="float: none; max-width: 100%; display: inline-block; ">
@@ -151,10 +161,10 @@
 												<span>한마디 및 사진 등록</span>
 												<textarea name="imgboardcontent" id="editor" style="width: 700px; height: 400px;"></textarea>
 											</li>
-											<li>
+											<!-- <li>
 												<span>참여자</span>
 												<span></span>
-											</li>
+											</li> -->
 										</ul>
 										
 										<!-- hidden을 이용하여 나머지 값을 다 받아 옵시당 여기에 userid가 필요합니다. -->
