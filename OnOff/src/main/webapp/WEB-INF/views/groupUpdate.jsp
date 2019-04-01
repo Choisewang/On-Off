@@ -74,7 +74,7 @@ if(document.getElementById("title").value==""||document.getElementById("content"
 										</div>
 										<div>
                 							<input type="button" class="btn brows-btn" value="이미지 등록" onclick="openPre()">
-                							<input type="hidden"  id="intext" name="groupimg" />
+                							<input type="hidden"  id="intext" name="groupimg" value="${dto.groupimg }" />
             							</div>
 									</div>
                               </li>
